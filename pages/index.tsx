@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from "react";
 
-const Home = () => (
-  <>
-    This is node
-  </>
-);
+function Home() {
+  return (
+    <h1>Home</h1>
+  )
+}
 
 export default Home;
