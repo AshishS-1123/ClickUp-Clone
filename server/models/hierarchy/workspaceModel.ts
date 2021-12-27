@@ -2,6 +2,7 @@ import { CRUD_CreateFunc, CRUD_DeleteFunc, CRUD_ReadFunc, CRUD_UpdateFunc } from
 
 type WorkspaceDataType = {
   id: string,
+  userId: string,
   name: string,
 }
 
@@ -12,6 +13,7 @@ const createWorkspaceForUser: CRUD_CreateFunc<WorkspaceDataType> = (data: Worksp
 const getWorkspaceFromId: CRUD_ReadFunc<WorkspaceDataType> = (itemId: string): WorkspaceDataType => {
   const item: WorkspaceDataType = {
     id: "",
+    userId: "",
     name: "",
   };
 
