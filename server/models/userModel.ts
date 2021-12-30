@@ -1,4 +1,4 @@
-type UserDataType = {
+export type UserDataType = {
   userId: string,
   userEmail: string,
   userPassword?: string,
@@ -23,8 +23,6 @@ function updatePasswordForUser(userData: UserDataType, newPassword: string): boo
 }
 
 export {
-  UserDataType,
-
   createUserWithPassword,
   getUserFromEmail,
   updatePasswordForUser,
