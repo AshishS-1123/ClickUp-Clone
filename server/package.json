@@ -8,26 +8,29 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "serve": "nodemon index.ts"
-  },
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.2",
-    "express-validator": "^6.14.0",
-    "helmet": "^4.6.0",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/mysql": "^2.15.20",
-    "@types/node": "^17.0.5",
-    "eslint": "^8.5.0",
-    "nodemon": "^2.0.15",
-    "sequelize-cli": "^6.3.0",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
-  }
+      "serve": "nodemon index.ts",
+      "start": "ts-node src/index.ts"
+    },
+    "dependencies": {
+      "bcrypt": "^5.0.1",
+      "cors": "^2.8.5",
+      "dotenv": "^10.0.0",
+      "express": "^4.17.2",
+      "express-validator": "^6.14.0",
+      "helmet": "^4.6.0",
+      "jsonwebtoken": "^8.5.1",
+      "mysql2": "^2.3.3",
+      "typeorm": "0.2.41",
+      "reflect-metadata": "^0.1.10",
+      "mysql": "^2.14.1"
+    },
+    "devDependencies": {
+      "@types/express": "^4.17.13",
+      "@types/mysql": "^2.15.20",
+      "@types/node": "^8.0.29",
+      "eslint": "^8.5.0",
+      "nodemon": "^2.0.15",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+    }
 }
