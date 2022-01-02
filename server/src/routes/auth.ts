@@ -3,10 +3,6 @@ import { registerUser, loginUser, forgotPassword, resetPassword } from "../contr
 
 const authRouter = Router();
 
-const dummyMethod: RequestHandler = (req, res, next) => {
-  res.end("In Dummy Method");
-}
-
 authRouter.route("/register").post(registerUser);
 authRouter.route("/login").post(loginUser);
 authRouter.route("/forgotPassword").post(forgotPassword);
