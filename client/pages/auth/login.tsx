@@ -1,8 +1,11 @@
 import * as React from "react";
+import Card from "/components/Card";
 
 function Login() {
     return (
-        <h1>Login</h1>
+        <Card>
+          <h1>Login</h1>
+        </Card>
     )
 }
 

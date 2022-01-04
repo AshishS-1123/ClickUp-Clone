@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { createUserWithPassword, UserDataType } from "../models/accessors/userModel";
 
 const registerUser: RequestHandler = (req, res, next) => {
   const { userId, userEmail, password } = req.body;
