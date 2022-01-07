@@ -1,0 +1,11 @@
+.auth_heading {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 28px;
+}
+
+.auth_input {
+  width: 80%;
+  height: 40px;
+  padding: 10px;
+  margin-top: 50px;
+}
