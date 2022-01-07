@@ -1,0 +1,17 @@
+.Card {
+  width: 95vw;
+  max-width: 500px;
+
+  height: 95vh;
+  max-height: 500px;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 20px;
+  background: #1490f5;
+
+  padding: 40px;
+}
