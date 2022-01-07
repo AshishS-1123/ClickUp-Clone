@@ -10,6 +10,15 @@ const errorHandler = require("./middleware/error");
 const notFound = require("./middleware/notFound");
 const connectDB = require("./config/db");
 
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.use(require('cors')());
+
 app.use(express.json())
 
 // Routes
