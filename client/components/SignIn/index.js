@@ -38,12 +38,12 @@ function SignIn() {
 
       <div className={styles.input_container}>
         <label htmlFor="signIn__email" className={styles.auth_label}>Email</label>
-        <input type="text" id="signIn__email" className={styles.auth_input} placeholder="Enter your email" />
+        <input ref={emailRef} type="text" id="signIn__email" className={styles.auth_input} placeholder="Enter your email" />
       </div>
 
       <div className={styles.input_container}>
         <label htmlFor="signIn__password" className={styles.auth_label}>Password</label>
-        <input type="password" id="signIn__password" className={styles.auth_input} placeholder="Enter password" />
+        <input ref={passwordRef} type="password" id="signIn__password" className={styles.auth_input} placeholder="Enter password" />
       </div>
 
       <button type="submit" className={styles.auth_button} onClick={clickHandler}>Log In</button>

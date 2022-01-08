@@ -38,12 +38,12 @@ function SignUp() {
 
       <div className={styles.input_container}>
         <label htmlFor="signUp__email" className={styles.auth_label}>Email</label>
-        <input type="text" id="signUp__email" className={styles.auth_input} placeholder="example@site.com" />
+        <input ref={emailRef} type="text" id="signUp__email" className={styles.auth_input} placeholder="example@site.com" />
       </div>
 
       <div className={styles.input_container}>
         <label htmlFor="signUp__password" className={styles.auth_label}>Password</label>
-        <input type="password" id="signUp__password" className={styles.auth_input} placeholder="*****" />
+        <input ref={passwordRef} type="password" id="signUp__password" className={styles.auth_input} placeholder="*****" />
       </div>
 
       <button type="submit" className={styles.auth_button} onClick={clickHandler}>Start playing</button>
