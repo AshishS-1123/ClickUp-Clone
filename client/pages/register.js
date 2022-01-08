@@ -2,19 +2,11 @@ import React from "react";
 import createSection from "../containers/Card";
 import SignUp from "../components/SignUp";
 
-const sections = [
-  createSection(SignUp),
-]
+const SignUpSection = createSection(SignUp);
 
 function Home() {
   return (
-    <>
-      {
-        sections.map((Section, idx) => {
-          return <Section key={idx} />
-        })
-      }
-    </>
+    <SignUpSection />
   );
 }
 
