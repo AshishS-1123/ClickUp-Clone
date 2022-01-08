@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import makeRequest from "../../utils/request";
 
-import styles from "./SignUp.module.css";
+import styles from "../SignUp/SignUp.module.css";
 
 const registerUser = async (userEmail, password) => {
-  const url = "/auth/register";
+  const url = "/auth/login";
   const body = { userEmail, password };
 
   const { data, status } = await makeRequest(url, "POST", body);
@@ -12,7 +12,7 @@ const registerUser = async (userEmail, password) => {
   return { data, status };
 }
 
-function SignUp() {
+function SignIn() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -32,22 +32,22 @@ function SignUp() {
   }
 
   return (
-    <form id="signUp__form" className={styles.auth_form}>
-      <h1 className={styles.auth_heading}>Let's go!</h1>
+    <form id="signIn__form" className={styles.auth_form}>
+      <h1 className={styles.auth_heading}>Welcome back!</h1>
 
       <div className={styles.input_container}>
-        <label htmlFor="signUp__email" className={styles.auth_label}>Email</label>
-        <input type="text" id="signUp__email" className={styles.auth_input} placeholder="example@site.com" />
+        <label htmlFor="signIn__email" className={styles.auth_label}>Email</label>
+        <input type="text" id="signIn__email" className={styles.auth_input} placeholder="Enter your email" />
       </div>
 
       <div className={styles.input_container}>
-        <label htmlFor="signUp__password" className={styles.auth_label}>Password</label>
-        <input type="password" id="signUp__password" className={styles.auth_input} placeholder="*****" />
+        <label htmlFor="signIn__password" className={styles.auth_label}>Password</label>
+        <input type="password" id="signIn__password" className={styles.auth_input} placeholder="Enter password" />
       </div>
 
-      <button type="submit" className={styles.auth_button} onClick={clickHandler}>Start playing</button>
+      <button type="submit" className={styles.auth_button} onClick={clickHandler}>Log In</button>
     </form>
   )
 }
 
-export default SignUp;
+export default SignIn;

@@ -1,12 +1,12 @@
 import React from "react";
 import createSection from "../containers/Card";
-import SignUp from "../components/SignUp";
+import SignIn from "../components/SignIn";
 
-const SignUpSection = createSection(SignUp);
+const SignInSection = createSection(SignIn);
 
 function SignInPage() {
   return (
-    <SignUpSection />
+    <SignInSection />
   );
 }
 
