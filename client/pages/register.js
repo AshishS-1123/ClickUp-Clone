@@ -1,6 +1,6 @@
 import React from "react";
 import createSection from "../containers/Card";
-import SignUp from "../components/SignUp/SignUp";
+import SignUp from "../components/SignUp";
 
 const sections = [
   createSection(SignUp),
@@ -8,13 +8,13 @@ const sections = [
 
 function Home() {
   return (
-    <div>
+    <>
       {
         sections.map((Section, idx) => {
           return <Section key={idx} />
         })
       }
-    </div>
+    </>
   );
 }
 
