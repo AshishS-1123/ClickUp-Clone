@@ -32,12 +32,21 @@ function SignUp() {
   }
 
   return (
-    <>
-      <h1 className={styles.auth_heading}>Sign Up</h1>
-      <input ref={emailRef} className={styles.auth_input} type="text" />
-      <input ref={passwordRef} className={styles.auth_input} type="password" />
-      <button className={styles.auth_input} type="submit" onClick={clickHandler}>Register</button>
-    </>
+    <form id="signUp__form" className={styles.auth_form}>
+      <h1 className={styles.auth_heading}>Welcome back!</h1>
+
+      <div className={styles.input_container}>
+        <label htmlFor="signUp__email" className={styles.auth_label}>Email</label>
+        <input type="text" id="signUp__email" className={styles.auth_input} placeholder="Enter your email" />
+      </div>
+
+      <div className={styles.input_container}>
+        <label htmlFor="signUp__password" className={styles.auth_label}>Password</label>
+        <input type="password" id="signUp__password" className={styles.auth_input} placeholder="Enter password" />
+      </div>
+
+      <button type="submit" className={styles.auth_button} onClick={clickHandler}>Log In</button>
+    </form>
   )
 }
 
