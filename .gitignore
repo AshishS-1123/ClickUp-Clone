@@ -13,3 +13,6 @@ npm-debug.log
 .next
 
 *.log
+
+# Font Files
+client/public/fonts
