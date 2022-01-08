@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import Link from "next/link";
 import makeRequest from "../../utils/request";
 
 import styles from "../SignUp/SignUp.module.css";
@@ -46,6 +47,10 @@ function SignIn() {
       </div>
 
       <button type="submit" className={styles.auth_button} onClick={clickHandler}>Log In</button>
+
+      <Link href="/register">
+        <a className={styles.auth_link}>Don't have an account? Register</a>
+      </Link>
     </form>
   )
 }
