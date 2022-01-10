@@ -14,7 +14,7 @@ export const signUp = createAsyncThunk(
         return data;
       } else {
         return thunkApi.rejectWithValue({
-          error: "Invalid Credentials"
+          error: data.error,
         });
       }
     } catch (error) {
@@ -64,12 +64,12 @@ function setUserCreds(state, action) {
   }
 }
 
-function setError(state, action) {
-  console.log("Rejected with ", action.error);
+function setError(state, { payload }) {
+  console.log("Rejected with ", payload.error);
   return {
     ...state,
     loading: false,
-    error: action.payload.error,
+    error: payload.error,
   }
 }
 

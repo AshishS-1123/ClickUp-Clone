@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../redux/reducers/authReducer";
 import styles from "./SignUp.module.css";
 
@@ -8,6 +8,8 @@ function SignUp() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const dispatch = useDispatch();
+  const error = useSelector(state => state.authReducer.error);
+  console.log("selector", error);
 
   const clickHandler = (event) => {
     event.preventDefault();
@@ -42,6 +44,10 @@ function SignUp() {
         <label htmlFor="signUp__password" className={styles.auth_label}>Password</label>
         <input ref={passwordRef} type="password" id="signUp__password" className={styles.auth_input} placeholder="*****" />
       </div>
+
+      <p className={styles.error_message}>
+        {error}
+      </p>
 
       <button type="submit" className={styles.auth_button} onClick={clickHandler}>Start playing</button>
 
