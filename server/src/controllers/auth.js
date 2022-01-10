@@ -44,7 +44,7 @@ exports.loginUser = async (req, res, next) => {
     }
 
     // If everything was done properly, send success to user
-    sendToken(user, 200, res)
+    sendToken(user, 201, res)
 
   } catch (error) {
     return next(new ErrorResponse(error.message))
@@ -134,6 +134,7 @@ const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken()
   res.status(statusCode).json({
     success: true,
-    token
+    token,
+    userEmail: user.userEmail,
   })
 }
