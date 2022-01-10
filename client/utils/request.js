@@ -29,7 +29,7 @@ async function makeRequest(url, method, body) {
     return { data, status };
   } catch (error) {
     return {
-      data: {},
+      data: { error: error.message },
       status: 501,
     }
   }
