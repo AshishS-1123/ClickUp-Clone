@@ -18,8 +18,14 @@ exports.registerUser = async (req, res, next) => {
     sendToken(user, 201, res)
 
   } catch (error) {
+    let message = "";
+    if (error.message.search("E11000") !== -1) {
+      message = "Email already exists";
+    } else {
+      message = "Server Error";
+    }
     // In case of error, inform user
-    return next(new ErrorResponse(error.message))
+    return next(new ErrorResponse(message))
   }
 }
 
