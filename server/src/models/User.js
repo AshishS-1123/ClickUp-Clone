@@ -13,7 +13,12 @@ const UserSchema = new mongoose.Schema({
     match: [
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
       "Please provide a valid email."
-    ]
+    ],
+    trim: true,
+    index: {
+      unique: true,
+      partialFilterExpression: { email: { $type: "string" } }
+    }
   },
   password: {
     type: String,
