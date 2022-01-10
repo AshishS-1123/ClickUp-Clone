@@ -1,21 +1,13 @@
 import React, { useRef } from "react";
 import Link from "next/link";
-import makeRequest from "../../utils/request";
-
+import { useDispatch } from "react-redux";
+import { signUp } from "../../redux/reducers/authReducer";
 import styles from "./SignUp.module.css";
-
-const registerUser = async (userEmail, password) => {
-  const url = "/auth/register";
-  const body = { userEmail, password };
-
-  const { data, status } = await makeRequest(url, "POST", body);
-
-  return { data, status };
-}
 
 function SignUp() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const dispatch = useDispatch();
 
   const clickHandler = (event) => {
     event.preventDefault();
@@ -23,12 +15,17 @@ function SignUp() {
     const userEmail = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    registerUser(userEmail, password)
-      .then((response) => {
-        console.log(response);
+    dispatch(signUp({ userEmail, password }))
+      .then((data) => {
+        if (data.type != "auth/register/rejected") {
+          // Redirect to another page.
+          console.log("Successful!");
+        } else {
+          console.log("Failed");
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Failed: ", error);
       })
   }
 
