@@ -63,6 +63,13 @@ export const loginAsync = createAsyncThunk(
   }
 );
 
+export const signOutAsync = createAsyncThunk(
+  "auth/signout",
+  async (thunkApi) => {
+    // In future might need to perform some async request here.
+    return;
+  }
+)
 
 const initialState = {
   userEmail: "",
@@ -79,8 +86,12 @@ export const authSlice = createSlice({
   },
   extraReducers: {
     [registerAsync.pending]: startLoading,
-    [registerAsync.fullfilled]: setUserCreds,
+    [registerAsync.fulfilled]: setUserCreds,
     [registerAsync.rejected]: setError,
+    [loginAsync.pending]: startLoading,
+    [loginAsync.fulfilled]: setUserCreds,
+    [loginAsync.rejected]: setError,
+    [signOutAsync.fulfilled]: signOutUser,
   }
 });
 
@@ -103,5 +114,12 @@ function setError(state, { payload }) {
   state.error = payload.error;
 }
 
-// export const { signIn, signUp, signOut } = authSlice.actions;
+function signOutUser(state) {
+  console.log("in state modify reducer");
+  state.userEmail = "";
+  state.token = "";
+  state.loggedIn = false;
+  state.loading = false;
+}
+
 export default authSlice.reducer;

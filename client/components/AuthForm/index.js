@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AuthForm.module.css";
+import protectedRoute from "../../containers/ProtectedRoutes";
 
 const dataFromAuthType = (authType) => {
   const metaData = {};
@@ -67,10 +68,10 @@ function AuthForm({ reducer, authType }) {
       <button type="submit" className={styles.auth_button} onClick={clickHandler}>Start playing</button>
 
       <Link href={alternateAuthLink}>
-        <a className={styles.auth_link}>Already have an account? Log In</a>
+        <a className={styles.auth_link}>{alternateAuthText}</a>
       </Link>
     </form>
   )
 }
 
-export default AuthForm;
+export default protectedRoute(AuthForm, false);
