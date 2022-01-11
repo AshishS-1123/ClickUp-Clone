@@ -1,12 +1,13 @@
 import React from "react";
 import createSection from "../containers/Card";
-import SignIn from "../components/SignIn";
+import AuthForm from "../components/AuthForm";
+import { loginAsync } from "../redux/reducers/authReducer";
 
-const SignInSection = createSection(SignIn);
+const SignInSection = createSection(AuthForm);
 
 function SignInPage() {
   return (
-    <SignInSection />
+    <SignInSection reducer={loginAsync} authType="login" />
   );
 }
 

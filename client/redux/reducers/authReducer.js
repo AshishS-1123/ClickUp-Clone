@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { registerUser } from "../../utils/requests/authRequests";
+import { logInUser, registerUser } from "../../utils/requests/authRequests";
 
-export const signUp = createAsyncThunk(
+export const registerAsync = createAsyncThunk(
   "auth/register",
   async ({ userEmail, password }, thunkApi) => {
     // Check that the email and password are provided
@@ -30,7 +30,39 @@ export const signUp = createAsyncThunk(
       });
     }
   }
-)
+);
+
+export const loginAsync = createAsyncThunk(
+  "auth/login",
+  async ({ userEmail, password }, thunkApi) => {
+    // Check that the email and password are provided
+    if (!userEmail || !password) {
+      return thunkApi.rejectWithValue({
+        error: "Please provide email and password",
+      });
+    }
+
+    try {
+      const { data, status } = await logInUser(userEmail, password);
+
+      if (status == 201) {
+        // Set the values in local storage.
+        // localStorage.setItem("token", data.token);
+        // Return the new state.
+        return data;
+      } else {
+        return thunkApi.rejectWithValue({
+          error: data.error,
+        });
+      }
+    } catch (error) {
+      return thunkApi.rejectWithValue({
+        error: error.message,
+      });
+    }
+  }
+);
+
 
 const initialState = {
   userEmail: "",
@@ -46,9 +78,9 @@ export const authSlice = createSlice({
   reducers: {
   },
   extraReducers: {
-    [signUp.pending]: startLoading,
-    [signUp.fullfilled]: setUserCreds,
-    [signUp.rejected]: setError,
+    [registerAsync.pending]: startLoading,
+    [registerAsync.fullfilled]: setUserCreds,
+    [registerAsync.rejected]: setError,
   }
 });
 

@@ -9,7 +9,7 @@ export const registerUser = async (userEmail, password) => {
   return { data, status };
 }
 
-export const signInUser = async (userEmail, password) => {
+export const logInUser = async (userEmail, password) => {
   const url = "/auth/login";
   const body = { userEmail, password };
 
