@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./Card.module.css";
 
 export default function createSection(Component) {
-  function HOC() {
+  function HOC(props) {
     return (
       <div className={styles.Card}>
-        <Component />
+        <Component {...props} />
       </div>
     );
   }
