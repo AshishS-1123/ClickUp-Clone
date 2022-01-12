@@ -1,7 +1,7 @@
 import React from "react";
 import createSection from "../containers/Card";
 // import SignUp from "../components/SignUp";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../utils/AuthForm";
 import { registerAsync } from "../redux/reducers/authReducer";
 
 const SignUpSection = createSection(AuthForm);

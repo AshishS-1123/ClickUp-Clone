@@ -1,7 +1,7 @@
 // import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
-import protectedRoute from "../containers/ProtectedRoutes";
+import protectedRoute from "../utils/ProtectedRoutes";
 import { signOutAsync } from "../redux/reducers/authReducer";
 
 

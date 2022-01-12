@@ -1,6 +1,6 @@
 import React from "react";
-import NavDrawer from "../containers/NavDrawer";
-// import protectedRoute from "../containers/ProtectedRoutes";
+import NavDrawer from "../features/NavBar/NavDrawer";
+// import protectedRoute from "../utils/ProtectedRoutes";
 
 function Dashboard() {
   return (
