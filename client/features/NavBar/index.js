@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DoubleArrowOutlinedIcon from '@mui/icons-material/DoubleArrowOutlined';
 import styles from "./NavDrawer.module.css";
+import UserManager from "./UserManager";
 
 const DrawerToggler = ({ onClick, rotateBtn }) => {
   const styles = {
@@ -39,6 +40,7 @@ function NavDrawer() {
           endIcon={<DrawerToggler onClick={toggleDrawer} rotateBtn={true} />}
         >ClickUp Clone</Button>
 
+        <UserManager />
       </Drawer>
     </>
   );
