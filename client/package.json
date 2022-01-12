@@ -10,6 +10,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
     "@reduxjs/toolkit": "^1.7.1",
     "lodash": "^4.17.21",
