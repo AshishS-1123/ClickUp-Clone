@@ -1,0 +1,8 @@
+.menu_button {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+
+  text-transform: capitalize;
+  color: white;
+}
