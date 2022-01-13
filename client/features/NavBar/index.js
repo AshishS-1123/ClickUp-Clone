@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 import DoubleArrowOutlinedIcon from '@mui/icons-material/DoubleArrowOutlined';
-import styles from "./NavDrawer.module.css";
+// import "./NavDrawer.module.css";
 import UserManager from "./UserManager";
 
 const DrawerToggler = ({ onClick, rotateBtn }) => {
   const styles = {
     transform: rotateBtn == true ? "rotate(180deg)" : "rotate(0deg)",
     fill: "#ffa12f",
+    marginTop: "9px"
   }
   return (
-    <IconButton aria-label="toggle-navbar" onClick={onClick}>
+    <div aria-label="toggle-navbar" onClick={onClick}>
       <DoubleArrowOutlinedIcon style={styles} />
-    </IconButton>
+    </div>
   )
 }
 
@@ -28,16 +28,25 @@ function NavDrawer() {
     <>
       <DrawerToggler onClick={toggleDrawer} />
       <Drawer
-        className={styles.drawer}
         anchor="left"
         open={drawerState}
         variant="persistent"
+        sx={{
+          "> .MuiPaper-root": {
+            background: "#20262b",
+            width: "199px",
+          }
+        }}
       >
         <Button
-          className={styles.buttonText}
           variant="text"
           disableRipple={true}
           endIcon={<DrawerToggler onClick={toggleDrawer} rotateBtn={true} />}
+          sx={{
+            color: "white",
+            fontWeight: 900,
+            fontSize: "16px",
+          }}
         >ClickUp Clone</Button>
 
         <UserManager />

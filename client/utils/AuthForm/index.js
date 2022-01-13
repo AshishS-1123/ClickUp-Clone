@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AuthForm.module.css";
-import protectedRoute from "../../containers/ProtectedRoutes";
+import protectedRoute from "../ProtectedRoutes";
 
 const dataFromAuthType = (authType) => {
   const metaData = {};
