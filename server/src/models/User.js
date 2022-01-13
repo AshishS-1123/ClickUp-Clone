@@ -27,7 +27,13 @@ const UserSchema = new mongoose.Schema({
     select: false // If we query a user we dont want their password unless we ask for it explicitly
   },
   resetPasswordToken: String,
-  resetPasswordExpire: Date
+  resetPasswordExpire: Date,
+
+  // For storing the Workspaces of the user.
+  workspaces: {
+    type: [String],
+    default: [],
+  }
 })
 
 // pre('save') will run our callback function before every save operation to database
