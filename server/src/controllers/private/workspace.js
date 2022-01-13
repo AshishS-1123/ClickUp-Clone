@@ -26,11 +26,12 @@ exports.createNewWorkspace = async (req, res, next) => {
 
   // Create the workspace.
   try {
-    workspace = new Workspace({
+    workspace = await Workspace.create({
       name: workspaceName,
       userId: userId,
     });
   } catch (error) {
+    console.log(error.message);
     return next(new ErrorResponse("Failed to create workspace", 500));
   }
 
