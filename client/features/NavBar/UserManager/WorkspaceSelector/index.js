@@ -40,8 +40,8 @@ function WorkspaceSelector() {
     "Workspace 4",
   ]
   return (
-    <MenuItem>
-      <Stack direction="column" spacing={1}>
+    <>
+      <Stack direction="column" spacing={1.5} alignItems="center" justifyContent="center">
         {
           names.map((name, idx) => {
             return <Avatar {...stringAvatar(name, idx)} key={idx} />
@@ -52,7 +52,7 @@ function WorkspaceSelector() {
           <AddIcon />
         </Avatar>
       </Stack>
-    </MenuItem>
+    </>
   );
 };
 
