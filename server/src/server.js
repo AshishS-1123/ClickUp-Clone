@@ -6,6 +6,9 @@ const express = require('express');
 const app = express();
 
 const authRouter = require("./routes/auth");
+const workspaceRouter = require("./routes/private/workspace");
+
+const { protect } = require("./middleware/auth");
 const errorHandler = require("./middleware/error");
 const notFound = require("./middleware/notFound");
 const connectDB = require("./config/db");
@@ -24,6 +27,7 @@ app.use(express.json())
 
 // Routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/user/:userId/workspaces", protect, workspaceRouter);
 
 // Not Found Page
 app.use(notFound);
