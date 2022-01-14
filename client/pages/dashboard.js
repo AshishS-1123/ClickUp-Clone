@@ -1,6 +1,6 @@
 import React from "react";
 import NavDrawer from "../features/NavBar";
-// import protectedRoute from "../utils/ProtectedRoutes";
+import protectedRoute from "../utils/ProtectedRoutes";
 
 function Dashboard() {
   return (
@@ -10,4 +10,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard;
+export default protectedRoute(Dashboard);

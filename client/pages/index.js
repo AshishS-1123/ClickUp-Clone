@@ -2,7 +2,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import protectedRoute from "../utils/ProtectedRoutes";
-import { signOutAsync } from "../redux/reducers/authReducer";
+import { signOutAsync } from "../redux/slices/authSlice";
 
 
 function HomePage() {
