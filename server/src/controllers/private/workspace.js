@@ -18,7 +18,6 @@ exports.createNewWorkspace = async (req, res, next) => {
   const { workspaceName } = req.body;
   const userId = req.user._id;
   let workspace;
-  console.log("User id ", userId);
 
   if (!workspaceName || workspaceName === "") {
     return next(new ErrorResponse("Please provide name for workspace", 400));

@@ -7,13 +7,14 @@ export const getAllWorkspacesAsync = createAsyncThunk(
     try {
       const { data, status } = await getAllWorkspaces(userId, token);
 
-      if (status == 201) {
-        return data;
+      if (data.success) {
+        return { workspaces: data.workspaces };
       }
 
-      thunkApi.rejectWithValue({ error: data.error });
+      return thunkApi.rejectWithValue({ error: data.error });
     } catch (error) {
-      thunkApi.rejectWithValue({ error: error.message });
+      console.log(error.message);
+      return thunkApi.rejectWithValue({ error: error.message });
     }
   }
 )
@@ -33,13 +34,15 @@ export const workspaceSlice = createSlice({
 
   },
   extraReducers: {
-    [getAllWorkspacesAsync.fulfilled]: state => {
-      console.log("Fulfilled");
-    },
+    [getAllWorkspacesAsync.fulfilled]: setWorkspaces,
     [getAllWorkspacesAsync.rejected]: state => {
       console.log("Failed");
     }
   }
 })
+
+function setWorkspaces(state, action) {
+  state.workspaces = action?.payload?.workspaces;
+}
 
 export default workspaceSlice.reducer;

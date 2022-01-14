@@ -57,16 +57,16 @@ function UserManager() {
           filter: 'drop-shadow(0px 2px 8px #384047)',
         }}
       >
-        <Grid container spacing={1} sx={{ width: "600px" }} >
+        <Grid container spacing={1} sx={{ width: "600px", minHeight: "366px" }} >
           <Grid item xs={1.5} sm={1.5} md={1.5} lg={1.5} xl={1.5}>
             <WorkspaceSelector />
           </Grid>
           <Divider orientation="vertical" flexItem={true} light={true} sx={{ right: { background: "#20262b" } }} variant="middle" />
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={4.5} sm={4.5} md={4.5} lg={4.5} xl={4.5}>
             <WorkspaceManager />
           </Grid>
           <Divider orientation="vertical" flexItem={true} light={true} sx={{ right: { background: "#20262b" } }} variant="middle" />
-          <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+          <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
             <UserSettings />
           </Grid>
         </Grid>
