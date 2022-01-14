@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import AddIcon from '@mui/icons-material/Add';
-import { useDispatch, useSelector } from "react-redux";
-import { getAllWorkspacesAsync } from "../../../../redux/slices/workspaceSlice";
+import { useSelector } from "react-redux";
 
 const stringAvatar = (name, id) => {
   const colors = [
@@ -38,18 +37,7 @@ const stringAvatar = (name, id) => {
 }
 
 function WorkspaceSelector() {
-  const dispatch = useDispatch();
   const workspaces = useSelector(state => state.workspaceReducer.workspaces);
-  const userId = useSelector(state => state.authReducer.userId);
-  const token = useSelector(state => state.authReducer.token);
-
-  useEffect(() => {
-    // Dispatch request to fetch workspaces.
-    dispatch(getAllWorkspacesAsync({ userId, token }))
-  }, []);
-
-  useEffect(() => {
-  }, [workspaces])
 
   return (
     <>
