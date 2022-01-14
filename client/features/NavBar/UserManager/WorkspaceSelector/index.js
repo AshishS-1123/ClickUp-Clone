@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-import MenuItem from "@mui/material/MenuItem";
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllWorkspacesAsync } from "../../../../redux/slices/workspaceSlice";
@@ -22,6 +21,10 @@ const stringAvatar = (name, id) => {
     "#757380",
   ]
 
+  const children = name.split(" ").length >= 2
+    ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+    : name.substr(0, 2);
+
   return {
     sx: {
       bgcolor: colors[id],
@@ -30,16 +33,11 @@ const stringAvatar = (name, id) => {
       fontSize: "12px",
       outline: `1px dashed ${colors[id]}`,
     },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    children: children,
   };
 }
 
 function WorkspaceSelector() {
-  // const names = [
-  //   "Workspace 1",
-  //   "Workspace 2",
-  // ]
-
   const dispatch = useDispatch();
   const workspaces = useSelector(state => state.workspaceReducer.workspaces);
   const userId = useSelector(state => state.authReducer.userId);
@@ -51,15 +49,14 @@ function WorkspaceSelector() {
   }, []);
 
   useEffect(() => {
-    console.log("Workspaces", workspaces);
   }, [workspaces])
 
   return (
     <>
       <Stack direction="column" spacing={1.5} alignItems="center" justifyContent="center">
         {
-          workspaces.map((name, idx) => {
-            return <Avatar {...stringAvatar(name, idx)} key={idx} />
+          workspaces.map((item, idx) => {
+            return <Avatar {...stringAvatar(item.name, idx)} key={item.id} />
           })
         }
 

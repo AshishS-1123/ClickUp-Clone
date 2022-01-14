@@ -46,6 +46,7 @@ function NavDrawer() {
             color: "white",
             fontWeight: 900,
             fontSize: "16px",
+            textTransform: "capitalize"
           }}
         >ClickUp Clone</Button>
 

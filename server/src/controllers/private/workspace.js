@@ -2,16 +2,41 @@ const User = require("../../models/User");
 const Workspace = require("../../models/Workspace");
 const ErrorResponse = require("../../utils/errorResponse");
 
+const fetchWorkspaceData = async (workspaceId) => {
+  const workspaceItem = {
+    name: "",
+    id: workspaceId,
+  };
+
+  const workspace = await Workspace.findById(workspaceId);
+  workspaceItem.name = workspace.name;
+
+  return workspaceItem
+}
+
 exports.getAllWorkspaces = async (req, res, next) => {
   // Get which user made this request.
   // Here we are getting this value from the JWT
   // middleware as that is more secure.
   const user = req.user;
 
-  res.status(200).json({
-    success: true,
-    workspaces: user.workspaces,
-  });
+  try {
+    const workspaceData = [];
+
+    for (let i = 0; i < user.workspaces.length; ++i) {
+      const currItem = await fetchWorkspaceData(user.workspaces[i]);
+      workspaceData.push(currItem);
+    }
+
+    res.status(200).json({
+      success: true,
+      workspaces: workspaceData,
+    });
+    ;
+  } catch (error) {
+    console.log(error.message);
+    return next(new ErrorResponse(error.message, 500));
+  }
 }
 
 exports.createNewWorkspace = async (req, res, next) => {
