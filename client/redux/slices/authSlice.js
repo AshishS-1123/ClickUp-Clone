@@ -77,6 +77,7 @@ const initialState = {
   token: "",
   error: "",
   loading: true,
+  userId: "",
 };
 
 export const authSlice = createSlice({
@@ -99,27 +100,27 @@ function startLoading(state) {
   state.loading = true;
 }
 function setUserCreds(state, action) {
-  const { userEmail, token } = action.payload;
+  const { userEmail, token, userId } = action.payload;
 
   state.loading = false;
   state.userEmail = userEmail;
   state.token = token;
   state.error = "";
   state.loggedIn = true;
+  state.userId = userId;
 }
 
 function setError(state, { payload }) {
-  console.log("Rejected with ", payload.error);
   state.loading = false;
   state.error = payload.error;
 }
 
 function signOutUser(state) {
-  console.log("in state modify reducer");
   state.userEmail = "";
   state.token = "";
   state.loggedIn = false;
   state.loading = false;
+  state.userId = "";
 }
 
 export default authSlice.reducer;
