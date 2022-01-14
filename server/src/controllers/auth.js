@@ -142,5 +142,6 @@ const sendToken = (user, statusCode, res) => {
     success: true,
     token,
     userEmail: user.userEmail,
+    userId: user._id,
   })
 }

@@ -8,7 +8,7 @@ exports.getAllWorkspaces = async (req, res, next) => {
   // middleware as that is more secure.
   const user = req.user;
 
-  res.status(201).json({
+  res.status(200).json({
     success: true,
     workspaces: user.workspaces,
   });
@@ -45,7 +45,7 @@ exports.createNewWorkspace = async (req, res, next) => {
     // Write to database.
     await user.save();
 
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       workspace: workspace,
     });

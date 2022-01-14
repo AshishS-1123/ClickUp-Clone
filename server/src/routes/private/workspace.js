@@ -13,7 +13,7 @@ const router = express.Router();
 // GET /workspace -> Get all workspaces of user. Just names
 // POST /workspace -> Create new workspace using name
 // DELETE /workspace/:id -> Delete workspace
-// GET /workspace/:id -> Get all data of workspace
+// GET /workspace/:id -> Get all data of workspace (name, recusively)
 // PATCH /workspace/:id -> Change property of workspace.
 
 router.route("/")
