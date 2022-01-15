@@ -22,11 +22,11 @@ export const getAllWorkspacesAsync = createAsyncThunk(
 export const createNewWorkspaceAsync = createAsyncThunk(
   "workspace/createNew",
   async ({ userId, token, workspaceName }, thunkApi) => {
-    const { data, status } = createNewWorkspace(userId, token, workspaceName);
+    const { data, status } = await createNewWorkspace(userId, token, workspaceName);
 
     try {
       if (data.success) {
-        return { workspaces: data.workspaces };
+        return { workspace: data.workspace };
       }
 
       return thunkApi.rejectWithValue({ error: data.error });
@@ -43,6 +43,8 @@ const initialState = {
   workspaces: [],
   // Stores ids of all spaces that belong the currently selected workspace.
   activeWorkspaceChildren: [],
+  // Stores any errors that were generated,
+  error: "",
 }
 
 export const workspaceSlice = createSlice({
@@ -53,14 +55,23 @@ export const workspaceSlice = createSlice({
   },
   extraReducers: {
     [getAllWorkspacesAsync.fulfilled]: setWorkspaces,
-    [getAllWorkspacesAsync.rejected]: state => {
-      console.log("Failed");
-    }
+    [getAllWorkspacesAsync.rejected]: setError,
+    [createNewWorkspaceAsync.fulfilled]: addNewWorkspace,
+    [createNewWorkspaceAsync.rejected]: setError,
   }
 })
 
 function setWorkspaces(state, action) {
   state.workspaces = action?.payload?.workspaces;
+}
+
+function setError(state, action) {
+  console.log("Failed action", action);
+  state.error = action?.payload?.error;
+}
+
+function addNewWorkspace(state, action) {
+  state.workspaces = [...state.workspaces, action?.payload?.workspace];
 }
 
 export default workspaceSlice.reducer;
