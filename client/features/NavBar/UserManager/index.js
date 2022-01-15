@@ -37,6 +37,7 @@ function UserManager() {
       >Settings</Button>
 
       <Menu
+        id="Menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleMenuClose}
