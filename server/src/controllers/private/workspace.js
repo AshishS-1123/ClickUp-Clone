@@ -71,7 +71,7 @@ exports.createNewWorkspace = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      workspace: workspace,
+      workspaces: user.workspaces,
     });
   } catch (error) {
     // In case the workspace was created but

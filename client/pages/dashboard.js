@@ -12,6 +12,9 @@ function Dashboard() {
   useEffect(() => {
     // Dispatch request to fetch workspaces.
     dispatch(getAllWorkspacesAsync({ userId, token }))
+    // Dispatch request to fetch data for first workspace.
+    // The first workspace is the default one we show the user at startup.
+
   }, []);
 
   return (
@@ -21,4 +24,4 @@ function Dashboard() {
   )
 }
 
-export default protectedRoute(Dashboard);
+export default Dashboard;
