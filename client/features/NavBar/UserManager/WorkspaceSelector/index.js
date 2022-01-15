@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import AddIcon from '@mui/icons-material/Add';
-import { useSelector } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { createNewWorkspaceAsync } from "../../../../redux/slices/workspaceSlice";
 
 // Returns styles for the avatar.
 const stringAvatar = (name, id) => {
@@ -34,6 +35,23 @@ const stringAvatar = (name, id) => {
 }
 
 function WorkspaceCreateDialog({ open, onClose }) {
+  const dispatch = useDispatch();
+  const userId = useSelector(state => state.authReducer.userId);
+  const token = useSelector(state => state.authReducer.token);
+  const error = useSelector(state => state.workspaceReducer.error);
+
+  const handleCreatingNewWorkspace = () => {
+    const inputRef = document.getElementById("WorkspaceFormInput");
+    const workspaceName = inputRef?.value;
+
+    dispatch(createNewWorkspaceAsync({ userId, token, workspaceName }))
+      .then(() => {
+        // After the new workspace has been created successfully,
+        // close the dialog. Otherwise, keep it open so that the user can see the error.
+        console.log("Action success");
+        onClose();
+      })
+  }
 
   return (
     <Dialog onClose={onClose} open={open}>
@@ -52,7 +70,7 @@ function WorkspaceCreateDialog({ open, onClose }) {
         }
       }}>
         <DialogTitle>Create new Workspace</DialogTitle>
-        <TextField label="workspace name" variant="standard">Workspace Name</TextField>
+        <TextField id="WorkspaceFormInput" label="workspace name" variant="standard">Workspace Name</TextField>
         <Button
           variant="contained"
           fullWidth
@@ -63,9 +81,11 @@ function WorkspaceCreateDialog({ open, onClose }) {
               background: "#ffa12f",
             }
           }}
+          onClick={handleCreatingNewWorkspace}
         >
           Create
         </Button>
+        <p style={{ color: "red", fontSize: "12px", marginTop: "12px" }}>{error}</p>
       </Box >
     </Dialog>
   )
@@ -74,10 +94,6 @@ function WorkspaceCreateDialog({ open, onClose }) {
 function WorkspaceSelector() {
   const [open, setOpen] = useState(false);
   const workspaces = useSelector(state => state.workspaceReducer.workspaces);
-
-  const handleCreatingNewWorkspace = () => {
-
-  }
 
   const handleAddIconClick = () => {
     // When add button is clicked, we show a dialog to create the new workspace.
