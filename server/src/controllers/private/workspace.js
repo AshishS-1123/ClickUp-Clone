@@ -41,6 +41,7 @@ exports.getAllWorkspaces = async (req, res, next) => {
 
 exports.createNewWorkspace = async (req, res, next) => {
   const { workspaceName } = req.body;
+
   const userId = req.user._id;
   let workspace;
 
@@ -55,8 +56,15 @@ exports.createNewWorkspace = async (req, res, next) => {
       userId: userId,
     });
   } catch (error) {
-    console.log(error.message);
-    return next(new ErrorResponse("Failed to create workspace", 500));
+    let message = "";
+
+    if (error.message.search("E11000") !== -1) {
+      message = "Workspace with this name already exists";
+    } else {
+      message = "Server Error";
+    }
+
+    return next(new ErrorResponse(message, 500));
   }
 
   // Associate this workspace with the correct user.
@@ -71,7 +79,10 @@ exports.createNewWorkspace = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      workspaces: user.workspaces,
+      workspace: {
+        name: workspace.name,
+        id: workspace._id,
+      },
     });
   } catch (error) {
     // In case the workspace was created but
