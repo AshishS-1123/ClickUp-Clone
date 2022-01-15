@@ -27,8 +27,8 @@ const stringAvatar = (name, id) => {
       bgcolor: colors[id],
       width: 32,
       height: 32,
-      fontSize: "12px",
-      outline: `1px dashed ${colors[id]}`,
+      fontSize: "10px",
+      color: "black"
     },
     children: children,
   };
@@ -121,7 +121,7 @@ function WorkspaceSelector() {
           })
         }
 
-        <Avatar sx={{ outline: "1px dashed red", width: 32, height: 32, bgcolor: "white", color: "black" }}>
+        <Avatar sx={{ width: 32, height: 32, bgcolor: "white", color: "black" }}>
           <AddIcon onClick={() => { handleAddIconClick() }} />
         </Avatar>
       </Stack>
