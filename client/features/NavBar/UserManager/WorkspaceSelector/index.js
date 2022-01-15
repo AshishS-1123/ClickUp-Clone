@@ -12,11 +12,11 @@ import { createNewWorkspaceAsync } from "../../../../redux/slices/workspaceSlice
 
 // Returns styles for the avatar.
 const stringAvatar = (name, id) => {
-  const colors = [
-    "#7b68ee", "#ffa12f", "#ff5722", "#f42c2c",
-    "#f8306d", "#4169e1", "#0ab4ff", "#5f81ff",
-    "#07ao92", "#1db954", "#2ea52c", "#757380",
-  ]
+  // const colors = [
+  //   "#7b68ee", "#ffa12f", "#ff5722", "#f42c2c",
+  //   "#f8306d", "#4169e1", "#0ab4ff", "#5f81ff",
+  //   "#07ao92", "#1db954", "#2ea52c", "#757380",
+  // ]
 
   const children = name.split(" ").length >= 2
     ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
@@ -24,7 +24,7 @@ const stringAvatar = (name, id) => {
 
   return {
     sx: {
-      bgcolor: colors[id],
+      bgcolor: "#7b68ee",
       width: 32,
       height: 32,
       fontSize: "10px",

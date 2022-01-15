@@ -25,3 +25,4 @@ function Dashboard() {
 }
 
 export default protectedRoute(Dashboard);
+// export default Dashboard;
