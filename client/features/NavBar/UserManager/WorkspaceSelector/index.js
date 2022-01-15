@@ -5,6 +5,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { useSelector } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 // Returns styles for the avatar.
 const stringAvatar = (name, id) => {
@@ -34,9 +37,36 @@ function WorkspaceCreateDialog({ open, onClose }) {
 
   return (
     <Dialog onClose={onClose} open={open}>
-      <DialogTitle>Create new Workspace</DialogTitle>
 
-
+      <Box sx={{
+        padding: "0px 20px 30px 20px",
+        textAlign: "center",
+        "& > .MuiTextField-root": {
+          width: "100%",
+        },
+        "& label": {
+          textTransform: "capitalize",
+        },
+        "& > button": {
+          marginTop: "20px",
+        }
+      }}>
+        <DialogTitle>Create new Workspace</DialogTitle>
+        <TextField label="workspace name" variant="standard">Workspace Name</TextField>
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{
+            background: "#ffa12f",
+            color: "#20262b",
+            "&:focus, &:hover": {
+              background: "#ffa12f",
+            }
+          }}
+        >
+          Create
+        </Button>
+      </Box >
     </Dialog>
   )
 }
