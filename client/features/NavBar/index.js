@@ -2,8 +2,26 @@ import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import DoubleArrowOutlinedIcon from '@mui/icons-material/DoubleArrowOutlined';
-// import "./NavDrawer.module.css";
+import { makeStyles } from "@mui/styles";
 import UserManager from "./UserManager";
+
+//////////////////
+const useDrawerStyles = makeStyles({
+  paper: {
+    background: "#20262b",
+    width: "199px",
+  }
+});
+
+const useButtonStyles = makeStyles({
+  root: {
+    color: "white",
+    fontWeight: 900,
+    fontSize: "16px",
+    textTransform: "capitalize"
+  }
+})
+//////////////////
 
 const DrawerToggler = ({ onClick, rotateBtn }) => {
   const styles = {
@@ -24,6 +42,9 @@ function NavDrawer() {
     setDrawerState(state => !state);
   };
 
+  const drawerClasses = useDrawerStyles();
+  const buttonClasses = useButtonStyles();
+
   return (
     <>
       <DrawerToggler onClick={toggleDrawer} />
@@ -31,23 +52,13 @@ function NavDrawer() {
         anchor="left"
         open={drawerState}
         variant="persistent"
-        sx={{
-          "> .MuiPaper-root": {
-            background: "#20262b",
-            width: "199px",
-          }
-        }}
+        classes={{ paper: drawerClasses.paper }}
       >
         <Button
           variant="text"
           disableRipple={true}
           endIcon={<DrawerToggler onClick={toggleDrawer} rotateBtn={true} />}
-          sx={{
-            color: "white",
-            fontWeight: 900,
-            fontSize: "16px",
-            textTransform: "capitalize"
-          }}
+          classes={{ root: buttonClasses.root }}
         >ClickUp Clone</Button>
 
         <UserManager />
