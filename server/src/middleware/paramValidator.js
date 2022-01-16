@@ -5,7 +5,7 @@
 const Workspace = require("../models/Workspace");
 const ErrorResponse = require("../utils/errorResponse");
 
-exports.paramValidator = async (req, res, next) => {
+exports.paramValidator = async function (req, res, next) {
   // Get all the possible params from the request.
   const { userId, workspaceId, spaceId } = req.params;
 
@@ -18,18 +18,22 @@ exports.paramValidator = async (req, res, next) => {
   if (!req.user.workspaces.includes(workspaceId)) {
     console.log(workspaceId);
     console.log(req.user.workspaces);
-    return next(new ErrorResponse("User not authorised to access this worksace", 403));
+    return next(new ErrorResponse("User not authorised to access this workspace", 403));
   }
 
   // At this point, the user is allowed to access the workspace.
   // Fetch the workspace in order to verify the space.
   const workspace = await Workspace.findById(workspaceId);
 
-  // Check if the given space belongs to the given workspace.
-  if (spaceId && !workspace.spaces.includes(spaceId)) {
-    return next(new ErrorResponse("Requested space does not belong this workspaece", 400));
+  // Store this workspace for future needs.
+  if (workspace) {
+    req.workspace = workspace;
   }
 
+  // Check if the given space belongs to the given workspace.
+  if (spaceId && !workspace.spaces.includes(spaceId)) {
+    return next(new ErrorResponse("Requested space does not belong this workspace", 400));
+  }
 
   next();
 }

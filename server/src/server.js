@@ -29,8 +29,8 @@ app.use(express.json())
 
 // Routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/user/:userId/workspaces", protect, paramValidator, workspaceRouter);
 app.use("/api/v1/user/:userId/workspaces/:workspaceId/spaces", protect, paramValidator, spaceRouter);
+app.use("/api/v1/user/:userId/workspaces", protect, paramValidator, workspaceRouter);
 
 // Not Found Page
 app.use(notFound);
