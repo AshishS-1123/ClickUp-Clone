@@ -10,6 +10,7 @@ const workspaceRouter = require("./routes/private/workspace");
 const spaceRouter = require("./routes/private/spaces");
 
 const { protect } = require("./middleware/auth");
+const { paramValidator } = require("./middleware/paramValidator");
 const errorHandler = require("./middleware/error");
 const notFound = require("./middleware/notFound");
 const connectDB = require("./config/db");
@@ -28,8 +29,8 @@ app.use(express.json())
 
 // Routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/user/:userId/workspaces", protect, workspaceRouter);
-app.use("/api/v1/user/:userId/workspaces/:workspaceId/spaces", spaceRouter);
+app.use("/api/v1/user/:userId/workspaces", protect, paramValidator, workspaceRouter);
+app.use("/api/v1/user/:userId/workspaces/:workspaceId/spaces", protect, paramValidator, spaceRouter);
 
 // Not Found Page
 app.use(notFound);

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-import { LIST_VIEW } from "../utils/viewTypes";
+const { LIST_VIEW } = require("../utils/viewTypes");
 
 const SpaceSchema = mongoose.Schema({
   // Name of this workspace.
