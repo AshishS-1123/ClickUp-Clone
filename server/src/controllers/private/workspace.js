@@ -34,7 +34,7 @@ exports.getAllWorkspaces = async (req, res, next) => {
     });
     ;
   } catch (error) {
-    console.log(error.message);
+    console.log("Get All Workspaces", error.message);
     return next(new ErrorResponse(error.message, 500));
   }
 }
@@ -94,7 +94,7 @@ exports.createNewWorkspace = async (req, res, next) => {
       return next(new ErrorResponse("Workspace created, but unassociated. Failed to delete workspace", 500));
     }
 
-    console.log(error.message);
+    console.log("Create New Workspace", error.message);
     return next(new ErrorResponse("Failed to associate new workspace with user. Deleted workspace", 500));
   }
 }
@@ -106,17 +106,34 @@ exports.getWorkspaceData = async (req, res, next) => {
 
 exports.deleteWorkspace = async (req, res, next) => {
   const workspaceId = req.workspace._id;
+  const user = req.user;
+
+  // First disassociate the workspace from the user.
+  try {
+    const idx = user.workspaces.indexOf(workspaceId);
+
+    if (idx > -1) {
+      user.workspaces.splice(idx);
+      await user.save();
+    } else {
+      return next(new ErrorResponse("Wrkspace Not Found", 404));
+    }
+
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 500));
+  }
+
+  // TODO: Delete All Spaces recursively here.
 
   try {
-    Workspace.findByIdAndDelete(workspaceId);
-    console.log("Got ws", workspaceId);
+    await Workspace.findByIdAndDelete(workspaceId);
 
-    req.status(200).json({
+    res.status(200).json({
       success: true,
-      message: "Workspace Deleted Successsfully",
+      workspaceId: workspaceId,
     });
   } catch (error) {
-    console.log(error.message);
+    console.log("Delete Workspace", error.message);
     return next(new ErrorResponse(error.message, 500));
   }
 }
