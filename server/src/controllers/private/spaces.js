@@ -95,11 +95,42 @@ exports.createNewSpace = async (req, res, next) => {
 }
 
 exports.getSpaceData = (req, res, next) => {
-  res.end("Get Space Data");
+  const space = req.space;
+  res.status(200).json({ space: space });
 }
 
-exports.deleteSpace = (req, res, next) => {
-  res.end("Delete Space");
+exports.deleteSpace = async (req, res, next) => {
+  const spaceId = req.space._id;
+  const workspace = req.workspace;
+
+  // First disassociate the space from the workspace.
+  try {
+    const idx = workspace.spaces.indexOf(spaceId);
+
+    if (idx > -1) {
+      workspace.spaces.splice(idx);
+      await workspace.save();
+    } else {
+      return next(new ErrorResponse("Space Not Found", 404));
+    }
+
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 500));
+  }
+
+  // TODO: Delete All Children recursively here.
+
+  try {
+    await Workspace.findByIdAndDelete(spaceId);
+
+    res.status(200).json({
+      success: true,
+      spaceId: spaceId,
+    });
+  } catch (error) {
+    console.log("Delete Workspace", error.message);
+    return next(new ErrorResponse(error.message, 500));
+  }
 }
 
 exports.modifySpace = (req, res, next) => {

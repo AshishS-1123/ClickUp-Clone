@@ -45,7 +45,7 @@ const workspaceValidator = async function (req, res, next, value) {
   };
 }
 
-const spaceValidator = async function (req, res, next) {
+const spaceValidator = async function (req, res, next, value) {
   const spaceId = value;
 
   // First check if the user is allowed to access this workspace.
