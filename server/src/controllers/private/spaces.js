@@ -20,7 +20,7 @@ exports.getAllSpaces = async (req, res, next) => {
     const spaceData = [];
 
     for (let i = 0; i < req.workspace.spaces.length; ++i) {
-      const currItem = await fetchSpaceData(workspace.spaces[i]);
+      const currItem = await fetchSpaceData(req.workspace.spaces[i]);
       spaceData.push(currItem);
     }
 

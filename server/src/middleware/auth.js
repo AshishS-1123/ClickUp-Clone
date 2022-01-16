@@ -13,7 +13,7 @@ exports.protect = async (req, res, next) => {
 
   // If no token is present, the user is not authorised.
   if (!token) {
-    return next (new ErrorResponse ("Not authorized to access this route", 401))
+    return next(new ErrorResponse("Not authorized to access this route", 401))
   }
 
   try {
@@ -27,9 +27,14 @@ exports.protect = async (req, res, next) => {
       return next (new ErrorResponse ("No User found with this id.", 404))
     }
 
-    req.user = user
+    // Check if the user is the same requested in the route.
+    if (String(user._id) !== String(req.user._id)) {
+      return next(new ErrorResponse("User and token do not match", 403));
+    }
+
     next ()
   } catch (error) {
+    console.log(error.message);
     return next (new ErrorResponse ("Not authorized to access this route", 401))
   }
 }

@@ -6,6 +6,7 @@ const {
   deleteWorkspace,
   modifyWorkspace
 } = require("../../controllers/private/workspace");
+const { paramValidator } = require("../../middleware/paramValidator");
 
 const router = express.Router();
 
@@ -16,11 +17,13 @@ const router = express.Router();
 // GET /workspace/:id -> Get all data of workspace (name, recusively)
 // PATCH /workspace/:id -> Change property of workspace.
 
+router.param("workspaceId", paramValidator);
+
 router.route("/")
   .get(getAllWorkspaces)
   .post(createNewWorkspace);
 
-router.route("/:id")
+router.route("/:workspaceId")
   .get(getWorkspaceData)
   .delete(deleteWorkspace)
   .patch(modifyWorkspace);

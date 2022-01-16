@@ -100,11 +100,25 @@ exports.createNewWorkspace = async (req, res, next) => {
 }
 
 exports.getWorkspaceData = async (req, res, next) => {
-  res.end("Get Workspace Data");
+  const workspace = req.workspace;
+  res.status(200).json({ workspace: workspace });
 }
 
 exports.deleteWorkspace = async (req, res, next) => {
-  res.end("Delete Workspace");
+  const workspaceId = req.workspace._id;
+
+  try {
+    Workspace.findByIdAndDelete(workspaceId);
+    console.log("Got ws", workspaceId);
+
+    req.status(200).json({
+      success: true,
+      message: "Workspace Deleted Successsfully",
+    });
+  } catch (error) {
+    console.log(error.message);
+    return next(new ErrorResponse(error.message, 500));
+  }
 }
 
 exports.modifyWorkspace = async (req, res, next) => {

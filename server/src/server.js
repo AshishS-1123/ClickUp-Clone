@@ -27,10 +27,12 @@ app.use(require('cors')());
 // JSON Middleware.
 app.use(express.json())
 
+app.param(["userId", "workspaceId"], paramValidator);
+
 // Routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/user/:userId/workspaces/:workspaceId/spaces", protect, paramValidator, spaceRouter);
-app.use("/api/v1/user/:userId/workspaces", protect, paramValidator, workspaceRouter);
+app.use("/api/v1/user/:userId/workspaces", protect, workspaceRouter);
+app.use("/api/v1/user/:userId/workspaces/:workspaceId/spaces", protect, spaceRouter);
 
 // Not Found Page
 app.use(notFound);

@@ -2,38 +2,73 @@
 // Then it will check if the params are all valid.
 // For example, if the request has a userId and a workspaceId, we need to check if the workspace belongs to the correct user.
 
+const User = require("../models/User");
 const Workspace = require("../models/Workspace");
+const Space = require("../models/Space");
 const ErrorResponse = require("../utils/errorResponse");
 
-exports.paramValidator = async function (req, res, next) {
-  // Get all the possible params from the request.
-  const { userId, workspaceId, spaceId } = req.params;
+const userValidator = async function (req, res, next, value) {
+  const userId = value;
 
-  // Check if the JWT and the the request refer to the same user.
-  if (userId && req.user._id != userId) {
-    return next(new ErrorResponse("Not authorised. Token and request do not match", 403));
-  }
+  try {
+    const user = await User.findById(userId);
 
-  // Check that the workspaceId in the request belongs to the current user.
+    req.user = user;
+  } catch (error) {
+    return next(new ErrorResponse("User not found", 404));
+  };
+}
+
+const workspaceValidator = async function (req, res, next, value) {
+  const workspaceId = value;
+
+  // First check if the user is allowed to access this workspace.
   if (!req.user.workspaces.includes(workspaceId)) {
-    console.log(workspaceId);
-    console.log(req.user.workspaces);
     return next(new ErrorResponse("User not authorised to access this workspace", 403));
   }
 
-  // At this point, the user is allowed to access the workspace.
-  // Fetch the workspace in order to verify the space.
-  const workspace = await Workspace.findById(workspaceId);
+  try {
+    const workspace = await Workspace.findById(workspaceId);
 
-  // Store this workspace for future needs.
-  if (workspace) {
     req.workspace = workspace;
+  } catch (error) {
+    return next(new ErrorResponse("Workspace not found", 404));
+  };
+}
+
+const spaceValidator = async function (req, res, next) {
+  const spaceId = value;
+
+  // First check if the user is allowed to access this workspace.
+  if (!req.workspace.spaces.includes(spaceId)) {
+    return next(new ErrorResponse("User not authorised to access this space", 403));
   }
 
-  // Check if the given space belongs to the given workspace.
-  if (spaceId && !workspace.spaces.includes(spaceId)) {
-    return next(new ErrorResponse("Requested space does not belong this workspace", 400));
+  try {
+    const space = await Space.findById(spaceId);
+
+    req.space = space;
+  } catch (error) {
+    return next(new ErrorResponse("Space not found", 404));
+  };
+}
+
+exports.paramValidator = async function (req, res, next) {
+  const { userId, workspaceId, spaceId } = req.params;
+  console.log(userId, workspaceId, spaceId);
+
+  if (userId && !req.user) {
+    await userValidator(req, res, next, userId);
   }
+
+  if (workspaceId && !req.workspace) {
+    await workspaceValidator(req, res, next, workspaceId);
+  }
+
+  if (spaceId && !req.space) {
+    await spaceValidator(req, res, next, spaceId);
+  }
+
 
   next();
 }
