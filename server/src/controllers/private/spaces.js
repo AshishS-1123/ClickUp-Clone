@@ -1,4 +1,5 @@
 const Space = require("../../models/Space");
+const Workspace = require("../../models/Workspace");
 const ErrorResponse = require("../../utils/errorResponse");
 
 const fetchSpaceData = async (spaceId) => {
@@ -34,8 +35,63 @@ exports.getAllSpaces = async (req, res, next) => {
   }
 }
 
-exports.createNewSpace = (req, res, next) => {
-  res.end("Create New Space");
+exports.createNewSpace = async (req, res, next) => {
+  const { spaceName, spaceColor, spaceAvatar } = req.body;
+
+  const workspaceId = req.workspace._id;
+  let space;
+
+  console.log(workspaceId, spaceName, spaceColor, spaceAvatar);
+
+  if (!spaceName || spaceName === "") {
+    return next(new ErrorResponse("Please provide name for space", 400));
+  }
+
+  // Create the space.
+  try {
+    space = await Space.create({
+      name: spaceName,
+      workspaceId: workspaceId,
+      spaceColor: spaceColor,
+      spaceAvatar: spaceAvatar,
+    });
+  } catch (error) {
+    let message = "";
+
+    if (error.message.search("E11000") !== -1) {
+      message = "Space with this name already exists";
+    } else {
+      message = "Server Error";
+    }
+
+    return next(new ErrorResponse(message, 500));
+  }
+  console.log("created space");
+
+  // Associate this space with the correct workspace.
+  try {
+    // Find the workspace under which to make the space
+    const workspace = await Workspace.findById(workspaceId);
+
+    // Add the new workspace's id to this user.
+    workspace.spaces.push(space._id);
+    // Write to database.
+    await workspace.save();
+
+    res.status(201).json({
+      success: true,
+      space: space,
+    });
+  } catch (error) {
+    try {
+      await Space.findByIdAndDelete(space._id);
+    } catch (error) {
+      return next(new ErrorResponse("Space created, but unassociated. Failed to delete Space", 500));
+    }
+
+    console.log(error.message);
+    return next(new ErrorResponse("Failed to associate new space with workspace. Deleted space", 500));
+  }
 }
 
 exports.getSpaceData = (req, res, next) => {
