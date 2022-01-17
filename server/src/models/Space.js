@@ -6,9 +6,6 @@ const SpaceSchema = mongoose.Schema({
   name: {
     type: String,
     required: [true, "Spaces must have a name"],
-    index: {
-      unique: true,
-    },
   },
   // Id of the workspace that this space is child of.
   workspaceId: {
