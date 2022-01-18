@@ -8,6 +8,8 @@ const app = express();
 const authRouter = require("./routes/auth");
 const workspaceRouter = require("./routes/private/workspace");
 const spaceRouter = require("./routes/private/spaces");
+const folderRouter = require("./routes/private/folder");
+const listRouter = require("./routes/private/list");
 
 const { protect } = require("./middleware/auth");
 const { paramValidator } = require("./middleware/paramValidator");
@@ -33,6 +35,8 @@ app.param(["userId", "workspaceId"], paramValidator);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user/:userId/workspaces", protect, workspaceRouter);
 app.use("/api/v1/user/:userId/workspaces/:workspaceId/spaces", protect, spaceRouter);
+app.use("/api/v1/user/:userId/workspaces/:workspaceId/folders", protect, folderRouter);
+app.use("/api/v1/user/:userId/workspaces/:workspaceId/lists", protect, listRouter);
 
 // Not Found Page
 app.use(notFound);

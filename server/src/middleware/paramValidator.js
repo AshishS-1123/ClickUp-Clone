@@ -66,9 +66,25 @@ const spaceValidator = async function (req, res, next, value) {
   };
 }
 
+const folderValidator = async function (req, res, next, value) {
+  const folderId = value;
+
+  try {
+    const folder = await Folder.findById(folderId);
+
+    if (!folder) {
+      throw new ErrorResponse("Folder not found", 404);
+    }
+
+    req.folder = folder;
+  } catch (error) {
+    throw new ErrorResponse(error.message, 404);
+  }
+}
+
 exports.paramValidator = async function (req, res, next) {
-  const { userId, workspaceId, spaceId } = req.params;
-  console.log(userId, workspaceId, spaceId);
+  const { userId, workspaceId, spaceId, folderId } = req.params;
+  // console.log(userId, workspaceId, spaceId);
 
   try {
     if (userId && !req.user) {
@@ -81,6 +97,10 @@ exports.paramValidator = async function (req, res, next) {
 
     if (spaceId && !req.space) {
       await spaceValidator(req, res, next, spaceId);
+    }
+
+    if (folderId && !req.folder) {
+      await folderValidator(req, res, next, folderId);
     }
   } catch (error) {
     console.log("Param Validator", error.message);
