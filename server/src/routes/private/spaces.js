@@ -4,22 +4,15 @@ const router = express.Router();
 const { getAllSpaces, createNewSpace, getSpaceData, deleteSpace, modifySpace } = require("../../controllers/private/spaces");
 const { paramValidator } = require("../../middleware/paramValidator");
 
-// Requests
-// GET    /user/:userId/workspace/:workspaceId/space -> get all spaces
-// POST   /user/:userId/workspace/:workspaceId/space -> create new space
-// GET    /user/:userId/workspace/:workspaceId/space/:id -> get space by id
-// PATCH    /user/:userId/workspace/:workspaceId/space/:id -> update space data
-// DELETE /user/:userId/workspace/:workspaceId/space/:id -> delete space
-
 router.param("spaceId", paramValidator);
 
 router.route("/")
-  .get(getAllSpaces)
-  .post(createNewSpace);
+  .get(paramValidator, getAllSpaces)
+  .post(paramValidator, createNewSpace);
 
 router.route("/:spaceId")
-  .get(getSpaceData)
-  .delete(deleteSpace)
-  .patch(modifySpace);
+  .get(paramValidator, getSpaceData)
+  .delete(paramValidator, deleteSpace)
+  .patch(paramValidator, modifySpace);
 
 module.exports = router;
