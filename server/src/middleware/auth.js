@@ -27,10 +27,12 @@ exports.protect = async (req, res, next) => {
       return next (new ErrorResponse ("No User found with this id.", 404))
     }
 
-    // Check if the user is the same requested in the route.
-    if (String(user._id) !== String(req.user._id)) {
-      return next(new ErrorResponse("User and token do not match", 403));
-    }
+    req.user = user;
+
+    // // Check if the user is the same requested in the route.
+    // if (String(user._id) !== String(req.user._id)) {
+    //   return next(new ErrorResponse("User and token do not match", 403));
+    // }
 
     next ()
   } catch (error) {

@@ -12,6 +12,12 @@ const SpaceSchema = mongoose.Schema({
     type: String,
     required: [true, "Some error occured. No workspace found for this space"],
   },
+  // All spaces must keep the id of the user who created it.
+  // Used for validating requests.
+  userId: {
+    type: String,
+    required: [true, "Some error occured. No user provided"],
+  },
   // Id's of all children under this space.
   children: {
     type: [String],

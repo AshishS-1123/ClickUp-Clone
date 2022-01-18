@@ -17,15 +17,15 @@ const router = express.Router();
 // GET /workspace/:id -> Get all data of workspace (name, recusively)
 // PATCH /workspace/:id -> Change property of workspace.
 
-router.param("workspaceId", paramValidator);
+// router.all(paramValidator);
 
 router.route("/")
-  .get(getAllWorkspaces)
-  .post(createNewWorkspace);
+  .get(paramValidator, getAllWorkspaces)
+  .post(paramValidator, createNewWorkspace);
 
 router.route("/:workspaceId")
-  .get(getWorkspaceData)
-  .delete(deleteWorkspace)
-  .patch(modifyWorkspace);
+  .get(paramValidator, getWorkspaceData)
+  .delete(paramValidator, deleteWorkspace)
+  .patch(paramValidator, modifyWorkspace);
 
 module.exports = router;

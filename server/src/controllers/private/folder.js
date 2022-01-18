@@ -1,6 +1,11 @@
 
 exports.getAllFolders = async (req, res, next) => {
-  res.end("Get All Folders");
+  try {
+    const folderData = [];
+
+  } catch (error) {
+
+  }
 }
 
 exports.getFolderData = async (req, res, next) => {

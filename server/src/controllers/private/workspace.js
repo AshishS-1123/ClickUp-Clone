@@ -1,3 +1,4 @@
+const { validateWorkspace } = require("../../middleware/paramValidator");
 const User = require("../../models/User");
 const Workspace = require("../../models/Workspace");
 const ErrorResponse = require("../../utils/errorResponse");
@@ -100,42 +101,58 @@ exports.createNewWorkspace = async (req, res, next) => {
 }
 
 exports.getWorkspaceData = async (req, res, next) => {
-  const workspace = req.workspace;
-  res.status(200).json({ workspace: workspace });
+  const workspaceId = req.params.workspaceId;
+  const userId = req.user._id;
+
+  try {
+    const workspace = await validateWorkspace(workspaceId, userId);
+
+    if (!workspace) {
+      return next(new ErrorResponse("Workspace not found", 404));
+    }
+
+    res.status(200).json({
+      workspace: workspace,
+    });
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 404));
+  }
+
 }
 
 exports.deleteWorkspace = async (req, res, next) => {
-  const workspaceId = req.workspace._id;
-  const user = req.user;
+  res.end("Delete Workspace :: TODO");
+  // const workspaceId = req.workspace._id;
+  // const user = req.user;
 
-  // First disassociate the workspace from the user.
-  try {
-    const idx = user.workspaces.indexOf(workspaceId);
+  // // First disassociate the workspace from the user.
+  // try {
+  //   const idx = user.workspaces.indexOf(workspaceId);
 
-    if (idx > -1) {
-      user.workspaces.splice(idx);
-      await user.save();
-    } else {
-      return next(new ErrorResponse("Wrkspace Not Found", 404));
-    }
+  //   if (idx > -1) {
+  //     user.workspaces.splice(idx);
+  //     await user.save();
+  //   } else {
+  //     return next(new ErrorResponse("Wrkspace Not Found", 404));
+  //   }
 
-  } catch (error) {
-    return next(new ErrorResponse(error.message, 500));
-  }
+  // } catch (error) {
+  //   return next(new ErrorResponse(error.message, 500));
+  // }
 
-  // TODO: Delete All Spaces recursively here.
+  // // TODO: Delete All Spaces recursively here.
 
-  try {
-    await Workspace.findByIdAndDelete(workspaceId);
+  // try {
+  //   await Workspace.findByIdAndDelete(workspaceId);
 
-    res.status(200).json({
-      success: true,
-      workspaceId: workspaceId,
-    });
-  } catch (error) {
-    console.log("Delete Workspace", error.message);
-    return next(new ErrorResponse(error.message, 500));
-  }
+  //   res.status(200).json({
+  //     success: true,
+  //     workspaceId: workspaceId,
+  //   });
+  // } catch (error) {
+  //   console.log("Delete Workspace", error.message);
+  //   return next(new ErrorResponse(error.message, 500));
+  // }
 }
 
 exports.modifyWorkspace = async (req, res, next) => {
