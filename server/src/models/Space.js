@@ -10,17 +10,17 @@ const SpaceSchema = mongoose.Schema({
   // Id of the workspace that this space is child of.
   workspaceId: {
     type: String,
-    required: [true, "Some error occured. No workspace found for this space"],
+    required: [true, "Provide workspace when creating spaces"],
   },
   // All spaces must keep the id of the user who created it.
   // Used for validating requests.
   userId: {
     type: String,
-    required: [true, "Some error occured. No user provided"],
+    required: [true, "Provide user when creatiing spaces"],
   },
   // Id's of all children under this space.
   children: {
-    type: [String],
+    type: [{ childType: String, id: String }],
     default: []
   },
 

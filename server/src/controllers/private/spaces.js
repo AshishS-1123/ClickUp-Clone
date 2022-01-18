@@ -3,26 +3,29 @@ const Space = require("../../models/Space");
 const Workspace = require("../../models/Workspace");
 const ErrorResponse = require("../../utils/errorResponse");
 
-const fetchSpaceData = async (spaceId) => {
-  const spaceItem = {
-    name: "",
-    id: spaceId,
-  };
+// const fetchSpaceData = async (spaceId) => {
+//   const spaceItem = {
+//     name: "",
+//     id: spaceId,
+//   };
 
-  const space = await Space.findById(spaceId);
-  spaceItem.name = space.name;
+//   const space = await Space.findById(spaceId);
+//   spaceItem.name = space.name;
 
-  return spaceItem
-}
+//   return spaceItem
+// }
 
 exports.getAllSpaces = async (req, res, next) => {
 
   try {
     const spaceData = [];
+    const userId = req.user._id;
 
     for (let i = 0; i < req.workspace.spaces.length; ++i) {
-      const currItem = await fetchSpaceData(req.workspace.spaces[i]);
-      spaceData.push(currItem);
+      const spaceId = req.workspace.spaces[i];
+      const space = await validateSpace(spaceId, userId);
+      // const currItem = await fetchSpaceData(req.workspace.spaces[i]);
+      spaceData.push({ name: space.name, id: spaceId });
     }
 
     res.status(200).json({
@@ -42,8 +45,6 @@ exports.createNewSpace = async (req, res, next) => {
   const workspaceId = req.workspace._id;
   let space;
 
-  console.log(workspaceId, spaceName, spaceColor, spaceAvatar);
-
   if (!spaceName || spaceName === "") {
     return next(new ErrorResponse("Please provide name for space", 400));
   }
@@ -58,17 +59,8 @@ exports.createNewSpace = async (req, res, next) => {
       spaceAvatar: spaceAvatar,
     });
   } catch (error) {
-    let message = "";
-
-    if (error.message.search("E11000") !== -1) {
-      message = "Space with this name already exists";
-    } else {
-      message = error.message;
-    }
-
-    return next(new ErrorResponse(message, 500));
+    return next(new ErrorResponse(error.message, 500));
   }
-  console.log("created space");
 
   // Associate this space with the correct workspace.
   try {

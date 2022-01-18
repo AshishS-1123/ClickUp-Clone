@@ -6,6 +6,10 @@ const FolderSchema = mongoose.Schema({
     type: String,
     required: [true, "Folders must have a name"],
   },
+  userId: {
+    type: String,
+    required: [true, "Provide user when creating folders"]
+  },
   // Parent of this folder and whether its another folder or space.
   parent: {
     type: { parentId: String, parentType: String },
@@ -13,7 +17,7 @@ const FolderSchema = mongoose.Schema({
   },
   // Id's of all children under this folder
   children: {
-    type: [String],
+    type: [{ type: String, id: String }],
     default: []
   },
 })

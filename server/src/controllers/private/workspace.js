@@ -3,17 +3,17 @@ const User = require("../../models/User");
 const Workspace = require("../../models/Workspace");
 const ErrorResponse = require("../../utils/errorResponse");
 
-const fetchWorkspaceData = async (workspaceId) => {
-  const workspaceItem = {
-    name: "",
-    id: workspaceId,
-  };
+// const fetchWorkspaceData = async (workspaceId) => {
+//   const workspaceItem = {
+//     name: "",
+//     id: workspaceId,
+//   };
 
-  const workspace = await Workspace.findById(workspaceId);
-  workspaceItem.name = workspace.name;
+//   const workspace = await Workspace.findById(workspaceId);
+//   workspaceItem.name = workspace.name;
 
-  return workspaceItem
-}
+//   return workspaceItem
+// }
 
 exports.getAllWorkspaces = async (req, res, next) => {
   // Get which user made this request.
@@ -23,10 +23,13 @@ exports.getAllWorkspaces = async (req, res, next) => {
 
   try {
     const workspaceData = [];
+    const userId = user._id;
 
     for (let i = 0; i < user.workspaces.length; ++i) {
-      const currItem = await fetchWorkspaceData(user.workspaces[i]);
-      workspaceData.push(currItem);
+      const workspaceId = req.user.workspaces[i];
+      const workspace = await validateWorkspace(workspaceId, userId);
+      // const currItem = await fetchWorkspaceData(user.workspaces[i]);
+      workspaceData.push({ name: workspace.name, id: workspaceId });
     }
 
     res.status(200).json({

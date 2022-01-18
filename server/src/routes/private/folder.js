@@ -7,12 +7,12 @@ const { paramValidator } = require("../../middleware/paramValidator");
 router.param("folderId", paramValidator);
 
 router.route("/")
-  .get(getAllFolders)
-  .post(createNewFolder);
+  .get(paramValidator, getAllFolders)
+  .post(paramValidator, createNewFolder);
 
 router.route("/:folderId")
-  .get(getFolderData)
-  .delete(deleteFolder)
-  .patch(modifyFolder);
+  .get(paramValidator, getFolderData)
+  .delete(paramValidator, deleteFolder)
+  .patch(paramValidator, modifyFolder);
 
 module.exports = router;
