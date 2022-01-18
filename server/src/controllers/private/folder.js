@@ -57,7 +57,7 @@ exports.createNewFolder = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      fodler: folder,
+      folder: folder,
     });
   } catch (error) {
     try {

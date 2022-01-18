@@ -6,6 +6,10 @@ const ListSchema = mongoose.Schema({
     type: String,
     required: [true, "List must have a name"],
   },
+  userId: {
+    type: String,
+    required: [true, "Provide User when creating lists"],
+  },
   // Parent of this list and whether its a folder or space.
   parent: {
     type: { parentId: String, parentType: String },

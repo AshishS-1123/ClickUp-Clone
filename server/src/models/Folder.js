@@ -17,7 +17,7 @@ const FolderSchema = mongoose.Schema({
   },
   // Id's of all children under this folder
   children: {
-    type: [{ type: String, id: String }],
+    type: [{ childType: String, id: String }],
     default: []
   },
 })

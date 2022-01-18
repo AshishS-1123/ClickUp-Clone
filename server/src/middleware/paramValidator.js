@@ -7,6 +7,7 @@ const Space = require("../models/Space");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
 const Folder = require("../models/Folder");
+const List = require("../models/List");
 
 const validateUser = async (userId, tokenUserId) => {
 
@@ -63,8 +64,18 @@ const validateFolder = async (folderId, userId) => {
   throw new ErrorResponse("User not authorised to access this folder", 403);
 }
 
-const validateParent = async (parentId, parentType, userId) => {
+const validateList = async (listId, userId) => {
+  const list = await List.findById(listId);
 
+  if (!list) {
+    throw new ErrorResponse("List not found", 404);
+  }
+
+  if (list.userId == userId) {
+    return list;
+  }
+
+  throw new ErrorResponse("User not authorised to access this list", 403);
 }
 
 const paramValidator = async function (req, res, next) {
@@ -114,6 +125,13 @@ const paramValidator = async function (req, res, next) {
       req.parent = folder;
       req.parentType = "FOLDER";
     }
+
+    if (queryParams.hasOwnProperty("list")) {
+      // Check if this user is allowed to access this list.
+      const list = await validateList(queryParams.list, userId);
+
+      req.list = list;
+    }
   } catch (error) {
     return next(new ErrorResponse(error.message, 500));
   }
@@ -127,4 +145,5 @@ module.exports = {
   validateWorkspace,
   validateSpace,
   validateFolder,
+  validateList,
 };

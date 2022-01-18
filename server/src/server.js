@@ -36,6 +36,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/workspaces", protect, workspaceRouter);
 app.use("/api/v1/spaces", protect, spaceRouter);
 app.use("/api/v1/folders", protect, folderRouter);
+app.use("/api/v1/lists", protect, listRouter);
 
 // app.use("/api/v1/user/:userId/workspaces/:workspaceId/folders", protect, folderRouter);
 // app.use("/api/v1/user/:userId/workspaces/:workspaceId/lists", protect, listRouter);
