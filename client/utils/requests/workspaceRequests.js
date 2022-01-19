@@ -1,7 +1,7 @@
-import makeRequest from "../request";
+import makeRequest from "./request";
 
 export const getAllWorkspaces = async (userId, token) => {
-  const url = `/user/${userId}/workspaces`;
+  const url = `/workspaces?user=${userId}`;
   const body = {};
 
   const headers = new Headers();
@@ -12,7 +12,7 @@ export const getAllWorkspaces = async (userId, token) => {
 }
 
 export const createNewWorkspace = async (userId, token, workspaceName) => {
-  const url = `/user/${userId}/workspaces`;
+  const url = `/workspaces?user=${userId}`;
   const body = { workspaceName };
 
   const headers = new Headers();

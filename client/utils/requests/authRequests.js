@@ -1,4 +1,4 @@
-import makeRequest from "../request";
+import makeRequest from "./request";
 
 export const registerUser = async (userEmail, password) => {
   const url = "/auth/register";
