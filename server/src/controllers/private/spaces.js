@@ -100,6 +100,7 @@ exports.getSpaceData = async (req, res, next) => {
     }
 
     res.status(200).json({
+      success: true,
       space: space,
     });
   } catch (error) {

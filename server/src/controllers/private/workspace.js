@@ -29,7 +29,7 @@ exports.getAllWorkspaces = async (req, res, next) => {
       const workspaceId = req.user.workspaces[i];
       const workspace = await validateWorkspace(workspaceId, userId);
       // const currItem = await fetchWorkspaceData(user.workspaces[i]);
-      workspaceData.push({ name: workspace.name, id: workspaceId });
+      workspaceData.push({ name: workspace.name, id: workspaceId, spaces: workspace.spaces });
     }
 
     res.status(200).json({
