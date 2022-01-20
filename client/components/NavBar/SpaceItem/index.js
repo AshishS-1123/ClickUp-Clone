@@ -6,7 +6,7 @@ function SpaceItem({ isActive, spaceName }) {
 
   let containerStyle = {};
 
-  if (!isActive) {
+  if (isActive) {
     containerStyle = {
       ...containerStyle,
       background: "#3c3d39",
