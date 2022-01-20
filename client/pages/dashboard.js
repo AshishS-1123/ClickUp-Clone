@@ -13,13 +13,13 @@ function Dashboard() {
 
   useEffect(() => {
     // Dispatch request to fetch workspaces.
-    dispatch(getAllWorkspacesAsync({ userId, token }))
-      .then((action) => {
-        const workspaceId = action.payload.workspaces[0].id;
-        action.payload.workspaces[0].spaces.forEach(spaceId => {
-          dispatch(getSpaceDataAsync({ spaceId, workspaceId, userId, token }));
-        });
-      })
+    // dispatch(getAllWorkspacesAsync({ userId, token }))
+    //   .then((action) => {
+    //     const workspaceId = action.payload.workspaces[0].id;
+    //     action.payload.workspaces[0].spaces.forEach(spaceId => {
+    //       dispatch(getSpaceDataAsync({ spaceId, workspaceId, userId, token }));
+    //     });
+    //   })
   }, []);
 
   return (
@@ -29,5 +29,5 @@ function Dashboard() {
   )
 }
 
-export default protectedRoute(Dashboard);
-// export default Dashboard;
+// export default protectedRoute(Dashboard);
+export default Dashboard;
