@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SpaceItem from "../../../components/NavBar/SpaceItem";
 import Stack from "@mui/material/Stack";
 import "./SpaceContainer.module.css";
+import computeSpaceTree from "../../../utils/computeSpaceTree";
 // import { useSelector } from "react-redux";
 
 const spaceContainerStyles = {
@@ -112,6 +113,8 @@ const spaceData = {
 function SpaceContainer() {
   // const spaceData = useSelector(state => state.spaceReducer);
   // console.log(spaceData);
+  const tree = computeSpaceTree(spaceData)()
+  console.log(tree);
 
   return (
     <>
@@ -133,8 +136,8 @@ function SpaceContainer() {
         <AccordionDetails sx={{ padding: "0px" }}>
           <Stack>
             {
-              spaceData.spaceData.map(item => {
-                return <SpaceItem spaceName={item.name} contents={item.children} key={item._id} />
+              tree.map(item => {
+                return <SpaceItem spaceName={item.name} contents={item.contents} key={item.id} />
               })
             }
           </Stack>
