@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import styles from "./SpaceItem.module.css";
 import ShieldIcon from '@mui/icons-material/Shield';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useDispatch, useSelector } from "react-redux";
 import FolderItem from "../FolderItem";
 import ListItem from "../ListItem";
+import { setActive } from "../../../redux/slices/spaceSlice";
 
-function SpaceItem({ isActive, spaceName, contents }) {
+function SpaceItem({ id, spaceName, contents }) {
+  const isActive = useSelector(state => state.spaceReducer.activeItem) == id;
+  const dispatch = useDispatch();
+
   const [revealerVisible, setRevealerVisible] = useState(false);
 
   let containerStyle = {};
@@ -22,11 +27,15 @@ function SpaceItem({ isActive, spaceName, contents }) {
     setRevealerVisible(prev => !prev);
   }
 
+  const setCurrentAsActive = (event) => {
+    dispatch(setActive({ id }));
+  }
+
   return (
     <>
       <div className={styles.spaceItem__container} style={containerStyle}>
 
-        <div className={styles.spaceItem__titleContainer}>
+        <div className={styles.spaceItem__titleContainer} onClick={setCurrentAsActive}>
           <ShieldIcon sx={{ width: "20px", height: "20px" }} />
           <div className={styles.spaceItem__title}>{spaceName}</div>
         </div>
@@ -44,9 +53,9 @@ function SpaceItem({ isActive, spaceName, contents }) {
         {
           contents.map(item => {
             if (item.itemType == "FOLDER") {
-              return <FolderItem folderName={item.name} contents={item.contents} nestingLevel={20} key={item.id} />
+              return <FolderItem folderName={item.name} contents={item.contents} id={item.id} nestingLevel={20} key={item.id} />
             } else {
-              return <ListItem listName={item.name} contents={item.contents} nestingLevel={20} key={item.id} />
+              return <ListItem listName={item.name} contents={item.contents} id={item.id} nestingLevel={20} key={item.id} />
             }
           })
         }

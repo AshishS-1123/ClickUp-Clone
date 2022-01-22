@@ -22,19 +22,21 @@ export const getSpaceDataAsync = createAsyncThunk(
  *    folderId: String, folderName: String, children: [{childType: String, childId: String}]
  * listData => stores Id of all lists and the tasks in them
  *    listId: String, listName: String, tasks: [String]
+ * activeItem => stores Id of currently active item
  */
 
 const initialState = {
   spaceData: [],
   folderData: [],
   listData: [],
+  activeItem: "",
 };
 
 export const spaceSlice = createSlice({
   name: "space",
   initialState: initialState,
   reducers: {
-
+    setActive: setActiveItem,
   },
   extraReducers: {
     [getSpaceDataAsync.fulfilled]: assignSpaceData,
@@ -55,5 +57,11 @@ function assignSpaceData(state, action) {
     state.listData.push(item);
   });
 }
+
+function setActiveItem(state, action) {
+  state.activeItem = action.payload.id;
+}
+
+export const { setActive } = spaceSlice.actions;
 
 export default spaceSlice.reducer;

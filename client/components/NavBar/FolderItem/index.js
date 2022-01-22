@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "../SpaceItem/SpaceItem.module.css";
 import FolderIcon from '@mui/icons-material/Folder';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ListItem from "../ListItem";
+import { setActive } from "../../../redux/slices/spaceSlice";
 
-function FolderItem({ isActive, folderName, contents, nestingLevel = 10 }) {
+function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
   const [revealerVisible, setRevealerVisible] = useState(false);
+  const isActive = useSelector(state => state.spaceReducer.activeItem) == id;
+  const dispatch = useDispatch();
 
   let containerStyle = {
     paddingLeft: `${nestingLevel}px`,
@@ -24,11 +28,15 @@ function FolderItem({ isActive, folderName, contents, nestingLevel = 10 }) {
     setRevealerVisible(prev => !prev);
   }
 
+  const setCurrentAsActive = (event) => {
+    dispatch(setActive({ id }));
+  }
+
   return (
     <>
     <div className={styles.spaceItem__container} style={containerStyle}>
 
-        <div className={styles.spaceItem__titleContainer}>
+        <div className={styles.spaceItem__titleContainer} onClick={setCurrentAsActive}>
           <FolderIcon sx={{ width: "16px", height: "16px", color: "lightgrey" }} />
           <div className={styles.spaceItem__title}>{folderName}</div>
         </div>
@@ -47,9 +55,9 @@ function FolderItem({ isActive, folderName, contents, nestingLevel = 10 }) {
         {
           contents.map(item => {
             if (item.itemType == "FOLDER") {
-              return <FolderItem folderName={item.name} key={item.id} nestingLevel={nestingLevel + 10} />
+              return <FolderItem folderName={item.name} key={item.id} id={item.id} nestingLevel={nestingLevel + 10} />
             } else {
-              return <ListItem listName={item.name} key={item.id} nestingLevel={nestingLevel + 10} />
+              return <ListItem listName={item.name} key={item.id} id={item.id} nestingLevel={nestingLevel + 10} />
             }
           })
         }
