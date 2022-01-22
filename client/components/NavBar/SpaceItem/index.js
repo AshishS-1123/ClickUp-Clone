@@ -43,10 +43,10 @@ function SpaceItem({ isActive, spaceName, contents }) {
       <div style={{ display: revealerVisible ? "block" : "none" }}>
         {
           contents.map(item => {
-            if (item.childType == "FOLDER") {
-              return <FolderItem folderName={item.id} key={item.id} />
+            if (item.itemType == "FOLDER") {
+              return <FolderItem folderName={item.name} contents={item.contents} nestingLevel={20} key={item.id} />
             } else {
-              return <ListItem listName={item.id} key={item.id} />
+              return <ListItem listName={item.name} contents={item.contents} nestingLevel={20} key={item.id} />
             }
           })
         }
