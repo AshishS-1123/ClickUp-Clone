@@ -1,7 +1,6 @@
 import makeRequest from "./request";
 
 export const fetchSpace = async (spaceId, workspaceId, userId, token) => {
-  console.log("Fetching space...");
   const url = `/spaces/${spaceId}?user=${userId}&workspace=${workspaceId}`;
   const body = {};
 
@@ -9,7 +8,6 @@ export const fetchSpace = async (spaceId, workspaceId, userId, token) => {
   headers.append("Authorization", `Bearer ${token}`)
 
   const { data, status } = await makeRequest(url, "GET", body, headers);
-  console.log("In req", data);
   return { data, status };
 }
 

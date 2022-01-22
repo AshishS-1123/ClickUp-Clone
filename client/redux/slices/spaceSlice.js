@@ -4,11 +4,8 @@ import { fetchSpaceEverything } from "../../utils/requests/everythingRequests";
 export const getSpaceDataAsync = createAsyncThunk(
   "space/getData",
   async ({ spaceId, workspaceId, userId, token }, thunkApi) => {
-    console.log("Getting space Data...");
     try {
       const spaceData = await fetchSpaceEverything(spaceId, workspaceId, userId, token);
-      console.log("Space Data");
-      console.log(spaceData);
       return { spaceData };
     } catch (error) {
       thunkApi.rejectWithValue({ error: error.message });
@@ -46,7 +43,6 @@ export const spaceSlice = createSlice({
 
 function assignSpaceData(state, action) {
   const spaceData = action?.payload?.spaceData;
-  console.log(spaceData);
   spaceData.space.forEach(item => {
     state.spaceData.push(item);
   });
