@@ -4,11 +4,23 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 10px;
   color: #f89d2f;
+}
+
+.spaceItem__titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .spaceItem__title {
   padding-left: 10px;
   font-size: 14px;
+}
+
+.spaceItem__revealer {
+  visibility: hidden;
 }
