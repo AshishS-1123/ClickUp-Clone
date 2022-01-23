@@ -8,6 +8,7 @@ import { setActive } from "../../../redux/slices/spaceSlice";
 
 function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
   const [revealerVisible, setRevealerVisible] = useState(false);
+  const [showIcons, setShowIcons] = useState(false);
   const isActive = useSelector(state => state.spaceReducer.activeItem) == id;
   const dispatch = useDispatch();
 
@@ -17,6 +18,7 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
   };
 
   if (isActive) {
+    console.log("Folder active");
     containerStyle = {
       ...containerStyle,
       background: "#3c3d39",
@@ -34,11 +36,16 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
 
   return (
     <>
-    <div className={styles.spaceItem__container} style={containerStyle}>
+      <div
+        className={styles.item__container}
+        style={containerStyle}
+        onMouseEnter={() => { setShowIcons(true) }}
+        onMouseLeave={() => { setShowIcons(false) }}
+      >
 
-        <div className={styles.spaceItem__titleContainer} onClick={setCurrentAsActive}>
+        <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
           <FolderIcon sx={{ width: "16px", height: "16px", color: "lightgrey" }} />
-          <div className={styles.spaceItem__title}>{folderName}</div>
+          <div className={styles.folder__title}>{folderName}</div>
         </div>
 
         <KeyboardArrowDownIcon
@@ -46,6 +53,7 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
           sx={{
             transform: revealerVisible ? "rotate(180deg)" : "",
             color: "white",
+            display: showIcons ? "block" : "none",
           }}
         />
 

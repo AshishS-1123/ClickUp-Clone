@@ -9,6 +9,7 @@ import { setActive } from "../../../redux/slices/spaceSlice";
 
 function SpaceItem({ id, spaceName, contents }) {
   const isActive = useSelector(state => state.spaceReducer.activeItem) == id;
+  const [showIcons, setShowIcons] = useState(false);
   const dispatch = useDispatch();
 
   const [revealerVisible, setRevealerVisible] = useState(false);
@@ -33,17 +34,23 @@ function SpaceItem({ id, spaceName, contents }) {
 
   return (
     <>
-      <div className={styles.spaceItem__container} style={containerStyle}>
+      <div
+        className={styles.item__container}
+        style={containerStyle}
+        onMouseEnter={() => { setShowIcons(true) }}
+        onMouseLeave={() => { setShowIcons(false) }}
+      >
 
-        <div className={styles.spaceItem__titleContainer} onClick={setCurrentAsActive}>
+        <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
           <ShieldIcon sx={{ width: "20px", height: "20px" }} />
-          <div className={styles.spaceItem__title}>{spaceName}</div>
+          <div className={styles.item__title}>{spaceName}</div>
         </div>
 
         <KeyboardArrowDownIcon
           onClick={showRevealer}
           sx={{
             transform: revealerVisible ? "rotate(180deg)" : "",
+            display: showIcons ? "block" : "none",
           }}
         />
 

@@ -26,10 +26,10 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
   }
 
   return (
-    <div className={styles.spaceItem__container} style={containerStyle}>
-      <div className={styles.spaceItem__titleContainer} onClick={setCurrentAsActive}>
-        <RadioButtonUncheckedIcon sx={{ width: "12px", height: "12px", color: "lightgrey" }} />
-        <div className={styles.spaceItem__title}>{listName}</div>
+    <div className={styles.item__container} style={containerStyle}>
+      <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
+        <RadioButtonUncheckedIcon sx={{ width: "10px", height: "10px", color: "lightgrey" }} />
+        <div className={styles.list__title}>{listName}</div>
       </div>
     </div>
   )
