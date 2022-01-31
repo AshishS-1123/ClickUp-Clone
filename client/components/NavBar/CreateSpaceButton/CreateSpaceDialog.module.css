@@ -1,7 +1,7 @@
 .title_bar {
   width: 100%;
-  height: 50%;
-  background: #384047;;
+  height: 40%;
+  background: #384047;
 }
 
 .title {
@@ -16,7 +16,7 @@
 
 .content {
   background: #2b343b;
-  height: 50%;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding: 50px 0;
@@ -59,4 +59,21 @@
   width: 80%;
   margin: -20px auto 24px auto;
   border: none;
+}
+
+.text {
+  color: white;
+  font-size: 14px;
+  padding: 20px;
+  text-align: center;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+.listWidgetContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  height: calc(50% + 40px);
 }

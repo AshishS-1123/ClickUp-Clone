@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import Container from "@mui/material/Container";
 import CloseIcon from '@mui/icons-material/Close';
-import Button from "@mui/material/Button";
+import SpaceNamePage from "./pages/spaceNamePage";
+import ViewSelectorPage from "./pages/viewSelectorPage";
+import SpaceStatusPage from "./pages/spaceStatusesPage";
+import ConfirmationPage from "./pages/confirmationPage";
 import styles from "./CreateSpaceDialog.module.css";
 
-function SpaceNamePage() {
-  return (
-    <>
-      <div className={styles.content}>
-        <label htmlFor="spaceDialog_name" id="spaceDialog_nameLabel">Space name</label>
-        <input type="text" id="spaceDialog_name" placeholder="Enter space name" />
-      </div>
-    </>
-  )
-}
 
 function CreateSpaceDialog({ open, closeDialog }) {
+  // const Pages = [
+  //   { page: SpaceNamePage, title: "Create new space" },
+  //   { page: ViewSelectorPage, title: "Default settings for views" },
+  //   { page: SpaceStatusPage, title: "What task statuses do you want?" },
+  //   { page: ConfirmationPage, title: "All good?" },
+  // ]
+
+  // const [currPageIdx, setCurrPageIdx] = useState(0);
+  // const CurrentPage = Pages[currPageIdx].page;
+  // const currentTitle = Pages[currPageIdx].title;
+
+  // const gotoNextPage = () => {
+  //   setCurrPageIdx(prev => prev + 1);
+  // }
+
+  const backdropClicked = () => {
+    setCurrPageIdx(0);
+    closeDialog();
+  }
+
   return (
     <Dialog
       open={open}
-      onBackdropClick={closeDialog}
+      onBackdropClick={backdropClicked}
       sx={{
         "& .MuiDialog-paper": {
           width: "550px",
@@ -40,8 +52,12 @@ function CreateSpaceDialog({ open, closeDialog }) {
           color: "white",
         }} />
       </div>
-      <SpaceNamePage />
-      <button className={styles.spaceDialog_button}>Next</button>
+      {
+        <SpaceNamePage />
+      }
+      <button
+        className={styles.spaceDialog_button}
+      >Next</button>
     </Dialog>
   )
 }

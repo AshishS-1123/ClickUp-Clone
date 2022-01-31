@@ -9,7 +9,7 @@ function Dashboard() {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.authReducer.userId);
   const token = useSelector(state => state.authReducer.token);
-  // const activeSpaces = useSelector(state => state.workspaceReducer.activeWorkspaceChildren);
+  const activeSpaces = useSelector(state => state.workspaceReducer.activeWorkspaceChildren);
 
   useEffect(() => {
     // Dispatch request to fetch workspaces.

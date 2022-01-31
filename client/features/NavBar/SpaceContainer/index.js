@@ -4,10 +4,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddIcon from '@mui/icons-material/Add';
 import SpaceItem from "../../../components/NavBar/SpaceItem";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import CreateSpaceButton from "../../../components/NavBar/CreateSpaceButton";
 import "./SpaceContainer.module.css";
 import computeSpaceTree from "../../../utils/computeSpaceTree";
 // import { useSelector } from "react-redux";
@@ -117,10 +116,6 @@ function SpaceContainer() {
   // console.log(spaceData);
   const tree = computeSpaceTree(spaceData)()
 
-  const handleCreateNewSpace = () => {
-    console.log("Create new Space");
-  }
-
   return (
     <>
       <Accordion sx={spaceContainerStyles} square disableGutters>
@@ -140,23 +135,7 @@ function SpaceContainer() {
 
         <AccordionDetails sx={{ padding: "0px" }}>
           <Stack spacing={2}>
-            <Button
-              startIcon={<AddIcon />}
-              variant="contained"
-              onClick={handleCreateNewSpace}
-              sx={{
-                width: "80%",
-                height: "24px",
-                margin: "0 auto",
-                fontSize: "11px",
-                color: "#d7d7d7",
-                background: "#384047",
-                "&:hover": {
-                  color: "#d7d7d7",
-                  background: "#384047",
-                }
-              }}
-            >New Space</Button>
+            <CreateSpaceButton />
             {
               tree.map(item => {
                 return <SpaceItem spaceName={item.name} contents={item.contents} key={item.id} />

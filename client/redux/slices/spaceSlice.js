@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchSpaceEverything } from "../../utils/requests/everythingRequests";
+import { createSpace } from "../../utils/requests/spaceRequests";
 
 export const getSpaceDataAsync = createAsyncThunk(
   "space/getData",
@@ -12,6 +13,23 @@ export const getSpaceDataAsync = createAsyncThunk(
     }
   }
 );
+
+export const createSpaceAsync = createAsyncThunk(
+  "space/createSpace",
+  async ({ spaceName, workspaceId, userId, token }, thunkApi) => {
+    try {
+      const { data } = await createSpace(spaceName, workspaceId, userId, token);
+
+      if (data.success == false) {
+        thunkApi.rejectWithValue({ error: data.error });
+      }
+
+      return { data };
+    } catch (error) {
+      thunkApi.rejectWithValue({ error: error.message });
+    }
+  }
+)
 
 /*
  * In the space slice we only store the spaces of the currently active workspace.
@@ -40,6 +58,7 @@ export const spaceSlice = createSlice({
   },
   extraReducers: {
     [getSpaceDataAsync.fulfilled]: assignSpaceData,
+    [createSpaceAsync.fulfilled]: attachNewSpace,
   }
 })
 
@@ -60,6 +79,10 @@ function assignSpaceData(state, action) {
 
 function setActiveItem(state, action) {
   state.activeItem = action.payload.id;
+}
+
+function attachNewSpace(state, action) {
+  console.log(action.payload);
 }
 
 export const { setActive } = spaceSlice.actions;
