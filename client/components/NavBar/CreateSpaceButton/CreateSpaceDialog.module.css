@@ -77,3 +77,11 @@
   padding: 10px 0;
   height: calc(50% + 40px);
 }
+
+.errorText {
+  color: rgb(236, 108, 108);
+  font-size: 12px;
+  position: relative;
+  top: -9%;
+  text-align: center;
+}

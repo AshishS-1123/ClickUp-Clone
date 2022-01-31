@@ -26,8 +26,9 @@ function CreateSpaceDialog({ open, closeDialog }) {
     console.log(spaceName);
 
     dispatch(createSpaceAsync({ spaceName, workspaceId, userId, token }))
-      .then(() => {
-        backdropClicked();
+      .then((res) => {
+        if (!res.payload.error)
+          backdropClicked();
       })
   }
 

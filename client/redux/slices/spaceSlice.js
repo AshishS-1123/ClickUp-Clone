@@ -21,12 +21,12 @@ export const createSpaceAsync = createAsyncThunk(
       const { data } = await createSpace(spaceName, workspaceId, userId, token);
 
       if (data.success == false) {
-        thunkApi.rejectWithValue({ error: data.error });
+        return thunkApi.rejectWithValue({ error: data.error });
       }
 
       return { data };
     } catch (error) {
-      thunkApi.rejectWithValue({ error: error.message });
+      return thunkApi.rejectWithValue({ error: error.message });
     }
   }
 )
@@ -48,6 +48,7 @@ const initialState = {
   folderData: [],
   listData: [],
   activeItem: "",
+  error: "",
 };
 
 export const spaceSlice = createSlice({
@@ -58,7 +59,9 @@ export const spaceSlice = createSlice({
   },
   extraReducers: {
     [getSpaceDataAsync.fulfilled]: assignSpaceData,
+    [getSpaceDataAsync.rejected]: setError,
     [createSpaceAsync.fulfilled]: attachNewSpace,
+    [createSpaceAsync.rejected]: setError,
   }
 })
 
@@ -86,6 +89,10 @@ function setActiveItem(state, action) {
 
 function attachNewSpace(state, action) {
   state.spaceData.push(action.payload.data.space);
+}
+
+function setError(state, action) {
+  state.error = action.payload.error;
 }
 
 export const { setActive } = spaceSlice.actions;
