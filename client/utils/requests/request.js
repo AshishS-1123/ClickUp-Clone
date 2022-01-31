@@ -1,6 +1,7 @@
 const URL = "http://localhost:5000/api/v1"
 
 async function makeRequest(url, method, body, headers) {
+  console.log("Bofy is :", body);
   // Create the whole url.
   url = URL + url;
 

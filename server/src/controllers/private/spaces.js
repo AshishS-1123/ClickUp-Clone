@@ -40,6 +40,8 @@ exports.getAllSpaces = async (req, res, next) => {
 }
 
 exports.createNewSpace = async (req, res, next) => {
+  console.log("In create Space::::::");
+  console.log(req.body);
   const { spaceName, spaceColor, spaceAvatar } = req.body;
 
   const workspaceId = req.workspace._id;

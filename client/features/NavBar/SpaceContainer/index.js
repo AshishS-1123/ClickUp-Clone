@@ -4,6 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useSelector } from "react-redux";
 import SpaceItem from "../../../components/NavBar/SpaceItem";
 import Stack from "@mui/material/Stack";
 import CreateSpaceButton from "../../../components/NavBar/CreateSpaceButton";
@@ -20,6 +21,7 @@ const spaceContainerStyles = {
   }
 }
 
+/*
 const spaceData = {
   "spaceData": [
     {
@@ -109,10 +111,11 @@ const spaceData = {
     }
   ]
 }
+*/
 
 
 function SpaceContainer() {
-  // const spaceData = useSelector(state => state.spaceReducer);
+  const spaceData = useSelector(state => state.spaceReducer);
   // console.log(spaceData);
   const tree = computeSpaceTree(spaceData)()
 

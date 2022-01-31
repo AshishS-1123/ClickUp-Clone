@@ -1,32 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import Dialog from "@mui/material/Dialog";
 import CloseIcon from '@mui/icons-material/Close';
 import SpaceNamePage from "./pages/spaceNamePage";
-import ViewSelectorPage from "./pages/viewSelectorPage";
-import SpaceStatusPage from "./pages/spaceStatusesPage";
-import ConfirmationPage from "./pages/confirmationPage";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./CreateSpaceDialog.module.css";
+import { createSpaceAsync } from "../../../redux/slices/spaceSlice";
 
 
 function CreateSpaceDialog({ open, closeDialog }) {
-  // const Pages = [
-  //   { page: SpaceNamePage, title: "Create new space" },
-  //   { page: ViewSelectorPage, title: "Default settings for views" },
-  //   { page: SpaceStatusPage, title: "What task statuses do you want?" },
-  //   { page: ConfirmationPage, title: "All good?" },
-  // ]
-
-  // const [currPageIdx, setCurrPageIdx] = useState(0);
-  // const CurrentPage = Pages[currPageIdx].page;
-  // const currentTitle = Pages[currPageIdx].title;
-
-  // const gotoNextPage = () => {
-  //   setCurrPageIdx(prev => prev + 1);
-  // }
+  const dispatch = useDispatch();
+  const workspaceData = useSelector(state => state.workspaceReducer);
+  const userData = useSelector(state => state.authReducer);
 
   const backdropClicked = () => {
-    setCurrPageIdx(0);
     closeDialog();
+  }
+
+  const handleCreateSpace = () => {
+    const nameInput = document.getElementById("spaceDialog_name");
+    const spaceName = nameInput.value;
+
+    const workspaceId = workspaceData.workspaces[workspaceData.activeWorkspace].id;
+    const userId = userData.userId;
+    const token = userData.token;
+    console.log(spaceName);
+
+    dispatch(createSpaceAsync({ spaceName, workspaceId, userId, token }))
+      .then(() => {
+        backdropClicked();
+      })
   }
 
   return (
@@ -45,19 +47,23 @@ function CreateSpaceDialog({ open, closeDialog }) {
     >
       <div className={styles.title_bar}>
         <h1 className={styles.title}>Create new space</h1>
-        <CloseIcon sx={{
-          position: "absolute",
-          top: "25px",
-          right: "25px",
-          color: "white",
-        }} />
+        <CloseIcon
+          sx={{
+            position: "absolute",
+            top: "25px",
+            right: "25px",
+            color: "white",
+          }}
+          onClick={backdropClicked}
+        />
       </div>
       {
         <SpaceNamePage />
       }
       <button
         className={styles.spaceDialog_button}
-      >Next</button>
+        onClick={handleCreateSpace}
+      >Create space</button>
     </Dialog>
   )
 }

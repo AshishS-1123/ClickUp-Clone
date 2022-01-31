@@ -65,15 +65,18 @@ export const spaceSlice = createSlice({
 function assignSpaceData(state, action) {
   const spaceData = action?.payload?.spaceData;
   spaceData.space.forEach(item => {
-    state.spaceData.push(item);
+    if (!state.spaceData.includes(item))
+      state.spaceData.push(item);
   });
 
   spaceData.folder.forEach(item => {
-    state.folderData.push(item);
+    if (!state.folderData.includes(item))
+      state.folderData.push(item);
   });
 
   spaceData.list.forEach(item => {
-    state.listData.push(item);
+    if (!state.listData.includes(item))
+      state.listData.push(item);
   });
 }
 
@@ -82,7 +85,7 @@ function setActiveItem(state, action) {
 }
 
 function attachNewSpace(state, action) {
-  console.log(action.payload);
+  state.spaceData.push(action.payload.data.space);
 }
 
 export const { setActive } = spaceSlice.actions;

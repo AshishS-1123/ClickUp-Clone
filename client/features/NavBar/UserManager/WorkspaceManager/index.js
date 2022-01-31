@@ -24,7 +24,8 @@ const shortenName = (name) => {
 }
 
 function WorkspaceManager() {
-  const activeWorkspace = useSelector(state => state.workspaceReducer.activeWorkspace);
+  const workspaceData = useSelector(state => state.workspaceReducer);
+  const activeWorkspace = workspaceData.workspaces[workspaceData.activeWorkspace];
   const workspaceName = shortenName(activeWorkspace.name);
 
   return (
