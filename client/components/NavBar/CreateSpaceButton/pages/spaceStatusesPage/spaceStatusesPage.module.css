@@ -1,0 +1,9 @@
+.statusPage__container {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.statusItem {
+  font-size: 10px;
+}
