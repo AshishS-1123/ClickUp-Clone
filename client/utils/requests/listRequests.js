@@ -11,9 +11,9 @@ export const fetchList = async (listId, parentType, parentId, userId, token) => 
   return { data, status };
 }
 
-export const createList = async (parentType, parentId, userId, token) => {
+export const createList = async (listName, parentType, parentId, userId, token) => {
   const url = `/lists?user=${userId}&${parentType}=${parentId}`;
-  const body = {};
+  const body = { listName };
 
   const headers = new Headers();
   headers.append("Authorization", `Bearer ${token}`)

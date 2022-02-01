@@ -22,7 +22,6 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
   };
 
   if (isActive) {
-    console.log("Folder active");
     containerStyle = {
       ...containerStyle,
       background: "#3c3d39",
@@ -91,7 +90,13 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
         }
       </div>
 
-      <FolderOptionsDialog anchorEl={anchorEl} openMenu={openMenu} closeMenu={closeOptions} />
+      <FolderOptionsDialog
+        anchorEl={anchorEl}
+        openMenu={openMenu}
+        closeMenu={closeOptions}
+        itemId={id}
+        itemType="folder"
+      />
     </>
   )
 }

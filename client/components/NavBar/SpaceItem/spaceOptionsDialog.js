@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import CreateListDialog from "../../Dialogs/createListDialog";
 import CreateFolderDialog from "../../Dialogs/createFolderDialog";
 
-function SpaceOptionsDialog({ anchorEl, openMenu, closeMenu }) {
+function SpaceOptionsDialog({ anchorEl, openMenu, closeMenu, id }) {
   const [showListDialog, setShowListDialog] = useState(false);
   const [showFolderDialog, setShowFolderDialog] = useState(false);
 
@@ -40,8 +40,13 @@ function SpaceOptionsDialog({ anchorEl, openMenu, closeMenu }) {
         <MenuItem style={menuItemStyle}><DeleteIcon />Delete</MenuItem>
       </Menu>
 
-      <CreateFolderDialog open={showFolderDialog} closeDialog={() => { setShowFolderDialog(false) }} />
-      <CreateListDialog open={showListDialog} closeDialog={() => { setShowListDialog(false) }} />
+      <CreateFolderDialog
+        open={showFolderDialog}
+        closeDialog={() => { setShowFolderDialog(false); closeMenu() }}
+        itemType="space"
+        itemId={id}
+      />
+      <CreateListDialog open={showListDialog} closeDialog={() => { setShowListDialog(false); closeMenu() }} />
     </>
   )
 }

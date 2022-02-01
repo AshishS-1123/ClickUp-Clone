@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import CreateListDialog from "../../Dialogs/createListDialog";
 import CreateFolderDialog from "../../Dialogs/createFolderDialog";
 
-function FolderOptionsDialog({ anchorEl, openMenu, closeMenu }) {
+function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }) {
   const [showListDialog, setShowListDialog] = useState(false);
   const [showFolderDialog, setShowFolderDialog] = useState(false);
 
@@ -40,8 +40,13 @@ function FolderOptionsDialog({ anchorEl, openMenu, closeMenu }) {
         <MenuItem style={menuItemStyle}><DeleteIcon />Delete</MenuItem>
       </Menu>
 
-      <CreateFolderDialog open={showFolderDialog} closeDialog={() => { setShowFolderDialog(false) }} />
-      <CreateListDialog open={showListDialog} closeDialog={() => { setShowListDialog(false) }} />
+      <CreateFolderDialog
+        open={showFolderDialog}
+        closeDialog={() => { setShowFolderDialog(false); closeMenu() }}
+        itemType={itemType}
+        itemId={itemId}
+      />
+      <CreateListDialog open={showListDialog} closeDialog={() => { setShowListDialog(false); closeMenu() }} />
     </>
   )
 }

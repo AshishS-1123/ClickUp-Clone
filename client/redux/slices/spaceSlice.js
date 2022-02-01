@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchSpaceEverything } from "../../utils/requests/everythingRequests";
+import { createFolder } from "../../utils/requests/folderRequests";
+import { createList } from "../../utils/requests/listRequests";
 import { createSpace } from "../../utils/requests/spaceRequests";
 
 export const getSpaceDataAsync = createAsyncThunk(
@@ -30,6 +32,41 @@ export const createSpaceAsync = createAsyncThunk(
     }
   }
 )
+
+export const createFolderAsync = createAsyncThunk(
+  "space/createFolder",
+  async ({ folderName, parentType, parentId, userId, token }, thunkApi) => {
+    try {
+      const { data } = await createFolder(folderName, parentType, parentId, userId, token);
+
+      if (data.success == false) {
+        return thunkApi.rejectWithValue({ error: data.error });
+      }
+
+      return { data };
+    } catch (error) {
+      return thunkApi.rejectWithValue({ error: error.message });
+    }
+  }
+)
+
+export const createListAsync = createAsyncThunk(
+  "space/createList",
+  async ({ listName, parentType, parentId, userId, token }, thunkApi) => {
+    try {
+      const { data } = await createList(listName, parentType, parentId, userId, token);
+
+      if (data.success == false) {
+        return thunkApi.rejectWithValue({ error: data.error });
+      }
+
+      return { data };
+    } catch (error) {
+      return thunkApi.rejectWithValue({ error: error.message });
+    }
+  }
+)
+
 
 /*
  * In the space slice we only store the spaces of the currently active workspace.
@@ -62,6 +99,11 @@ export const spaceSlice = createSlice({
     [getSpaceDataAsync.rejected]: setError,
     [createSpaceAsync.fulfilled]: attachNewSpace,
     [createSpaceAsync.rejected]: setError,
+    [createFolderAsync.fulfilled]: attachNewFolder,
+    [createFolderAsync.rejected]: setError,
+    [createListAsync.fulfilled]: attachNewList,
+    [createListAsync.rejected]: setError,
+
   }
 })
 
@@ -89,6 +131,43 @@ function setActiveItem(state, action) {
 
 function attachNewSpace(state, action) {
   state.spaceData.push(action.payload.data.space);
+}
+
+function attachNewFolder(state, action) {
+  console.log("New folder\n", action);
+  const folder = action.payload?.data?.folder;
+
+  // Add this folder to the list of all folders.
+  state.folderData.push(folder);
+
+  // Update this folder data in the parent.
+  const parentId = folder.parent.parentId;
+  const parentType = folder.parent.parentType.toLowerCase();
+
+  let parentData;
+  if (parentType == "space") {
+    parentData = state.spaceData;
+  } else if (parentType == "folder") {
+    parentData = state.folderData;
+  } else if (parentType == "list") {
+    parentData = state.listData;
+  }
+
+  // Add the new folder to the parent's children list.
+  for (let i = 0; i < parentData.length; ++i) {
+    if (parentData[i]._id == parentId) {
+      parentData[i].children.push({
+        childType: "FOLDER",
+        id: folder._id,
+        _id: folder._id,
+      });
+      break;
+    }
+  }
+}
+
+function attachNewList(state, action) {
+  console.log("New List\n", action);
 }
 
 function setError(state, action) {

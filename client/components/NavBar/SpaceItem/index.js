@@ -93,7 +93,7 @@ function SpaceItem({ id, spaceName, contents }) {
         }
       </div>
 
-      <SpaceOptionsDialog anchorEl={anchorEl} openMenu={openMenu} closeMenu={closeOptions} />
+      <SpaceOptionsDialog anchorEl={anchorEl} openMenu={openMenu} closeMenu={closeOptions} id={id} />
     </>
   )
 }
