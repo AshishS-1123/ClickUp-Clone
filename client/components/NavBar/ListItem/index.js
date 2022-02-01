@@ -40,8 +40,8 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
   }
 
   return (
-    <div c
-      lassName={styles.item__container}
+    <div
+      className={styles.item__container}
       style={containerStyle}
       onMouseEnter={() => { setRevealerVisible(true) }}
       onMouseLeave={() => { setRevealerVisible(false) }}
