@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../CreateItemDialog.module.css";
+import styles from "../../CreateSpaceDialog.module.css";
 import ListWidget from "./widgets/listWidget";
 
 function ViewSelectorPage() {

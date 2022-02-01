@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import CloseIcon from '@mui/icons-material/Close';
 import SpaceNamePage from "./pages/spaceNamePage";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./CreateItemDialog.module.css";
+import styles from "./CreateSpaceDialog.module.css";
 import { createSpaceAsync } from "../../../redux/slices/spaceSlice";
 
 

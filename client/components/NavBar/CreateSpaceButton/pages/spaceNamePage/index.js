@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styles from "../../CreateItemDialog.module.css";
+import styles from "../../CreateSpaceDialog.module.css";
 
 function SpaceNamePage() {
   const error = useSelector(state => state.spaceReducer.error);
