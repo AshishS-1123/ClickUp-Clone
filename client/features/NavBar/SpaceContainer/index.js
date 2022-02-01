@@ -141,7 +141,7 @@ function SpaceContainer() {
             <CreateSpaceButton />
             {
               tree.map(item => {
-                return <SpaceItem spaceName={item.name} contents={item.contents} key={item.id} />
+                return <SpaceItem spaceName={item.name} contents={item.contents} id={item.id} key={item.id} />
               })
             }
           </Stack>
