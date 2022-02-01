@@ -81,7 +81,7 @@ function SpaceItem({ id, spaceName, contents }) {
 
       </div>
 
-      <div style={{ display: revealerVisible ? "block" : "none" }}>
+      <div style={{ display: revealerVisible ? "block" : "none", marginTop: "0" }}>
         {
           contents.map(item => {
             if (item.itemType == "FOLDER") {

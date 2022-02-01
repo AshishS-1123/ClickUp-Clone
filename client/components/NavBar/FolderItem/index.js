@@ -3,14 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "../SpaceItem/SpaceItem.module.css";
 import FolderIcon from '@mui/icons-material/Folder';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ListItem from "../ListItem";
 import { setActive } from "../../../redux/slices/spaceSlice";
+import FolderOptionsDialog from "./folderOptionsDialog";
 
 function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
   const [revealerVisible, setRevealerVisible] = useState(false);
   const [showIcons, setShowIcons] = useState(false);
   const isActive = useSelector(state => state.spaceReducer.activeItem) == id;
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
 
   let containerStyle = {
     paddingLeft: `${nestingLevel}px`,
@@ -34,6 +38,14 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
     dispatch(setActive({ id }));
   }
 
+  const showOptions = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  const closeOptions = (event) => {
+    setAnchorEl(null);
+  }
+
   return (
     <>
       <div
@@ -47,6 +59,14 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
           <FolderIcon sx={{ width: "16px", height: "16px", color: "lightgrey" }} />
           <div className={styles.folder__title}>{folderName}</div>
         </div>
+
+        <MoreHorizIcon
+          onClick={showOptions}
+          sx={{
+            visibility: (showIcons || openMenu) ? "visible" : "hidden",
+            transform: "scale(0.7)"
+          }}
+        />
 
         <KeyboardArrowDownIcon
           onClick={showRevealer}
@@ -70,6 +90,8 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
           })
         }
       </div>
+
+      <FolderOptionsDialog anchorEl={anchorEl} openMenu={openMenu} closeMenu={closeOptions} />
     </>
   )
 }

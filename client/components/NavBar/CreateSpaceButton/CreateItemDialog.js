@@ -3,11 +3,11 @@ import Dialog from "@mui/material/Dialog";
 import CloseIcon from '@mui/icons-material/Close';
 import SpaceNamePage from "./pages/spaceNamePage";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./CreateSpaceDialog.module.css";
+import styles from "./CreateItemDialog.module.css";
 import { createSpaceAsync } from "../../../redux/slices/spaceSlice";
 
 
-function CreateSpaceDialog({ open, closeDialog }) {
+function CreateItemDialog({ open, closeDialog }) {
   const dispatch = useDispatch();
   const workspaceData = useSelector(state => state.workspaceReducer);
   const userData = useSelector(state => state.authReducer);
@@ -69,4 +69,4 @@ function CreateSpaceDialog({ open, closeDialog }) {
   )
 }
 
-export default CreateSpaceDialog;
+export default CreateItemDialog;

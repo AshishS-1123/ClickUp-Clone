@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
-import CreateSpaceDialog from "./CreateSpaceDialog";
+import CreateItemDialog from "./CreateItemDialog";
 
 function CreateSpaceButton() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -33,7 +33,7 @@ function CreateSpaceButton() {
           }
         }}
       >New Space</Button>
-      <CreateSpaceDialog open={openDialog} closeDialog={closeDialog} />
+      <CreateItemDialog open={openDialog} closeDialog={closeDialog} />
     </>
   );
 }
