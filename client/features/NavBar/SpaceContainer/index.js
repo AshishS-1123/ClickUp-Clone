@@ -116,8 +116,9 @@ const spaceData = {
 
 function SpaceContainer() {
   const spaceData = useSelector(state => state.spaceReducer);
-  // console.log(spaceData);
+  console.log(spaceData);
   const tree = computeSpaceTree(spaceData)()
+  console.log("space tree ", tree)
 
   return (
     <>

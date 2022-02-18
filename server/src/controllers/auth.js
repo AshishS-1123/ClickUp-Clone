@@ -1,7 +1,9 @@
 const User = require('../models/User')
+const Workspace = require("../models/Workspace")
 const ErrorResponse = require('../utils/errorResponse')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
+const { createNewWorkspace } = require('./private/workspace')
 
 exports.registerUser = async (req, res, next) => {
   // Get the login info from the request
@@ -14,6 +16,21 @@ exports.registerUser = async (req, res, next) => {
       userEmail, password
     })
 
+    try {
+      const workspace = await Workspace.create({
+        name: "Default Workspace",
+        userId: user._id,
+      });
+
+      // Add the new workspace's id to this user.
+      user.workspaces.push(workspace._id);
+      // Write to database.
+      await user.save();
+    } catch (error) {
+      console.log(error.message);
+      return next(new ErrorResponse("Could not create default workspace for user", 400));
+    }
+
     // If everything was done properly, send success to user
     sendToken(user, 201, res)
 
@@ -24,6 +41,7 @@ exports.registerUser = async (req, res, next) => {
     } else {
       message = "Server Error";
     }
+
     // In case of error, inform user
     return next(new ErrorResponse(message))
   }
