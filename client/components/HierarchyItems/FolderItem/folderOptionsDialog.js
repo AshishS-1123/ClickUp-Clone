@@ -46,7 +46,12 @@ function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }
         itemType={itemType}
         itemId={itemId}
       />
-      <CreateListDialog open={showListDialog} closeDialog={() => { setShowListDialog(false); closeMenu() }} />
+      <CreateListDialog
+        open={showListDialog}
+        closeDialog={() => { setShowListDialog(false); closeMenu() }}
+        itemType={itemType}
+        itemId={itemId}
+      />
     </>
   )
 }

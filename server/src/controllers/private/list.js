@@ -33,6 +33,7 @@ exports.getAllLists = async (req, res, next) => {
 
 exports.createNewList = async (req, res, next) => {
   const { listName } = req.body;
+
   const parent = req.parent;
   const parentType = req.parentType;
   let list;

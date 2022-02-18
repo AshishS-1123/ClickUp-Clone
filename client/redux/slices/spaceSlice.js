@@ -167,7 +167,34 @@ function attachNewFolder(state, action) {
 }
 
 function attachNewList(state, action) {
-  console.log("New List\n", action);
+  const list = action.payload.data.list;
+
+  state.listData.push((list));
+
+  // Update this folder data in the parent.
+  const parentId = list.parent.parentId;
+  const parentType = list.parent.parentType.toLowerCase();
+
+  let parentData;
+  if (parentType == "space") {
+    parentData = state.spaceData;
+  } else if (parentType == "folder") {
+    parentData = state.folderData;
+  } else if (parentType == "list") {
+    parentData = state.listData;
+  }
+
+  // Add the new folder to the parent's children list.
+  for (let i = 0; i < parentData.length; ++i) {
+    if (parentData[i]._id == parentId) {
+      parentData[i].children.push({
+        childType: "LIST",
+        id: list._id,
+        _id: list._id,
+      });
+      break;
+    }
+  }
 }
 
 function setError(state, action) {

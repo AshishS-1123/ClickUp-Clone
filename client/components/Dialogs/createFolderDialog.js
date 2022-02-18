@@ -14,7 +14,7 @@ function CreateFolderDialog({ open, closeDialog, itemType, itemId }) {
   }
 
   const handleCreateFolder = () => {
-    const inputEl = document.getElementById("listDialog_name");
+    const inputEl = document.getElementById("folderDialog_name");
     const folderName = inputEl.value;
 
     const userId = userData.userId;
@@ -58,7 +58,7 @@ function CreateFolderDialog({ open, closeDialog, itemType, itemId }) {
         </div>
         <div className={styles.content}>
           <label htmlFor="listDialog_name" id="dialog_nameLabel">Folder name</label>
-          <input type="text" id="listDialog_name" placeholder="Enter folder name" />
+          <input type="text" id="folderDialog_name" placeholder="Enter folder name" />
         </div>
         <button
           className={styles.dialog_button}
