@@ -11,7 +11,6 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
-  const [showIcons, setShowIcons] = useState(false);
   const [revealerVisible, setRevealerVisible] = useState(false);
 
   let containerStyle = {
@@ -49,6 +48,9 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
       <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
         <RadioButtonUncheckedIcon sx={{ width: "10px", height: "10px", color: "lightgrey" }} />
         <div className={styles.list__title}>{listName}</div>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "row" }}>
         <MoreHorizIcon
           onClick={showOptions}
           sx={{
@@ -58,6 +60,7 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
           }}
         />
       </div>
+
       <ListOptionsDialog anchorEl={anchorEl} openMenu={openMenu} closeMenu={closeOptions} />
     </div>
   )

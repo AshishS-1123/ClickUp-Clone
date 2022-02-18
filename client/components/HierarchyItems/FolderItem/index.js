@@ -59,32 +59,45 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
           <div className={styles.folder__title}>{folderName}</div>
         </div>
 
-        <MoreHorizIcon
-          onClick={showOptions}
-          sx={{
-            visibility: (showIcons || openMenu) ? "visible" : "hidden",
-            transform: "scale(0.7)"
-          }}
-        />
 
-        <KeyboardArrowDownIcon
-          onClick={showRevealer}
-          sx={{
-            transform: revealerVisible ? "rotate(180deg)" : "",
-            color: "white",
-            display: showIcons ? "block" : "none",
-          }}
-        />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <MoreHorizIcon
+            onClick={showOptions}
+            sx={{
+              visibility: (showIcons || openMenu) ? "visible" : "hidden",
+              transform: "scale(0.7)"
+            }}
+          />
+
+          <KeyboardArrowDownIcon
+            onClick={showRevealer}
+            sx={{
+              transform: revealerVisible ? "rotate(180deg)" : "",
+              color: "white",
+              display: showIcons ? "block" : "none",
+            }}
+          />
+        </div>
 
       </div>
 
       <div style={{ display: revealerVisible ? "block" : "none" }}>
         {
-          contents.map(item => {
+          contents && contents.map(item => {
             if (item.itemType == "FOLDER") {
-              return <FolderItem folderName={item.name} key={item.id} id={item.id} nestingLevel={nestingLevel + 10} />
+              return <FolderItem
+                key={item.id}
+                folderName={item.name}
+                id={item.id}
+                nestingLevel={nestingLevel + 10}
+                contents={item.contents}
+              />
             } else {
-              return <ListItem listName={item.name} key={item.id} id={item.id} nestingLevel={nestingLevel + 10} />
+              return <ListItem
+                key={item.id} id={item.id}
+                listName={item.name}
+                nestingLevel={nestingLevel + 10}
+              />
             }
           })
         }
