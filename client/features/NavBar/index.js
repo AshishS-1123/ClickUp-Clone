@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import DoubleArrowOutlinedIcon from '@mui/icons-material/DoubleArrowOutlined';
-import UserManager from "./UserManager";
+import SettingsManager from "./SettingsManager";
 import SpaceContainer from "./SpaceContainer";
 
 const DrawerToggler = ({ onClick, rotateBtn }) => {
@@ -51,7 +51,7 @@ function NavDrawer() {
         >ClickUp Clone</Button>
 
         <SpaceContainer />
-        <UserManager />
+        <SettingsManager />
       </Drawer>
     </>
   );

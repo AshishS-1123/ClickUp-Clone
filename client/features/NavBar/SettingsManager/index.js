@@ -10,7 +10,7 @@ import WorkspaceSelector from "./WorkspaceSelector";
 import WorkspaceManager from "./WorkspaceManager";
 import UserSettings from "./UserSettings";
 
-function UserManager() {
+function SettingsManager() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -76,4 +76,4 @@ function UserManager() {
   );
 };
 
-export default UserManager;
+export default SettingsManager;
