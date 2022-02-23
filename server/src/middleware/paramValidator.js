@@ -166,4 +166,5 @@ module.exports = {
   validateSpace,
   validateFolder,
   validateList,
+  validateTask,
 };
