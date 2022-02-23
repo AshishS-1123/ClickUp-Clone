@@ -10,7 +10,6 @@ import Stack from "@mui/material/Stack";
 import CreateSpaceButton from "../../../components/HierarchyItems/CreateSpaceButton";
 import "./SpaceContainer.module.css";
 import computeSpaceTree from "../../../utils/computeSpaceTree";
-// import { useSelector } from "react-redux";
 
 const spaceContainerStyles = {
   bgcolor: "#20262b",

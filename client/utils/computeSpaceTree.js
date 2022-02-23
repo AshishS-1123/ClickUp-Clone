@@ -35,7 +35,6 @@ function computeSpaceTree(data) {
   function getListData(listId) {
     const list = data.listData.filter(item => item._id == listId)[0];
 
-    // console.log("For List:: ", list.name);
     return {
       itemType: "LIST",
       id: listId,

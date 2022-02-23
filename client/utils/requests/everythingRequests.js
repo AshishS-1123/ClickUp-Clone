@@ -1,13 +1,15 @@
 import { fetchSpace } from "./spaceRequests"
 import { fetchFolder } from "./folderRequests";
 import { fetchList } from "./listRequests";
+import { fetchTask } from "./taskRequests";
 
 export const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
   // This is the value we will be returning.
   const returnValue = {
     space: [], // Data for the space. spaceId, spaceName, children(type, id)
     folder: [], // data for all folders. folderId, folderName, children(type, id)
-    list: [] // data for all lists. listId, listName, tasks
+    list: [], // data for all lists. listId, listName, tasks
+    task: [], // data for tasks.
   }
 
   // This queue contains all the data that needs to be fetched.
@@ -35,6 +37,10 @@ export const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) 
         fetchedItem = await fetchList(itemToFetch.itemId, itemToFetch.parentType, itemToFetch.parentId, userId, token);
         fetchedItem = fetchedItem.data;
         break;
+      case "TASK":
+        fetchedItem = await fetchTask(itemToFetch.itemId, itemToFetch.parentType, itemToFetch.parentId, userId, token);
+        fetchedItem = fetchedItem.data;
+        break;
     }
 
     // If fetching failed,
@@ -56,17 +62,23 @@ export const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) 
         returnValue.list.push(fetchedItem.list);
         fetchedItem = fetchedItem.list;
         break;
+      case "TASK":
+        returnValue.task.push(fetchedItem.task);
+        fetchedItem = fetchedItem.task;
+        break;
     }
 
     // Now add all the children of the fetched item to the queue.
-    fetchedItem.children.forEach(child => {
-      fetchQueue.push({
-        itemType: child.childType,
-        itemId: child.id,
-        parentType: itemToFetch.itemType,
-        parentId: itemToFetch.itemId,
+    if (fetchedItem.hasOwnProperty("children")) {
+      fetchedItem.children.forEach(child => {
+        fetchQueue.push({
+          itemType: child.childType,
+          itemId: child.id,
+          parentType: itemToFetch.itemType,
+          parentId: itemToFetch.itemId,
+        });
       });
-    });
+    }
   }
 
   return returnValue;

@@ -9,9 +9,9 @@ export const getSpaceDataAsync = createAsyncThunk(
   async ({ spaceId, workspaceId, userId, token }, thunkApi) => {
     try {
       const spaceData = await fetchSpaceEverything(spaceId, workspaceId, userId, token);
-      return { spaceData };
+      return thunkApi.fulfillWithValue({ spaceData })
     } catch (error) {
-      thunkApi.rejectWithValue({ error: error.message });
+      return thunkApi.rejectWithValue({ error: error.message });
     }
   }
 );
@@ -84,6 +84,7 @@ const initialState = {
   spaceData: [],
   folderData: [],
   listData: [],
+  taskData: [],
   activeItem: "",
   error: "",
 };
@@ -123,6 +124,11 @@ function assignSpaceData(state, action) {
     if (!state.listData.includes(item))
       state.listData.push(item);
   });
+
+  spaceData.task.forEach(item => {
+    if (!state.taskData.includes(item))
+      state.listData.push(item);
+  })
 }
 
 function setActiveItem(state, action) {
@@ -134,7 +140,6 @@ function attachNewSpace(state, action) {
 }
 
 function attachNewFolder(state, action) {
-  console.log("New folder\n", action);
   const folder = action.payload?.data?.folder;
 
   // Add this folder to the list of all folders.
