@@ -72,7 +72,23 @@ exports.createNewTask = async (req, res, next) => {
 }
 
 exports.getTaskData = async (req, res, next) => {
-  res.end("Get Task Data");
+  const taskId = req.params.taskId;
+  const userId = req.user._id;
+
+  try {
+    const task = await validateTask(taskId, userId);
+
+    if (!task) {
+      return next(new ErrorResponse("Task not found", 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      task: task,
+    });
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 404));
+  }
 }
 
 exports.deleteTask = async (req, res, next) => {
