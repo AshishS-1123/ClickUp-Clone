@@ -8,6 +8,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
 const Folder = require("../models/Folder");
 const List = require("../models/List");
+const Task = require("../models/Task");
 
 const validateUser = async (userId, tokenUserId) => {
 
@@ -78,6 +79,18 @@ const validateList = async (listId, userId) => {
   throw new ErrorResponse("User not authorised to access this list", 403);
 }
 
+const validateTask = async (taskId, userId) => {
+  const task = await Task.findById(taskId);
+
+  if (!task) {
+    throw new ErrorResponse("Task Not Found", 404);
+  }
+
+  if (task.userId == userId) {
+    return task;
+  }
+}
+
 const paramValidator = async function (req, res, next) {
   // Get the query parameters
   const queryParams = req.query;
@@ -131,6 +144,13 @@ const paramValidator = async function (req, res, next) {
       const list = await validateList(queryParams.list, userId);
 
       req.list = list;
+    }
+
+    if (queryParams.hasOwnProperty("task")) {
+      // Check if this user is allowed to access this task.
+      const task = await validateTask(queryParams.task, userId);
+
+      req.task = task;
     }
   } catch (error) {
     return next(new ErrorResponse(error.message, 500));

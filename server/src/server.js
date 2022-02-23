@@ -10,6 +10,7 @@ const workspaceRouter = require("./routes/private/workspace");
 const spaceRouter = require("./routes/private/spaces");
 const folderRouter = require("./routes/private/folder");
 const listRouter = require("./routes/private/list");
+const taskRouter = require("./routes/private/task");
 
 const { protect } = require("./middleware/auth");
 const { paramValidator } = require("./middleware/paramValidator");
@@ -37,6 +38,7 @@ app.use("/api/v1/workspaces", protect, workspaceRouter);
 app.use("/api/v1/spaces", protect, spaceRouter);
 app.use("/api/v1/folders", protect, folderRouter);
 app.use("/api/v1/lists", protect, listRouter);
+app.use("/api/v1/tasks", protect, taskRouter);
 
 // app.use("/api/v1/user/:userId/workspaces/:workspaceId/folders", protect, folderRouter);
 // app.use("/api/v1/user/:userId/workspaces/:workspaceId/lists", protect, listRouter);
