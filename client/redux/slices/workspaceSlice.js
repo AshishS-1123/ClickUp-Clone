@@ -37,6 +37,15 @@ export const createNewWorkspaceAsync = createAsyncThunk(
   }
 )
 
+export const switchWorkspace = createAsyncThunk(
+  "workspace/switchWorkspace",
+  async ({ workspaceId }, thunkApi) => {
+    // If we want to update the active workspace on backend,
+    // do it here.
+    return { workspaceId };
+  }
+)
+
 const initialState = {
   // Array of all workspace ids belonging to this user.
   // Workspaces will be stored as objects {id, name}
@@ -60,6 +69,7 @@ export const workspaceSlice = createSlice({
     [getAllWorkspacesAsync.rejected]: setError,
     [createNewWorkspaceAsync.fulfilled]: addNewWorkspace,
     [createNewWorkspaceAsync.rejected]: setError,
+    [switchWorkspace.fulfilled]: setActiveWorkspace,
   }
 })
 
@@ -85,6 +95,11 @@ function addNewWorkspace(state, action) {
   if (state.workspaces.length == 1) {
     state.activeWorkspace = 0;
   }
+}
+
+function setActiveWorkspace(state, action) {
+  state.activeWorkspace = action.payload?.workspaceId || 0;
+  state.activeWorkspaceChildren = state.workspaces[state.activeWorkspace].children;
 }
 
 export default workspaceSlice.reducer;

@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { createNewWorkspaceAsync } from "../../../../redux/slices/workspaceSlice";
+import { createNewWorkspaceAsync, switchWorkspace } from "../../../../redux/slices/workspaceSlice";
 
 // Returns styles for the avatar.
 const stringAvatar = (name, id) => {
@@ -94,6 +94,7 @@ function WorkspaceCreateDialog({ open, onClose }) {
 function WorkspaceSelector() {
   const [open, setOpen] = useState(false);
   const workspaces = useSelector(state => state.workspaceReducer.workspaces);
+  const dispatch = useDispatch();
 
   const handleAddIconClick = () => {
     // When add button is clicked, we show a dialog to create the new workspace.
@@ -112,12 +113,23 @@ function WorkspaceSelector() {
     setOpen(false);
   }
 
+  const handleWorkspaceIconClick = (activeIndex) => {
+    dispatch(switchWorkspace({ workspaceId: activeIndex }))
+      .then(() => {
+        console.log("Set active to", activeIndex);
+      })
+  }
+
   return (
     <>
       <Stack direction="column" spacing={1.5} alignItems="center" justifyContent="center">
         {
           workspaces.map((item, idx) => {
-            return <Avatar {...stringAvatar(item.name, idx)} key={item.id} />
+            return <Avatar
+              {...stringAvatar(item.name, idx)}
+              key={item.id}
+              onClick={() => { handleWorkspaceIconClick(idx) }}
+            />
           })
         }
 
