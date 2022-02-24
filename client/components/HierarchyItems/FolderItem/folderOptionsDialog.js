@@ -19,6 +19,11 @@ function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }
     fontSize: "13px",
   }
 
+  const iconStyle = {
+    marginRight: "5px",
+    transform: "scale(0.8)",
+  }
+
   return (
     <>
       <Menu
@@ -35,12 +40,12 @@ function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }
         open={openMenu}
         onClose={closeMenu}
       >
-        <h5 style={{ fontWeight: "600", padding: "5px 20px", fontSize: "11px" }}>FOLDER SETTINGS</h5>
-        <MenuItem style={menuItemStyle} onClick={() => { setShowFolderDialog(true) }}><AddIcon />Add Folder</MenuItem>
-        <MenuItem style={menuItemStyle} onClick={() => { setShowListDialog(true) }}><AddIcon />Add List</MenuItem>
-        <MenuItem style={menuItemStyle} onClick={() => { setShowTaskDialog(true) }}><AddIcon />Add Task</MenuItem>
-        <MenuItem style={menuItemStyle}><EditIcon />Edit</MenuItem>
-        <MenuItem style={menuItemStyle}><DeleteIcon />Delete</MenuItem>
+        <h5 style={{ fontWeight: "600", padding: "5px 20px", fontSize: "11px", color: "#dadada" }}>FOLDER SETTINGS</h5>
+        <MenuItem style={menuItemStyle} onClick={() => { setShowFolderDialog(true) }}><AddIcon style={iconStyle} />Add Folder</MenuItem>
+        <MenuItem style={menuItemStyle} onClick={() => { setShowListDialog(true) }}><AddIcon style={iconStyle} />Add List</MenuItem>
+        <MenuItem style={menuItemStyle} onClick={() => { setShowTaskDialog(true) }}><AddIcon style={iconStyle} />Add Task</MenuItem>
+        <MenuItem style={menuItemStyle}><EditIcon style={iconStyle} />Edit</MenuItem>
+        <MenuItem style={menuItemStyle}><DeleteIcon style={iconStyle} />Delete</MenuItem>
       </Menu>
 
       <CreateFolderDialog

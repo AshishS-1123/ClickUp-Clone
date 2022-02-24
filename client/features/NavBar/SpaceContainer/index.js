@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -116,18 +116,21 @@ const spaceData = {
 
 
 function SpaceContainer() {
+  const [tree, setTree] = useState([]);
   const spaceData = useSelector(state => state.spaceReducer);
   const { userId, token } = useSelector(state => state.authReducer);
   const { activeWorkspace, activeWorkspaceChildren, workspaces } = useSelector(state => state.workspaceReducer);
   const dispatch = useDispatch();
 
-  const tree = computeSpaceTree(spaceData)()
+  useEffect(() => {
+    setTree(computeSpaceTree(spaceData)())
+  }, [spaceData])
 
   useEffect(() => {
     dispatch(resetSlice());
     activeWorkspaceChildren.forEach(spaceId => {
       const workspaceId = workspaces[activeWorkspace].id
-      dispatch(getSpaceDataAsync({ spaceId, workspaceId, userId, token }));
+      dispatch(getSpaceDataAsync({ spaceId, workspaceId, userId, token }))
     });
   }, [activeWorkspace])
 
@@ -152,7 +155,7 @@ function SpaceContainer() {
           <Stack spacing={2}>
             <CreateSpaceButton />
             {
-              tree.map(item => {
+              tree && tree.map(item => {
                 return <SpaceItem spaceName={item.name} contents={item.contents} id={item.id} key={item.id} />
               })
             }
