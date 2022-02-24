@@ -99,7 +99,7 @@ function addNewWorkspace(state, action) {
 
 function setActiveWorkspace(state, action) {
   state.activeWorkspace = action.payload?.workspaceId || 0;
-  state.activeWorkspaceChildren = state.workspaces[state.activeWorkspace].children;
+  state.activeWorkspaceChildren = state.workspaces[state.activeWorkspace].spaces;
 }
 
 export default workspaceSlice.reducer;

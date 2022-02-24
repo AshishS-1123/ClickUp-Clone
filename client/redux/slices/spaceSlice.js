@@ -111,6 +111,7 @@ export const spaceSlice = createSlice({
   initialState: initialState,
   reducers: {
     setActive: setActiveItem,
+    resetSlice: resetSliceToDefault,
   },
   extraReducers: {
     [getSpaceDataAsync.fulfilled]: assignSpaceData,
@@ -255,6 +256,10 @@ function setError(state, action) {
   state.error = action.payload.error;
 }
 
-export const { setActive } = spaceSlice.actions;
+function resetSliceToDefault(state, action) {
+  return initialState
+}
+
+export const { setActive, resetSlice } = spaceSlice.actions;
 
 export default spaceSlice.reducer;

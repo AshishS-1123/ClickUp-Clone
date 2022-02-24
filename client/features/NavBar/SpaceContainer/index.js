@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpaceItem from "../../../components/HierarchyItems/SpaceItem";
 import Stack from "@mui/material/Stack";
 import CreateSpaceButton from "../../../components/HierarchyItems/CreateSpaceButton";
 import "./SpaceContainer.module.css";
 import computeSpaceTree from "../../../utils/computeSpaceTree";
+import { resetSlice } from "../../../redux/slices/spaceSlice";
+import { getSpaceDataAsync } from "../../../redux/slices/spaceSlice";
 
 const spaceContainerStyles = {
   bgcolor: "#20262b",
@@ -115,9 +117,19 @@ const spaceData = {
 
 function SpaceContainer() {
   const spaceData = useSelector(state => state.spaceReducer);
-  console.log(spaceData);
+  const { userId, token } = useSelector(state => state.authReducer);
+  const { activeWorkspace, activeWorkspaceChildren, workspaces } = useSelector(state => state.workspaceReducer);
+  const dispatch = useDispatch();
+
   const tree = computeSpaceTree(spaceData)()
-  console.log("space tree ", tree)
+
+  useEffect(() => {
+    dispatch(resetSlice());
+    activeWorkspaceChildren.forEach(spaceId => {
+      const workspaceId = workspaces[activeWorkspace].id
+      dispatch(getSpaceDataAsync({ spaceId, workspaceId, userId, token }));
+    });
+  }, [activeWorkspace])
 
   return (
     <>
