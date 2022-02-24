@@ -19,8 +19,10 @@ function computeSpaceTree(data) {
     const contents = folder.children.map(child => {
       if (child.childType == "FOLDER") {
         return getFolderData(child.id);
-      } else {
+      } else if (child.childType == "LIST") {
         return getListData(child.id);
+      } else if (child.childType == "TASK") {
+        return { itemType: "TASK", id: child.id };
       }
     });
 

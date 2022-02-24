@@ -92,7 +92,7 @@ function FolderItem({ id, folderName, contents, nestingLevel = 10 }) {
                 nestingLevel={nestingLevel + 10}
                 contents={item.contents}
               />
-            } else {
+            } else if (item.itemType == "LIST") {
               return <ListItem
                 key={item.id} id={item.id}
                 listName={item.name}

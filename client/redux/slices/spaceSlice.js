@@ -146,7 +146,7 @@ function assignSpaceData(state, action) {
 
   spaceData.task.forEach(item => {
     if (!state.taskData.includes(item))
-      state.listData.push(item);
+      state.taskData.push(item);
   })
 }
 
