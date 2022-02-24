@@ -51,8 +51,11 @@ exports.createNewTask = async (req, res, next) => {
     return next(new ErrorResponse(error.message, 500));
   }
 
+  console.log("Parent", parent);
+  console.log("Task", task);
   try {
     parent.children.push({ childType: "TASK", id: String(task._id) });
+    console.log("New parent", parent);
     await parent.save();
 
     res.status(201).json({

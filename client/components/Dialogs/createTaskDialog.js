@@ -19,6 +19,7 @@ function CreateTaskDialog({ open, closeDialog, itemType, itemId }) {
 
     const userId = userData.userId;
     const token = userData.token;
+    console.log(itemType, itemId);
 
     dispatch(createTaskAsync({ taskName, parentType: itemType, parentId: itemId, userId, token }))
       .then((res) => {

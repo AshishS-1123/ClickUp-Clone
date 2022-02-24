@@ -222,6 +222,7 @@ function attachNewList(state, action) {
 }
 
 function attachNewTask(state, action) {
+  console.log("Attaching new task\n");
   const task = action?.payload?.data?.task;
 
   state.taskData.push(task);

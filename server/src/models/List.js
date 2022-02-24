@@ -17,7 +17,7 @@ const ListSchema = mongoose.Schema({
   },
   // Id's of all tasks under this list.
   children: {
-    type: [String],
+    type: [{ childType: String, id: String }],
     default: []
   },
 })

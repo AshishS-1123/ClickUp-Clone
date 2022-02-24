@@ -144,6 +144,8 @@ const paramValidator = async function (req, res, next) {
       const list = await validateList(queryParams.list, userId);
 
       req.list = list;
+      req.parent = list;
+      req.parentType = "LIST";
     }
 
     if (queryParams.hasOwnProperty("task")) {

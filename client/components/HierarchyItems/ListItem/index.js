@@ -61,7 +61,13 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
         />
       </div>
 
-      <ListOptionsDialog anchorEl={anchorEl} openMenu={openMenu} closeMenu={closeOptions} />
+      <ListOptionsDialog
+        anchorEl={anchorEl}
+        openMenu={openMenu}
+        closeMenu={closeOptions}
+        itemId={id}
+        itemType="list"
+      />
     </div>
   )
 }
