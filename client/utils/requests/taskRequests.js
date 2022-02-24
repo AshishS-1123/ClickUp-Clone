@@ -11,8 +11,8 @@ export const fetchTask = async (taskId, parentType, parentId, userId, token) => 
   return { data, status };
 }
 
-export const createList = async (taskName, parentType, parentId, userId, token) => {
-  const url = `/tasks/${taskId}?user=${userId}&${parentType}=${parentId}`;
+export const createTask = async (taskName, parentType, parentId, userId, token) => {
+  const url = `/tasks?user=${userId}&${parentType}=${parentId}`;
   const body = { taskName };
 
   const headers = new Headers();

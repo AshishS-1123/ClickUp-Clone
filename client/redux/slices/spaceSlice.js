@@ -3,6 +3,7 @@ import { fetchSpaceEverything } from "../../utils/requests/everythingRequests";
 import { createFolder } from "../../utils/requests/folderRequests";
 import { createList } from "../../utils/requests/listRequests";
 import { createSpace } from "../../utils/requests/spaceRequests";
+import { createTask } from "../../utils/requests/taskRequests";
 
 export const getSpaceDataAsync = createAsyncThunk(
   "space/getData",
@@ -67,6 +68,22 @@ export const createListAsync = createAsyncThunk(
   }
 )
 
+export const createTaskAsync = createAsyncThunk(
+  "space/createTask",
+  async ({ taskName, parentType, parentId, userId, token }, thunkApi) => {
+    try {
+      const { data } = await createTask(taskName, parentType, parentId, userId, token);
+
+      if (data.success == false) {
+        return thunkApi.rejectWithValue({ error: data.error });
+      }
+
+      return { data };
+    } catch (error) {
+      return thunkApi.rejectWithValue({ error: error.message });
+    }
+  }
+)
 
 /*
  * In the space slice we only store the spaces of the currently active workspace.
@@ -104,6 +121,8 @@ export const spaceSlice = createSlice({
     [createFolderAsync.rejected]: setError,
     [createListAsync.fulfilled]: attachNewList,
     [createListAsync.rejected]: setError,
+    [createTaskAsync.fulfilled]: attachNewTask,
+    [createTaskAsync.rejected]: setError,
 
   }
 })
@@ -174,7 +193,7 @@ function attachNewFolder(state, action) {
 function attachNewList(state, action) {
   const list = action.payload.data.list;
 
-  state.listData.push((list));
+  state.listData.push(list);
 
   // Update this folder data in the parent.
   const parentId = list.parent.parentId;
@@ -196,6 +215,35 @@ function attachNewList(state, action) {
         childType: "LIST",
         id: list._id,
         _id: list._id,
+      });
+      break;
+    }
+  }
+}
+
+function attachNewTask(state, action) {
+  const task = action?.payload?.data?.task;
+
+  state.taskData.push(task);
+
+  // Update this folder data in the parent.
+  const parentId = task.parent.parentId;
+  const parentType = task.parent.parentType.toLowerCase();
+
+  let parentData;
+  if (parentType == "folder") {
+    parentData = state.folderData;
+  } else if (parentType == "list") {
+    parentData = state.listData;
+  }
+
+  // Add the new task to the parent's children list.
+  for (let i = 0; i < parentData.length; ++i) {
+    if (parentData[i]._id == parentId) {
+      parentData[i].children.push({
+        childType: "TASK",
+        id: task._id,
+        _id: task._id,
       });
       break;
     }

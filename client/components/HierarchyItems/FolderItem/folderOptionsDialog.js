@@ -6,10 +6,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CreateListDialog from "../../Dialogs/createListDialog";
 import CreateFolderDialog from "../../Dialogs/createFolderDialog";
+import CreateTaskDialog from "../../Dialogs/createTaskDialog";
 
 function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }) {
   const [showListDialog, setShowListDialog] = useState(false);
   const [showFolderDialog, setShowFolderDialog] = useState(false);
+  const [showTaskDialog, setShowTaskDialog] = useState(false);
 
   const menuItemStyle = {
     padding: "8px",
@@ -36,6 +38,7 @@ function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }
         <h5 style={{ fontWeight: "600", padding: "5px 20px", fontSize: "11px" }}>FOLDER SETTINGS</h5>
         <MenuItem style={menuItemStyle} onClick={() => { setShowFolderDialog(true) }}><AddIcon />Add Folder</MenuItem>
         <MenuItem style={menuItemStyle} onClick={() => { setShowListDialog(true) }}><AddIcon />Add List</MenuItem>
+        <MenuItem style={menuItemStyle} onClick={() => { setShowTaskDialog(true) }}><AddIcon />Add Task</MenuItem>
         <MenuItem style={menuItemStyle}><EditIcon />Edit</MenuItem>
         <MenuItem style={menuItemStyle}><DeleteIcon />Delete</MenuItem>
       </Menu>
@@ -52,6 +55,13 @@ function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }
         itemType={itemType}
         itemId={itemId}
       />
+      <CreateTaskDialog
+        open={showTaskDialog}
+        closeDialog={() => { setShowTaskDialog(false); closeMenu() }}
+        itemType={itemType}
+        itemId={itemId}
+      />
+
     </>
   )
 }
