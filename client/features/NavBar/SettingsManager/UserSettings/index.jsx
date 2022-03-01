@@ -1,23 +1,23 @@
-import React from "react";
-import MenuItem from "@mui/material/MenuItem";
-import Avatar from "@mui/material/Avatar";
-import styles from "./UserSettings.module.css";
+import React from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
+import styles from './UserSettings.module.css';
 
 function UserSettings() {
-
   return (
-    <MenuItem sx={{ overflow: "wrap", height: "100%", color: "white" }}>
+    <MenuItem sx={{ overflow: 'wrap', height: '100%', color: 'white' }}>
       <div className={styles.container}>
         <div className={styles.titleContainer}>
           <Avatar
             sx={{
-              bgcolor: "#ffa12f",
+              bgcolor: '#ffa12f',
               width: 32,
               height: 32,
-              fontSize: "10px",
-              color: "black"
+              fontSize: '10px',
+              color: 'black',
             }}
-            children="AS" />
+            children="AS"
+          />
           <p>Ashish Shevale</p>
         </div>
 
@@ -29,6 +29,6 @@ function UserSettings() {
       </div>
     </MenuItem>
   );
-};
+}
 
 export default UserSettings;
