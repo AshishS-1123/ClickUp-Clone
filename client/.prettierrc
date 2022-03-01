@@ -7,5 +7,9 @@
   "trailingComma": "all",
   "semi": true,
   "tabWidth": 2,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "useTabs": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "endOfLine": "auto"
 }

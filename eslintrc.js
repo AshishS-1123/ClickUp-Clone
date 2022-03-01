@@ -9,7 +9,7 @@ const prettierOptions = JSON.parse(
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y', 'testing-library', 'jest-dom'],
   env: {
     jest: true,
     browser: true,
@@ -79,6 +79,10 @@ module.exports = {
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error",
   },
   settings: {
     'import/resolver': {
@@ -87,4 +91,10 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      "files": ["**/__tests__/**/*.js"],
+      "extends": ["plugin:testing-library/react"]
+    },
+  ],
 };

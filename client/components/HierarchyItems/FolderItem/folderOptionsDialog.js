@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CreateListDialog from "../../Dialogs/createListDialog";
-import CreateFolderDialog from "../../Dialogs/createFolderDialog";
+import CreateFolderDialog from "../../Dialogs/CreateFolderDialog";
 import CreateTaskDialog from "../../Dialogs/createTaskDialog";
 
 function FolderOptionsDialog({ anchorEl, openMenu, closeMenu, itemId, itemType }) {
