@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import styles from "./spaceStatusesPage.module.css";
+import React, { useRef } from 'react';
+import styles from './spaceStatusesPage.module.css';
 
 function StatusContainer({ statusType, statuses, addStatus }) {
   const colorRef = useRef(null);
@@ -10,31 +10,29 @@ function StatusContainer({ statusType, statuses, addStatus }) {
     const name = nameRef.current.value;
 
     addStatus({ color, name });
-  }
+  };
 
   return (
     <>
       <h6>{statusType}</h6>
       {
-        statuses.map(status => {
-          return (
-            <div className={styles.statusItem}>
-              <input
-                type="color"
-                className={styles.colorInput}
-                value={status.color}
-                ref={colorRef}
-              />
+        statuses.map((status) => (
+          <div className={styles.statusItem}>
+            <input
+              type="color"
+              className={styles.colorInput}
+              value={status.color}
+              ref={colorRef}
+            />
 
-              <input
-                type="text"
-                className={styles.nameInput}
-                value={status.name}
-                ref={nameRef}
-              />
-            </div>
-          )
-        })
+            <input
+              type="text"
+              className={styles.nameInput}
+              value={status.name}
+              ref={nameRef}
+            />
+          </div>
+        ))
       }
       <button
         className={styles.createStatusButton}
@@ -43,7 +41,7 @@ function StatusContainer({ statusType, statuses, addStatus }) {
         Add Status
       </button>
     </>
-  )
+  );
 }
 
 function SpaceStatusPage() {
@@ -52,11 +50,11 @@ function SpaceStatusPage() {
 
   const addActiveStatus = (status) => {
     activeStatuses = [...activeStatuses, status];
-  }
+  };
 
   const addClosedStatus = (status) => {
     closedStatuses = [...closedStatuses, status];
-  }
+  };
 
   return (
     <div className={styles.statusPage__container}>

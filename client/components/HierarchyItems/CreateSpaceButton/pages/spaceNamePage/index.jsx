@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import styles from "../../CreateSpaceDialog.module.css";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import styles from '../../CreateSpaceDialog.module.css';
 
 function SpaceNamePage() {
-  const error = useSelector(state => state.spaceReducer.error);
+  const error = useSelector((state) => state.spaceReducer.error);
 
   return (
     <>
@@ -13,7 +13,7 @@ function SpaceNamePage() {
       </div>
       <p className={styles.errorText}>{error}</p>
     </>
-  )
+  );
 }
 
 export default SpaceNamePage;

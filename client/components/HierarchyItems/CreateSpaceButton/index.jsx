@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import Button from "@mui/material/Button";
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import CreateSpaceDialog from "./CreateSpaceDialog";
+import CreateSpaceDialog from './CreateSpaceDialog';
 
 function CreateSpaceButton() {
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleCreateNewSpace = () => {
     setOpenDialog(true);
-  }
+  };
 
   const closeDialog = () => {
     setOpenDialog(false);
-  }
+  };
 
   return (
     <>
@@ -21,18 +21,20 @@ function CreateSpaceButton() {
         variant="contained"
         onClick={handleCreateNewSpace}
         sx={{
-          width: "80%",
-          height: "24px",
-          margin: "0 auto",
-          fontSize: "11px",
-          color: "#d7d7d7",
-          background: "#384047",
-          "&:hover": {
-            color: "#d7d7d7",
-            background: "#384047",
-          }
+          width: '80%',
+          height: '24px',
+          margin: '0 auto',
+          fontSize: '11px',
+          color: '#d7d7d7',
+          background: '#384047',
+          '&:hover': {
+            color: '#d7d7d7',
+            background: '#384047',
+          },
         }}
-      >New Space</Button>
+      >
+        New Space
+      </Button>
       <CreateSpaceDialog open={openDialog} closeDialog={closeDialog} />
     </>
   );
