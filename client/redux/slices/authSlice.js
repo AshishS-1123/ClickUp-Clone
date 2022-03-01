@@ -1,101 +1,72 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { logInUser, registerUser } from "../../utils/requests/authRequests";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { logInUser, registerUser } from '../../utils/requests/authRequests';
 
 export const registerAsync = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async ({ userEmail, password }, thunkApi) => {
     // Check that the email and password are provided
     if (!userEmail || !password) {
       return thunkApi.rejectWithValue({
-        error: "Please provide email and password",
+        error: 'Please provide email and password',
       });
     }
 
     try {
       const { data, status } = await registerUser(userEmail, password);
 
-      if (status == 201) {
+      if (status === 201) {
         // Set the values in local storage.
         // localStorage.setItem("token", data.token);
         // Return the new state.
         return data;
-      } else {
-        return thunkApi.rejectWithValue({
-          error: data.error,
-        });
       }
+      return thunkApi.rejectWithValue({
+        error: data.error,
+      });
     } catch (error) {
       return thunkApi.rejectWithValue({
         error: error.message,
       });
     }
-  }
+  },
 );
 
 export const loginAsync = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async ({ userEmail, password }, thunkApi) => {
     // Check that the email and password are provided
     if (!userEmail || !password) {
       return thunkApi.rejectWithValue({
-        error: "Please provide email and password",
+        error: 'Please provide email and password',
       });
     }
 
     try {
       const { data, status } = await logInUser(userEmail, password);
 
-      if (status == 201) {
+      if (status === 201) {
         // Set the values in local storage.
         // localStorage.setItem("token", data.token);
         // Return the new state.
         return data;
-      } else {
-        return thunkApi.rejectWithValue({
-          error: data.error,
-        });
       }
+      return thunkApi.rejectWithValue({
+        error: data.error,
+      });
     } catch (error) {
       return thunkApi.rejectWithValue({
         error: error.message,
       });
     }
-  }
+  },
 );
 
 export const signOutAsync = createAsyncThunk(
-  "auth/signout",
-  async (thunkApi) => {
-    // In future might need to perform some async request here.
-    return;
-  }
-)
+  'auth/signout',
+  () => { },
+);
 
-const initialState = {
-  userEmail: "",
-  loggedIn: false,
-  token: "",
-  error: "",
-  loading: true,
-  userId: "",
-};
-
-export const authSlice = createSlice({
-  name: "auth",
-  initialState: initialState,
-  reducers: {
-  },
-  extraReducers: {
-    [registerAsync.pending]: startLoading,
-    [registerAsync.fulfilled]: setUserCreds,
-    [registerAsync.rejected]: setError,
-    [loginAsync.pending]: startLoading,
-    [loginAsync.fulfilled]: setUserCreds,
-    [loginAsync.rejected]: setError,
-    [signOutAsync.fulfilled]: signOutUser,
-  }
-});
-
+/* eslint-disable no-param-reassign */
 function startLoading(state) {
   state.loading = true;
 }
@@ -105,7 +76,7 @@ function setUserCreds(state, action) {
   state.loading = false;
   state.userEmail = userEmail;
   state.token = token;
-  state.error = "";
+  state.error = '';
   state.loggedIn = true;
   state.userId = userId;
 }
@@ -116,11 +87,37 @@ function setError(state, { payload }) {
 }
 
 function signOutUser(state) {
-  state.userEmail = "";
-  state.token = "";
+  state.userEmail = '';
+  state.token = '';
   state.loggedIn = false;
   state.loading = false;
-  state.userId = "";
+  state.userId = '';
 }
+/* eslint-disable no-param-reassign */
+
+const initialState = {
+  userEmail: '',
+  loggedIn: false,
+  token: '',
+  error: '',
+  loading: true,
+  userId: '',
+};
+
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+  },
+  extraReducers: {
+    [registerAsync.pending]: startLoading,
+    [registerAsync.fulfilled]: setUserCreds,
+    [registerAsync.rejected]: setError,
+    [loginAsync.pending]: startLoading,
+    [loginAsync.fulfilled]: setUserCreds,
+    [loginAsync.rejected]: setError,
+    [signOutAsync.fulfilled]: signOutUser,
+  },
+});
 
 export default authSlice.reducer;
