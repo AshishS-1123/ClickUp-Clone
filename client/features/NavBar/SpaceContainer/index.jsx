@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useDispatch, useSelector } from "react-redux";
-import SpaceItem from "../../../components/HierarchyItems/SpaceItem";
-import Stack from "@mui/material/Stack";
-import CreateSpaceButton from "../../../components/HierarchyItems/CreateSpaceButton";
-import "./SpaceContainer.module.css";
-import computeSpaceTree from "../../../utils/computeSpaceTree";
-import { resetSlice } from "../../../redux/slices/spaceSlice";
-import { getSpaceDataAsync } from "../../../redux/slices/spaceSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import Stack from '@mui/material/Stack';
+import SpaceItem from '../../../components/HierarchyItems/SpaceItem';
+import CreateSpaceButton from '../../../components/HierarchyItems/CreateSpaceButton';
+import './SpaceContainer.module.css';
+import computeSpaceTree from '../../../utils/computeSpaceTree';
+import { resetSlice, getSpaceDataAsync } from '../../../redux/slices/spaceSlice';
 
 const spaceContainerStyles = {
-  bgcolor: "#20262b",
-  boxShadow: "none",
-  height: "48px",
-  "> div": {
-    color: "white",
-  }
-}
+  bgcolor: '#20262b',
+  boxShadow: 'none',
+  height: '48px',
+  '> div': {
+    color: 'white',
+  },
+};
 
 /*
 const spaceData = {
@@ -114,55 +113,63 @@ const spaceData = {
 }
 */
 
-
 function SpaceContainer() {
   const [tree, setTree] = useState([]);
-  const spaceData = useSelector(state => state.spaceReducer);
-  const { userId, token } = useSelector(state => state.authReducer);
-  const { activeWorkspace, activeWorkspaceChildren, workspaces } = useSelector(state => state.workspaceReducer);
+  const spaceData = useSelector((state) => state.spaceReducer);
+  const { userId, token } = useSelector((state) => state.authReducer);
+  const {
+    activeWorkspace,
+    activeWorkspaceChildren,
+    workspaces
+  } = useSelector((state) => state.workspaceReducer);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setTree(computeSpaceTree(spaceData)())
-  }, [spaceData])
+    setTree(computeSpaceTree(spaceData)());
+  }, [spaceData]);
 
   useEffect(() => {
     dispatch(resetSlice());
-    activeWorkspaceChildren.forEach(spaceId => {
-      const workspaceId = workspaces[activeWorkspace].id
-      dispatch(getSpaceDataAsync({ spaceId, workspaceId, userId, token }))
+    activeWorkspaceChildren.forEach((spaceId) => {
+      const workspaceId = workspaces[activeWorkspace].id;
+      dispatch(getSpaceDataAsync({
+        spaceId, workspaceId, userId, token,
+      }));
     });
-  }, [activeWorkspace])
+  }, [activeWorkspace]);
 
   return (
-    <>
-      <Accordion sx={spaceContainerStyles} square disableGutters>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+    <Accordion sx={spaceContainerStyles} square disableGutters>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon sx={{ color: 'white' }} />}
+      >
+        <Typography
+          variant="caption"
+          sx={{
+            textTransform: 'uppercase',
+            color: 'white',
+            fontWeight: '900',
+          }}
         >
-          <Typography
-            variant="caption"
-            sx={{
-              textTransform: "uppercase",
-              color: "white", fontWeight: "900",
-            }}
-          >
-            Spaces
-          </Typography>
-        </AccordionSummary>
+          Spaces
+        </Typography>
+      </AccordionSummary>
 
-        <AccordionDetails sx={{ padding: "0px" }}>
-          <Stack spacing={2}>
-            <CreateSpaceButton />
-            {
-              tree && tree.map(item => {
-                return <SpaceItem spaceName={item.name} contents={item.contents} id={item.id} key={item.id} />
-              })
-            }
-          </Stack>
-        </AccordionDetails>
-      </Accordion>
-    </>
+      <AccordionDetails sx={{ padding: '0px' }}>
+        <Stack spacing={2}>
+          <CreateSpaceButton />
+          {
+            tree && tree.map((item) => <SpaceItem
+              spaceName={item.name}
+              contents={item.contents}
+              id={item.id}
+              key={item.id}
+            />)
+          }
+        </Stack>
+      </AccordionDetails>
+    </Accordion>
   );
 }
 
