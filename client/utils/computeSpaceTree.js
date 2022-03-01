@@ -1,65 +1,65 @@
-
 function computeSpaceTree(data) {
   const returnValue = [];
 
-  function getChildrenForSpace(children) {
-    return children.map(child => {
-      if (child.childType == "FOLDER") {
-        return getFolderData(child.id);
-      } else {
-        return getListData(child.id);
-      }
-    });
+  function getListData(listId) {
+    // eslint-disable-next-line no-underscore-dangle
+    const list = data.listData.filter((item) => item._id === listId)[0];
+
+    return {
+      itemType: 'LIST',
+      id: listId,
+      name: list.name,
+    };
   }
 
   function getFolderData(folderId) {
-    const folder = data.folderData.filter(item => item._id == folderId)[0];
-    // console.log("Folder", folder);
+    // eslint-disable-next-line no-underscore-dangle
+    const folder = data.folderData.filter((item) => item._id === folderId)[0];
 
-    const contents = folder.children.map(child => {
-      if (child.childType == "FOLDER") {
+    const contents = folder.children.map((child) => {
+      if (child.childType === 'FOLDER') {
         return getFolderData(child.id);
-      } else if (child.childType == "LIST") {
+      } if (child.childType === 'LIST') {
         return getListData(child.id);
-      } else if (child.childType == "TASK") {
-        return { itemType: "TASK", id: child.id };
+      } if (child.childType === 'TASK') {
+        return { itemType: 'TASK', id: child.id };
       }
+
+      return undefined;
     });
 
     return {
-      itemType: "FOLDER",
+      itemType: 'FOLDER',
       id: folderId,
       name: folder.name,
-      contents: contents,
-    }
+      contents,
+    };
   }
 
-  function getListData(listId) {
-    const list = data.listData.filter(item => item._id == listId)[0];
-
-    return {
-      itemType: "LIST",
-      id: listId,
-      name: list.name,
-    }
+  function getChildrenForSpace(children) {
+    return children.map((child) => {
+      if (child.childType === 'FOLDER') {
+        return getFolderData(child.id);
+      }
+      return getListData(child.id);
+    });
   }
 
   return function computeHierarchies() {
-    data.spaceData.forEach(space => {
-      // console.log("For Space:: ", space.name);
+    data.spaceData.forEach((space) => {
       // Get all the children for this space.
       const contents = getChildrenForSpace(space.children);
 
       returnValue.push({
+        // eslint-disable-next-line no-underscore-dangle
         id: space._id,
         name: space.name,
-        contents: contents,
+        contents,
       });
     });
 
     return returnValue;
-  }
-
+  };
 }
 
 export default computeSpaceTree;

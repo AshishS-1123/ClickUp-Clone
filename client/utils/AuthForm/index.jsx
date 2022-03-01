@@ -1,30 +1,35 @@
-import React, { useRef } from "react";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./AuthForm.module.css";
-import protectedRoute from "../ProtectedRoutes";
+import React, { useRef } from 'react';
+import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './AuthForm.module.css';
+import protectedRoute from '../ProtectedRoutes';
+import PropTypes from "prop-types";
 
 const dataFromAuthType = (authType) => {
   const metaData = {};
 
-  if (authType == "login") {
-    metaData.formHeading = "Welcome back!";
-    metaData.alternateAuthLink = "/register";
+  if (authType === 'login') {
+    metaData.formHeading = 'Welcome back!';
+    metaData.alternateAuthLink = '/register';
     metaData.alternateAuthText = "Don't have an account? Register";
-  } else if (authType == "register") {
+  } else if (authType === 'register') {
     metaData.formHeading = "Let's go!";
-    metaData.alternateAuthLink = "/login";
-    metaData.alternateAuthText = "Already have an account? Log In";
+    metaData.alternateAuthLink = '/login';
+    metaData.alternateAuthText = 'Already have an account? Log In';
+  } else {
+    metaData.formHeading = '';
+    metaData.alternateAuthLink = '';
+    metaData.alternateAuthText = '';
   }
 
   return metaData;
-}
+};
 
 function AuthForm({ reducer, authType }) {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const dispatch = useDispatch();
-  const error = useSelector(state => state.authReducer.error);
+  const error = useSelector((state) => state.authReducer.error);
 
   const { formHeading, alternateAuthLink, alternateAuthText } = dataFromAuthType(authType);
   const clickHandler = (event) => {
@@ -34,18 +39,18 @@ function AuthForm({ reducer, authType }) {
     const password = passwordRef.current.value;
 
     dispatch(reducer({ userEmail, password }))
-      .then((data) => {
-        if (data.type.search("rejected") === -1) {
-          // Redirect to another page.
-          console.log("Successful!");
-        } else {
-          console.log("Failed");
-        }
-      })
-      .catch((error) => {
-        console.log("Failed: ", error);
-      })
-  }
+    // .then((data) => {
+    //   if (data.type.search('rejected') === -1) {
+    //     // Redirect to another page.
+    //     console.log('Successful!');
+    //   } else {
+    //     console.log('Failed');
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.log('Failed: ', error);
+    // });
+  };
 
   return (
     <form className={styles.auth_form}>
@@ -71,7 +76,12 @@ function AuthForm({ reducer, authType }) {
         <a className={styles.auth_link}>{alternateAuthText}</a>
       </Link>
     </form>
-  )
+  );
 }
+
+AuthForm.propTypes = {
+  reducer: PropTypes.func.isRequired,
+  authType: PropTypes.string.isRequired,
+};
 
 export default protectedRoute(AuthForm, false);
