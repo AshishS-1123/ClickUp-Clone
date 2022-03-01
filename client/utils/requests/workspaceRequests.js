@@ -1,36 +1,36 @@
-import makeRequest from "./request";
+import makeRequest from './request';
 
 export const getAllWorkspaces = async (userId, token) => {
   const url = `/workspaces?user=${userId}`;
   const body = {};
 
   const headers = new Headers();
-  headers.append("Authorization", `Bearer ${token}`)
+  headers.append('Authorization', `Bearer ${token}`);
 
-  const { data, status } = await makeRequest(url, "GET", body, headers);
+  const { data, status } = await makeRequest(url, 'GET', body, headers);
   return { data, status };
-}
+};
 
 export const createNewWorkspace = async (userId, token, workspaceName) => {
   const url = `/workspaces?user=${userId}`;
   const body = { workspaceName };
 
   const headers = new Headers();
-  headers.append("Authorization", `Bearer ${token}`);
-  headers.append("Content-Type", "application/json");
+  headers.append('Authorization', `Bearer ${token}`);
+  headers.append('Content-Type', 'application/json');
 
-  const { data, status } = await makeRequest(url, "POST", body, headers);
+  const { data, status } = await makeRequest(url, 'POST', body, headers);
   return { data, status };
-}
+};
 
 export const getWorkspaceData = () => {
 
-}
+};
 
 export const deleteWorkspace = () => {
 
-}
+};
 
 export const modifyWorkspace = () => {
 
-}
+};
