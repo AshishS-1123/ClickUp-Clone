@@ -1,9 +1,8 @@
 // import { useRouter } from "next/router";
-import React from "react";
-import { useDispatch } from "react-redux";
-import protectedRoute from "../utils/ProtectedRoutes";
-import { signOutAsync } from "../redux/slices/authSlice";
-
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import protectedRoute from '../utils/ProtectedRoutes';
+import { signOutAsync } from '../redux/slices/authSlice';
 
 function HomePage() {
   // const router = useRouter();
@@ -11,9 +10,9 @@ function HomePage() {
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log("signout clicked");
+    console.log('signout clicked');
     dispatch(signOutAsync());
-  }
+  };
 
   return (
     <div>
@@ -21,6 +20,6 @@ function HomePage() {
       <button onClick={handleClick}>Sign Out</button>
     </div>
   );
-};
+}
 
 export default protectedRoute(HomePage);

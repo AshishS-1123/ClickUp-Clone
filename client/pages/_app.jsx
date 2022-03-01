@@ -1,10 +1,10 @@
-import Head from "next/head";
-import React from "react";
-import { GoogleFonts } from "nextjs-google-fonts/GoogleFonts";
-import { Provider } from "react-redux";
+import Head from 'next/head';
+import React from 'react';
+import { GoogleFonts } from 'nextjs-google-fonts/GoogleFonts';
+import { Provider } from 'react-redux';
 
-import store from "../redux/store";
-import '../styles/global_styles.css'
+import store from '../redux/store';
+import '../styles/global_styles.css';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -23,5 +23,5 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Component {...pageProps} />
     </Provider>
-  )
+  );
 }
