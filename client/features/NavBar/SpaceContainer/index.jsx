@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
 import Stack from '@mui/material/Stack';
 import SpaceItem from '../../../components/HierarchyItems/SpaceItem';
-import CreateSpaceButton from '../../../components/HierarchyItems/CreateSpaceButton';
+import CreateSpaceButton from '../../../components/Misc/CreateSpaceButton';
 import './SpaceContainer.module.css';
 import computeSpaceTree from '../../../utils/computeSpaceTree';
 import { resetSlice, getSpaceDataAsync } from '../../../redux/slices/spaceSlice';
