@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import CreateTaskDialog from '../../Dialogs/createTaskDialog';
+import CreateTaskDialog from '../../Dialogs/CreateTaskDialog';
 
 function ListOptionsDialog({
   anchorEl, openMenu, closeMenu, itemId, itemType,

@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import CreateListDialog from '../../Dialogs/createListDialog';
+import CreateListDialog from '../../Dialogs/CreateListDialog';
 import CreateFolderDialog from '../../Dialogs/CreateFolderDialog';
 
 function SpaceOptionsDialog({

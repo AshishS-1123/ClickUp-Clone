@@ -12,7 +12,6 @@ function CreateFolderDialog({
 
   const handleCreateFolder = () => {
     const folderName = folderNameElement.current.value;
-    console.log('FOlder Name', folderName);
 
     const { userId } = userData;
     const { token } = userData;
@@ -21,7 +20,6 @@ function CreateFolderDialog({
       folderName, parentType: itemType, parentId: itemId, userId, token,
     }))
       .then((res) => {
-        console.log('RES', res);
         if (res.payload.data.success) {
           closeDialog();
         }
