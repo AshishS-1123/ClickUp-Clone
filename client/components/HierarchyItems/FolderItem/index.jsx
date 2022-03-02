@@ -11,6 +11,7 @@ import FolderOptionsDialog from './folderOptionsDialog';
 function FolderItem({
   id, folderName, contents, nestingLevel = 10,
 }) {
+  console.log("Drawing Folder ...");
   const [revealerVisible, setRevealerVisible] = useState(false);
   const [showIcons, setShowIcons] = useState(false);
   const isActive = useSelector((state) => state.spaceReducer.activeItem) == id;
@@ -53,12 +54,13 @@ function FolderItem({
         className={styles.item__container}
         style={containerStyle}
         onMouseEnter={() => { setShowIcons(true); }}
+        onMouseMove={() => { setShowIcons(true); }}
         onMouseLeave={() => { setShowIcons(false); }}
       >
 
         <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
           <FolderIcon sx={{ width: '16px', height: '16px', color: 'lightgrey' }} />
-          <div className={styles.folder__title}>{folderName}</div>
+          <h5 className={styles.folder__title}>{folderName}</h5>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -85,7 +87,9 @@ function FolderItem({
       <div style={{ display: revealerVisible ? 'block' : 'none' }}>
         {
           contents && contents.map((item) => {
-            if (item.itemType == 'FOLDER') {
+            console.log("Draw", item);
+            if (item.itemType === 'FOLDER') {
+              console.log("Draw folder");
               return (
                 <FolderItem
                   key={item.id}
@@ -95,7 +99,7 @@ function FolderItem({
                   contents={item.contents}
                 />
               );
-            } if (item.itemType == 'LIST') {
+            } if (item.itemType === 'LIST') {
               return (
                 <ListItem
                   key={item.id}
