@@ -1,0 +1,78 @@
+.topBar {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.topBar input {
+  width: 90%;
+  background: #384047;
+  border: none;
+  color: #d5d6d7;
+  font-size: 17px;
+}
+
+.topBar input:focus {
+  outline: none;
+}
+
+.topBar svg {
+  color: white;
+}
+
+.parentInfoBar {
+  width: 100%;
+  color: #aeaba0;
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.parentInfoBar label {
+  margin-right: 10px;
+  color: white;
+}
+
+.parentInfoBar div {
+  background: #384047;
+  border: 2px solid #1e272e;
+  height: 40px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+
+.descriptionInput {
+  background: #384047;
+  border: 2px solid #1e272e;
+  height: 60%;
+  color: #aeaba0;
+  padding: 5px;
+  margin-bottom: 25px;
+}
+
+.descriptionInput:focus {
+  outline: none;
+}
+
+.bottomBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  border: none;
+  background: #f89d2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 121px;
+  height: 40px;
+  color: white;
+  border-radius: 3px;
+}

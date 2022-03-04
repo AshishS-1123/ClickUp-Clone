@@ -1,45 +1,67 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
-import styles from '../dialog.module.css';
+// Priority Icon
+import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
+// Due Dates Icon
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+// Tags Icon
+import StyleIcon from '@mui/icons-material/Style';
+import styles from './TaskDialog.module.css';
 
-function CreateTaskDialog({ open, closeDialog, handleCreateTask }, ref) {
+const iconStyles = {
+  color: '#8a8d91',
+  width: '34px',
+  height: '34px',
+  border: '1px dashed #d5d6d7',
+  borderRadius: '50%',
+  padding: '5px',
+  margin: '0 5px',
+}
+
+function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 1', forWorkspace = 'Workspace 1' }, ref) {
   return (
     <Dialog
-      open={open}
+      open={true}
       onBackdropClick={closeDialog}
       sx={{
         '& .MuiDialog-paper': {
-          width: '550px',
-          height: '419px',
+          width: '580px',
+          height: '510px',
           position: 'absolute',
-          top: '10px',
-          background: '#2b343b',
+          bottom: '0px',
+          right: '0px',
+          background: '#384047',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '20px',
         },
       }}
     >
-      <div className={styles.title_bar}>
-        <h1 className={styles.title}>Create new task</h1>
-        <CloseIcon
-          sx={{
-            position: 'absolute',
-            top: '25px',
-            right: '25px',
-            color: 'white',
-          }}
-          onClick={closeDialog}
-        />
+      <div className={styles.topBar}>
+        <input placeholder='Task name' />
+        <CloseIcon />
       </div>
-      <div className={styles.content}>
-        <label htmlFor="taskDialog_name" id="dialog_nameLabel">Task name</label>
-        <input type="text" id="taskDialog_name" placeholder="Enter task name" ref={ref} />
+
+      <div className={styles.parentInfoBar}>
+        <label>In</label>
+        <div className={styles.forList}>{inList}</div>
+
+        <label>For</label>
+        <div className={styles.forWorkspace}>{forWorkspace}</div>
       </div>
-      <button
-        className={styles.dialog_button}
-        onClick={handleCreateTask}
-      >
-        Create task
-      </button>
+
+      <textarea className={styles.descriptionInput} />
+
+      <div className={styles.bottomBar}>
+        <div className={styles.propertiesBar}>
+          <AssistantPhotoIcon sx={iconStyles} />
+          <CalendarTodayIcon sx={iconStyles} />
+          <StyleIcon sx={iconStyles} />
+        </div>
+        <button className={styles.button} onClick={handleCreateTask}>Create Task</button>
+      </div>
+
     </Dialog>
   );
 }
