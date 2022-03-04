@@ -1,8 +1,7 @@
 import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
-// Priority Icon
-import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
+import PriorityButton from './PropertiesButtons/PriorityButton';
 // Due Dates Icon
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 // Tags Icon
@@ -55,7 +54,7 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 
 
       <div className={styles.bottomBar}>
         <div className={styles.propertiesBar}>
-          <AssistantPhotoIcon sx={iconStyles} />
+          <PriorityButton />
           <CalendarTodayIcon sx={iconStyles} />
           <StyleIcon sx={iconStyles} />
         </div>

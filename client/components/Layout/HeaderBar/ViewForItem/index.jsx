@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import ShieldIcon from '@mui/icons-material/Shield';
 
 const containerStyles = {
-  width: '100px',
   height: '50px',
   display: 'flex',
   alignItems: 'center',

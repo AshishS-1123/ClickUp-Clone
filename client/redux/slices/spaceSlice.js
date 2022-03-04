@@ -22,6 +22,7 @@ const initialState = {
   listData: [],
   taskData: [],
   activeItem: '',
+  activeItemName: '',
   error: '',
 };
 
