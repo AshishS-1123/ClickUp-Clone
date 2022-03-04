@@ -19,10 +19,10 @@ const iconStyles = {
   margin: '0 5px',
 }
 
-function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 1', forWorkspace = 'Workspace 1' }, ref) {
+function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 1', forWorkspace = 'Workspace 1' }) {
   return (
     <Dialog
-      open={true}
+      open={open}
       onBackdropClick={closeDialog}
       sx={{
         '& .MuiDialog-paper': {
