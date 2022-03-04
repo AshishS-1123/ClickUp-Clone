@@ -13,6 +13,7 @@ const Task = require("../models/Task");
 const validateUser = async (userId, tokenUserId) => {
 
   if (userId != tokenUserId) {
+    console.log(userId, tokenUserId);
     throw new ErrorResponse("Token and Request do not match", 403);
   }
 
@@ -94,7 +95,7 @@ const validateTask = async (taskId, userId) => {
 const paramValidator = async function (req, res, next) {
   // Get the query parameters
   const queryParams = req.query;
-  console.log("Params", queryParams);
+  // console.log("Params", queryParams);
 
   // The userId will always be present.
   const userId = queryParams.user;

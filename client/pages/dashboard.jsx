@@ -5,37 +5,45 @@ import Views from '../features/Views';
 import protectedRoute from '../utils/ProtectedRoutes';
 import { getAllWorkspacesAsync } from '../redux/slices/workspaceSlice';
 import { getSpaceDataAsync, resetSlice } from '../redux/slices/spaceSlice';
-import TaskDialog from '../components/Dialogs/CreateTaskDialog/TaskDialog';
+import { getAllMetaData } from '../redux/slices/metaSlice';
 
 function Dashboard() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.authReducer.userId);
   const token = useSelector((state) => state.authReducer.token);
-  const activeSpaces = useSelector((state) => state.workspaceReducer.activeWorkspaceChildren);
+  const workspaces = useSelector((state) => state.workspaceReducer.activeWorkspaceChildren);
 
-  // useEffect(() => {
-  //   // Dispatch request to fetch workspaces.
-  //   dispatch(getAllWorkspacesAsync({ userId, token }))
-  //     .then((action) => {
-  //       dispatch(resetSlice);
-  //       console.log(action);
-  //       const workspaceId = action.payload.workspaces[0].id;
-  //       action.payload.workspaces[0].spaces.forEach((spaceId) => {
-  //         dispatch(getSpaceDataAsync({
-  //           spaceId, workspaceId, userId, token,
-  //         }));
-  //       });
-  //     });
-  // }, []);
+  useEffect(() => {
+    // Dispatch request to fetch workspaces.
+    dispatch(getAllWorkspacesAsync({ userId, token }))
+      .then((action) => {
+        dispatch(resetSlice);
+        // console.log(action);
+        const workspaceId = action.payload.workspaces[0].id;
+
+        // Fetch data for each of the spaces.
+        action.payload.workspaces[0].spaces.forEach((spaceId) => {
+          dispatch(getSpaceDataAsync({
+            spaceId, workspaceId, userId, token,
+          }));
+        });
+
+        // Fetch the meta data related to this workspace.
+        dispatch(getAllMetaData({ userId, workspaceId, token }))
+          .then((res) => {
+            // console.log("Meta", res);
+          })
+      });
+
+  }, []);
 
   return (
     <>
-      <TaskDialog open={true} closeDialog={() => { }} handleCreateTask={() => { }} />
       <NavDrawer />
       <Views />
     </>
   );
 }
 
-// export default protectedRoute(Dashboard);
-export default Dashboard;
+export default protectedRoute(Dashboard);
+// export default Dashboard;

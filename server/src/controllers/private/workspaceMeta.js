@@ -2,6 +2,7 @@ const WorkspaceMeta = require('../../models/WorkspaceMeta');
 const ErrorResponse = require('../../utils/errorResponse');
 
 exports.getAllPriorities = async (req, res, next) => {
+  console.log("In get all");
   const workspaceId = req.workspace._id;
   const userId = req.user._id;
 
@@ -11,11 +12,14 @@ exports.getAllPriorities = async (req, res, next) => {
       userId,
     });
 
+    console.log("Return", wMeta.priorities);
+
     res.json({
       success: true,
       priorities: wMeta.priorities
     });
   } catch (error) {
+    console.log(error.message);
     return next(new ErrorResponse(error.message, 500));
   }
 }
@@ -127,7 +131,7 @@ exports.getAllViews = async (req, res, next) => {
 
     res.json({
       success: true,
-      priorities: wMeta.views
+      views: wMeta.views
     });
   } catch (error) {
     return next(new ErrorResponse(error.message, 500));
