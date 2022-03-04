@@ -79,7 +79,22 @@ exports.addNewStatus = async (req, res, next) => {
 }
 
 exports.getAllViews = async (req, res, next) => {
+  const workspaceId = req.workspace._id;
+  const userId = req.user._id;
 
+  try {
+    const wMeta = await WorkspaceMeta.findOne({
+      workspaceId,
+      userId,
+    });
+
+    res.json({
+      success: true,
+      priorities: wMeta.views
+    });
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 500));
+  }
 }
 
 exports.addNewView = async (req, res, next) => {
