@@ -66,7 +66,7 @@ exports.getAllStatuses = async (req, res, next) => {
 
     res.json({
       success: true,
-      priorities: wMeta.statuses
+      statuses: wMeta.statuses
     });
   } catch (error) {
     return next(new ErrorResponse(error.message, 500));
@@ -74,8 +74,37 @@ exports.getAllStatuses = async (req, res, next) => {
 }
 
 exports.addNewStatus = async (req, res, next) => {
-  console.log("Add P");
-  res.end("done")
+  const workspaceId = req.workspace._id;
+  const userId = req.user._id;
+
+  const { status } = req.body;
+
+  try {
+    const wMeta = await WorkspaceMeta.findOne({
+      workspaceId,
+      userId,
+    });
+
+    if (!wMeta) {
+      return next(new ErrorResponse("Could not find meta for this workspace. Internal Error", 500));
+    }
+
+    const existing = wMeta.statuses.filter(item => item == status);
+
+    if (existing && existing.length > 0) {
+      return next(new ErrorResponse(`Found status ${existing[0]} with same data`, 404));
+    }
+
+    wMeta.statuses.push(status);
+    await wMeta.save();
+
+    res.json({
+      success: true,
+      statuses: wMeta.statuses,
+    });
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 404))
+  }
 }
 
 exports.getAllViews = async (req, res, next) => {
