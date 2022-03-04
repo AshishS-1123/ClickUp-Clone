@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const Workspace = require("../models/Workspace")
+const WorkspaceMeta = require('../models/WorkspaceMeta');
 const ErrorResponse = require('../utils/errorResponse')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
@@ -21,6 +22,8 @@ exports.registerUser = async (req, res, next) => {
         name: "Default Workspace",
         userId: user._id,
       });
+
+      await WorkspaceMeta.create({ userId: user._id, workspaceId: workspace._id });
 
       // Add the new workspace's id to this user.
       user.workspaces.push(workspace._id);

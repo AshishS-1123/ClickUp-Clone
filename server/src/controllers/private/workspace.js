@@ -1,6 +1,7 @@
 const { validateWorkspace } = require("../../middleware/paramValidator");
 const User = require("../../models/User");
 const Workspace = require("../../models/Workspace");
+const WorkspaceMeta = require("../../models/WorkspaceMeta");
 const ErrorResponse = require("../../utils/errorResponse");
 
 // const fetchWorkspaceData = async (workspaceId) => {
@@ -59,6 +60,8 @@ exports.createNewWorkspace = async (req, res, next) => {
       name: workspaceName,
       userId: userId,
     });
+
+    await WorkspaceMeta.create({ userId: req.user._id, workspaceId: workspace._id });
   } catch (error) {
     let message = "";
 

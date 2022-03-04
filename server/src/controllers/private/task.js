@@ -31,10 +31,16 @@ exports.getAllTasks = async (req, res, next) => {
 }
 
 exports.createNewTask = async (req, res, next) => {
-  const { taskName } = req.body;
+  const {
+    taskName,
+    tag,
+    priority,
+    dueDate
+  } = req.body;
 
   const parent = req.parent;
   const parentType = req.parentType;
+
   let task;
 
   if (!taskName || taskName == "") {
@@ -46,6 +52,9 @@ exports.createNewTask = async (req, res, next) => {
       name: taskName,
       userId: req.user._id,
       parent: { parent, parentType },
+      tag,
+      priority,
+      dueDate,
     });
   } catch (error) {
     return next(new ErrorResponse(error.message, 500));
