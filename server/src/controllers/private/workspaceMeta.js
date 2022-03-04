@@ -55,8 +55,22 @@ exports.addNewPriority = async (req, res, next) => {
 }
 
 exports.getAllStatuses = async (req, res, next) => {
-  console.log("Add P");
-  res.end("done")
+  const workspaceId = req.workspace._id;
+  const userId = req.user._id;
+
+  try {
+    const wMeta = await WorkspaceMeta.findOne({
+      workspaceId,
+      userId,
+    });
+
+    res.json({
+      success: true,
+      priorities: wMeta.statuses
+    });
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 500));
+  }
 }
 
 exports.addNewStatus = async (req, res, next) => {
@@ -65,8 +79,7 @@ exports.addNewStatus = async (req, res, next) => {
 }
 
 exports.getAllViews = async (req, res, next) => {
-  console.log("Add P");
-  res.end("done")
+
 }
 
 exports.addNewView = async (req, res, next) => {
