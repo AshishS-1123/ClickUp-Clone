@@ -26,6 +26,10 @@ exports.addNewPriority = async (req, res, next) => {
 
   const { level, color } = req.body;
 
+  if (!level || !color) {
+    return next(new ErrorResponse("Provide level and color for priority", 400));
+  }
+
   try {
     const wMeta = await WorkspaceMeta.findOne({
       workspaceId,
@@ -79,6 +83,10 @@ exports.addNewStatus = async (req, res, next) => {
 
   const { status } = req.body;
 
+  if (!status) {
+    return next(new ErrorResponse("Provide name for status", 400));
+  }
+
   try {
     const wMeta = await WorkspaceMeta.findOne({
       workspaceId,
@@ -127,6 +135,39 @@ exports.getAllViews = async (req, res, next) => {
 }
 
 exports.addNewView = async (req, res, next) => {
-  console.log("Add P");
-  res.end("done")
+  const workspaceId = req.workspace._id;
+  const userId = req.user._id;
+
+  const { view } = req.body;
+
+  if (!view) {
+    return next(new ErrorResponse("Provide name for view when creating", 400));
+  }
+
+  try {
+    const wMeta = await WorkspaceMeta.findOne({
+      workspaceId,
+      userId,
+    });
+
+    if (!wMeta) {
+      return next(new ErrorResponse("Could not find meta for this workspace. Internal Error", 500));
+    }
+
+    const existing = wMeta.views.filter(item => item == view);
+
+    if (existing && existing.length > 0) {
+      return next(new ErrorResponse(`Found view ${existing[0]} with same data`, 404));
+    }
+
+    wMeta.views.push(view);
+    await wMeta.save();
+
+    res.json({
+      success: true,
+      views: wMeta.views,
+    });
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 404))
+  }
 }
