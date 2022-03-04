@@ -85,10 +85,10 @@ exports.addNewStatus = async (req, res, next) => {
   const workspaceId = req.workspace._id;
   const userId = req.user._id;
 
-  const { status } = req.body;
+  const { status, color } = req.body;
 
-  if (!status) {
-    return next(new ErrorResponse("Provide name for status", 400));
+  if (!status || !color) {
+    return next(new ErrorResponse("Provide name and color for status", 400));
   }
 
   try {

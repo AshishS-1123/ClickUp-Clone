@@ -15,8 +15,14 @@ const WorkspaceMetaSchema = mongoose.Schema({
 
   // Represents the list of possible statuses you can assign to a task.
   statuses: {
-    type: [String],
-    default: ['done', 'review', 'pending', 'todo', 'archive']
+    type: [{ status: String, color: String }],
+    default: [
+      { status: 'done', color: 'green' },
+      { status: 'review', color: 'pink' },
+      { status: 'pending', color: 'yellow' },
+      { status: 'todo', color: 'blue' },
+      { status: 'archive', color: 'grey' },
+    ]
   },
 
   // Represents priorites of tasks.
