@@ -2,11 +2,14 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import PriorityButton from './PropertiesButtons/PriorityButton';
+import TagsButton from './PropertiesButtons/TagsButton';
+import DueDatesButton from './PropertiesButtons/DueDatesButton';
 // Due Dates Icon
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+// import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 // Tags Icon
-import StyleIcon from '@mui/icons-material/Style';
+// import StyleIcon from '@mui/icons-material/Style';
 import styles from './TaskDialog.module.css';
+import themeColors from '../../../utils/contexts/themeContext';
 
 const iconStyles = {
   color: '#8a8d91',
@@ -16,6 +19,11 @@ const iconStyles = {
   borderRadius: '50%',
   padding: '5px',
   margin: '0 5px',
+}
+
+const elementStyles = {
+  color: themeColors.textColor,
+  background: themeColors.background
 }
 
 function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 1', forWorkspace = 'Workspace 1' }) {
@@ -30,7 +38,7 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 
           position: 'absolute',
           bottom: '0px',
           right: '0px',
-          background: '#384047',
+          background: themeColors.background,
           display: 'flex',
           flexDirection: 'column',
           padding: '20px',
@@ -38,27 +46,27 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 
       }}
     >
       <div className={styles.topBar}>
-        <input placeholder='Task name' />
-        <CloseIcon />
+        <input placeholder='Task name' style={elementStyles} />
+        <CloseIcon sx={{ fill: themeColors.textBoldColor, width: '32px', height: '32px' }} />
       </div>
 
       <div className={styles.parentInfoBar}>
         <label>In</label>
-        <div className={styles.forList}>{inList}</div>
+        <div className={styles.forList} style={elementStyles}>{inList}</div>
 
         <label>For</label>
-        <div className={styles.forWorkspace}>{forWorkspace}</div>
+        <div className={styles.forWorkspace} style={elementStyles}>{forWorkspace}</div>
       </div>
 
-      <textarea className={styles.descriptionInput} />
+      <textarea className={styles.descriptionInput} style={elementStyles} />
 
       <div className={styles.bottomBar}>
         <div className={styles.propertiesBar}>
           <PriorityButton />
-          <CalendarTodayIcon sx={iconStyles} />
-          <StyleIcon sx={iconStyles} />
+          <DueDatesButton />
+          <TagsButton />
         </div>
-        <button className={styles.button} onClick={handleCreateTask}>Create Task</button>
+        <button className={styles.button} style={{ background: themeColors.accentColor, color: themeColors.textColor }} onClick={handleCreateTask}>Create Task</button>
       </div>
 
     </Dialog>

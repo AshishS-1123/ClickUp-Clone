@@ -41,7 +41,7 @@
   border: none;
   background: #7b68ee;
   color: white;
-  font-weight: 900;
+  font-weight: 600;
   font-size: 16px;
   border-radius: 3px;
   margin-top: 20px;
@@ -50,8 +50,8 @@
 .auth_link {
   text-align: center;
   text-decoration: none;
-  margin-top: 10px;
-  font-size: 14px;
+  margin-top: 6px;
+  font-size: 13px;
 }
 
 .error_message {

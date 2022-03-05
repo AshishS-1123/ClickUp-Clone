@@ -39,17 +39,6 @@ function AuthForm({ reducer, authType }) {
     const password = passwordRef.current.value;
 
     dispatch(reducer({ userEmail, password }))
-    // .then((data) => {
-    //   if (data.type.search('rejected') === -1) {
-    //     // Redirect to another page.
-    //     console.log('Successful!');
-    //   } else {
-    //     console.log('Failed');
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.log('Failed: ', error);
-    // });
   };
 
   return (

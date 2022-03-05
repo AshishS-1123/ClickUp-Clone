@@ -40,7 +40,7 @@ function ListOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: 600, padding: '5px 20px', fontSize: '13px', color: themeColors.textBoldColor,
+          fontWeight: 300, padding: '5px 20px', fontSize: '13px', color: themeColors.textBoldColor,
         }}
         >
           LIST SETTINGS

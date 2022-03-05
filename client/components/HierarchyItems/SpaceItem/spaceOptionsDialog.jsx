@@ -42,7 +42,7 @@ function SpaceOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
+          fontWeight: 400, padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
         }}
         >
           SPACE SETTINGS

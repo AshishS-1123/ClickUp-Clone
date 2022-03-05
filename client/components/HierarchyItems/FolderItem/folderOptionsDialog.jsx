@@ -25,6 +25,7 @@ function FolderOptionsDialog({
   const iconStyle = {
     marginRight: '5px',
     transform: 'scale(0.8)',
+    color: 'grey',
   };
 
   return (
@@ -44,7 +45,7 @@ function FolderOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
+          fontWeight: 300, padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
         }}
         >
           FOLDER SETTINGS
