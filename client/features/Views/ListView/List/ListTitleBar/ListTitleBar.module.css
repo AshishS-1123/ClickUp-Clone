@@ -1,0 +1,28 @@
+.titleBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 30px 30px 0 30px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.title {
+  width: 55%;
+  font-weight: 800;
+}
+
+.title span {
+  padding: 3px 14px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.titleBar_tags {
+  width: 40%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: 500;
+}
