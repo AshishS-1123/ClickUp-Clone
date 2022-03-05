@@ -5,6 +5,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { setActive } from '../../../redux/slices/spaceSlice';
 import styles from '../SpaceItem/SpaceItem.module.css';
 import ListOptionsDialog from './listOptionsDialog';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function ListItem({ id, listName, nestingLevel = 10 }) {
   const isActive = useSelector((state) => state.spaceReducer.activeItem) == id;
@@ -15,14 +16,14 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
 
   let containerStyle = {
     paddingLeft: `${nestingLevel}px`,
-    color: 'white',
+    color: themeColors.textBoldColor,
   };
 
   if (isActive) {
     containerStyle = {
       ...containerStyle,
-      background: '#3c3d39',
-      borderLeft: '3px solid #ffa12f',
+      background: themeColors.accentColorFaded,
+      borderLeft: `3px solid ${themeColors.accentColor}`,
     };
   }
 
@@ -46,7 +47,7 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
       onMouseLeave={() => { setRevealerVisible(false); }}
     >
       <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
-        <RadioButtonUncheckedIcon sx={{ width: '10px', height: '10px', color: 'lightgrey' }} />
+        <RadioButtonUncheckedIcon sx={{ width: '10px', height: '10px', color: themeColors.textBoldColor }} />
         <div className={styles.list__title}>{listName}</div>
       </div>
 

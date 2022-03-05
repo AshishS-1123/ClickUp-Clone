@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CreateTaskDialog from '../../Dialogs/CreateTaskDialog';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function ListOptionsDialog({
   anchorEl, openMenu, closeMenu, itemId, itemType,
@@ -13,7 +14,7 @@ function ListOptionsDialog({
 
   const menuItemStyle = {
     padding: '8px',
-    color: '#d5d6d7',
+    color: themeColors.textBoldColor,
     fontSize: '13px',
   };
 
@@ -27,8 +28,8 @@ function ListOptionsDialog({
       <Menu
         sx={{
           '& .MuiMenu-paper': {
-            background: '#384047',
-            color: '#979797',
+            background: themeColors.background,
+            color: themeColors.textColor,
           },
           '& li': {
             fontSize: '13px',
@@ -39,7 +40,7 @@ function ListOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: '#dadada',
+          fontWeight: 600, padding: '5px 20px', fontSize: '13px', color: themeColors.textBoldColor,
         }}
         >
           LIST SETTINGS

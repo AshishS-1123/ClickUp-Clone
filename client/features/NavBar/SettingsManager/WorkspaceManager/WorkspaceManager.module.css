@@ -18,11 +18,11 @@
 .titleContainer  p {
   margin-left: 5px;
   font-size: 12px;
+  font-weight: 600;
 }
 
 .container button {
   text-transform: capitalize;
-  color: white;
   font-size: 10px;
   align-self: flex-start;
 }
@@ -33,7 +33,6 @@
 
 .container li {
   text-transform: capitalize;
-  color: white;
   font-size: 13px;
 
   line-height: 1.75;

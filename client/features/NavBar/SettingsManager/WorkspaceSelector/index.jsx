@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { createNewWorkspaceAsync, switchWorkspace } from '../../../../redux/slices/workspaceSlice';
+import themeColors from '../../../../utils/contexts/themeContext';
 
 // Returns styles for the avatar.
 const stringAvatar = (name, id) => {
@@ -24,7 +25,7 @@ const stringAvatar = (name, id) => {
 
   return {
     sx: {
-      bgcolor: '#7b68ee',
+      bgcolor: themeColors.accentColor,
       width: 32,
       height: 32,
       fontSize: '10px',
@@ -123,7 +124,7 @@ function WorkspaceSelector() {
 
   return (
     <>
-      <Stack direction="column" spacing={1.5} alignItems="center" justifyContent="center">
+      <Stack direction="column" spacing={1.5} alignItems="center" justifyContent="center" sx={{ paddingTop: '5px' }}>
         {
           workspaces.map((item, idx) => (
             <Avatar
@@ -135,7 +136,7 @@ function WorkspaceSelector() {
         }
 
         <Avatar sx={{
-          width: 32, height: 32, bgcolor: 'white', color: 'black',
+          width: 32, height: 32, bgcolor: themeColors.backgroundDark, color: themeColors.textBoldColor,
         }}
         >
           <AddIcon onClick={() => { handleAddIconClick(); }} />

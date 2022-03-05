@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import CreateListDialog from '../../Dialogs/CreateListDialog';
 import CreateFolderDialog from '../../Dialogs/CreateFolderDialog';
 import CreateTaskDialog from '../../Dialogs/CreateTaskDialog';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function FolderOptionsDialog({
   anchorEl, openMenu, closeMenu, itemId, itemType,
@@ -17,7 +18,7 @@ function FolderOptionsDialog({
 
   const menuItemStyle = {
     padding: '8px',
-    color: '#d5d6d7',
+    color: themeColors.textColor,
     fontSize: '13px',
   };
 
@@ -31,8 +32,8 @@ function FolderOptionsDialog({
       <Menu
         sx={{
           '& .MuiMenu-paper': {
-            background: '#384047',
-            color: '#979797',
+            background: themeColors.background,
+            color: themeColors.textColor,
           },
           '& li': {
             fontSize: '13px',
@@ -43,7 +44,7 @@ function FolderOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: '#dadada',
+          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
         }}
         >
           FOLDER SETTINGS
@@ -55,10 +56,6 @@ function FolderOptionsDialog({
         <MenuItem style={menuItemStyle} onClick={() => { setShowListDialog(true); }}>
           <AddIcon style={iconStyle} />
           Add List
-        </MenuItem>
-        <MenuItem style={menuItemStyle} onClick={() => { setShowTaskDialog(true); }}>
-          <AddIcon style={iconStyle} />
-          Add Task
         </MenuItem>
         <MenuItem style={menuItemStyle}>
           <EditIcon style={iconStyle} />
@@ -82,13 +79,6 @@ function FolderOptionsDialog({
         itemType={itemType}
         itemId={itemId}
       />
-      <CreateTaskDialog
-        open={showTaskDialog}
-        closeDialog={() => { setShowTaskDialog(false); closeMenu(); }}
-        itemType={itemType}
-        itemId={itemId}
-      />
-
     </>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from '../dialog.module.css';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
   return (
@@ -14,7 +15,7 @@ function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
           height: '419px',
           position: 'absolute',
           top: '10px',
-          background: '#2b343b',
+          background: themeColors.background,
         },
       }}
     >
@@ -25,18 +26,24 @@ function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
             position: 'absolute',
             top: '25px',
             right: '25px',
-            color: 'white',
+            color: themeColors.textBoldColor,
+            width: '32px',
+            height: '32px'
           }}
           onClick={closeDialog}
         />
       </div>
       <div className={styles.content}>
-        <label htmlFor="listDialog_name" id="dialog_nameLabel">List name</label>
+        <label htmlFor="listDialog_name" id="dialog_nameLabel" style={{ color: themeColors.textBoldColor }}>List name</label>
         <input type="text" id="listDialog_name" placeholder="Enter list name" ref={ref} />
       </div>
       <button
         className={styles.dialog_button}
         onClick={handleCreateList}
+        style={{
+          background: themeColors.accentColor,
+          fontWeight: 800,
+        }}
       >
         Create list
       </button>

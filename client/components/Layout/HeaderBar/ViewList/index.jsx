@@ -50,7 +50,6 @@ function ViewList() {
 
   return (
     <div style={containerStyles}>
-      <Divider orientation="vertical" flexItem sx={{ border: '0.5px solid rgba(0,0,0,0.3)' }} />
       {
         enabledViews.map((viewName, idx) => {
           return <ViewButton

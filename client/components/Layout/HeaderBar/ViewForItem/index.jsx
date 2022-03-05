@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ShieldIcon from '@mui/icons-material/Shield';
+import themeColors from '../../../../utils/contexts/themeContext';
 
 const containerStyles = {
   height: '50px',
@@ -8,12 +9,14 @@ const containerStyles = {
   alignItems: 'center',
   justifyContent: 'space-around',
   marginLeft: '10px',
+  paddingRight: '10px',
+  borderRight: `1px solid lightgrey`
 };
 
 const textStyles = {
   fontSize: '16px',
-  color: '#d5d6d7',
-  fontWeight: '500',
+  color: themeColors.textBoldColor,
+  fontWeight: 800,
 }
 
 function ViewForItem() {
@@ -21,7 +24,7 @@ function ViewForItem() {
 
   return (
     <div style={containerStyles}>
-      <ShieldIcon sx={{ width: '32px', height: '32px', color: '#ffa12f' }} />
+      <ShieldIcon sx={{ width: '32px', height: '32px', color: themeColors.accentColor }} />
       <p style={textStyles}>{activeItemName || "Space 1"}</p>
     </div>
   )

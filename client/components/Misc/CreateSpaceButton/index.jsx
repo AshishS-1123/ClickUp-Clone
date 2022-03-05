@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import CreateSpaceDialog from "../../Dialogs/CreateSpaceDialog";
+import themeColors from '../../../utils/contexts/themeContext';
 
 function CreateSpaceButton() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -25,11 +26,11 @@ function CreateSpaceButton() {
           height: '24px',
           margin: '0 auto',
           fontSize: '11px',
-          color: '#d7d7d7',
-          background: '#384047',
+          color: themeColors.textColor,
+          background: themeColors.backgroundDark,
           '&:hover': {
-            color: '#d7d7d7',
-            background: '#384047',
+            color: themeColors.textColor,
+            background: themeColors.backgroundDark,
           },
         }}
       >

@@ -13,6 +13,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .titleContainer  p {
@@ -22,7 +23,6 @@
 
 .container button {
   text-transform: capitalize;
-  color: white;
   font-size: 10px;
   align-self: flex-start;
 }
@@ -33,7 +33,6 @@
 
 .container li {
   text-transform: capitalize;
-  color: white;
   font-size: 13px;
 
   line-height: 1.75;

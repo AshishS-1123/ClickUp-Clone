@@ -8,6 +8,7 @@ import FolderItem from '../FolderItem';
 import ListItem from '../ListItem';
 import { setActive } from '../../../redux/slices/spaceSlice';
 import SpaceOptionsDialog from './spaceOptionsDialog';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function SpaceItem({ id, spaceName, contents }) {
   const activeSpace = useSelector((state) => state.spaceReducer.activeItem);
@@ -20,14 +21,14 @@ function SpaceItem({ id, spaceName, contents }) {
   const [revealerVisible, setRevealerVisible] = useState(false);
 
   let containerStyle = {
-    color: 'white',
+    color: themeColors.textBoldColor,
   };
 
   if (isActive) {
     containerStyle = {
       ...containerStyle,
-      background: '#3c3d39',
-      borderLeft: '3px solid #ffa12f',
+      background: themeColors.accentColorFaded,
+      borderLeft: `3px solid ${themeColors.accentColor}`,
     };
   }
 
@@ -57,7 +58,7 @@ function SpaceItem({ id, spaceName, contents }) {
       >
 
         <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
-          <ShieldIcon sx={{ width: '20px', height: '20px', color: '#ffa12f' }} />
+          <ShieldIcon sx={{ width: '20px', height: '20px', color: themeColors.accentColor }} />
           <div className={styles.item__title}>{spaceName}</div>
         </div>
 

@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import styles from './WorkspaceManager.module.css';
+import themeColors from '../../../../utils/contexts/themeContext';
 
 const getAbbrev = (name) => {
   const abbrev = name.split(' ').length >= 2
@@ -30,18 +31,24 @@ function WorkspaceManager() {
 
   return (
     <MenuItem sx={{
-      overflow: 'wrap', height: '100%', color: 'white', padding: '6px 6px',
+      overflow: 'wrap',
+      height: '100%',
+      color: themeColors.textColor,
+      padding: '6px 6px',
+      '&:hover': {
+        background: themeColors.background,
+      }
     }}
     >
       <div className={styles.container}>
         <div className={styles.titleContainer}>
           <Avatar
             sx={{
-              bgcolor: '#7b68ee',
+              bgcolor: themeColors.accentColor,
               width: 32,
               height: 32,
               fontSize: '10px',
-              color: 'black',
+              color: themeColors.textColor,
             }}
             children={getAbbrev(activeWorkspace.name)}
           />

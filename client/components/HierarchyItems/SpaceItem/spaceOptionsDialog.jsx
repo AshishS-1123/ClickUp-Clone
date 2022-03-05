@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CreateListDialog from '../../Dialogs/CreateListDialog';
 import CreateFolderDialog from '../../Dialogs/CreateFolderDialog';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function SpaceOptionsDialog({
   anchorEl, openMenu, closeMenu, id,
@@ -15,7 +16,7 @@ function SpaceOptionsDialog({
 
   const menuItemStyle = {
     padding: '8px',
-    color: '#d5d6d7',
+    color: themeColors.textColor,
     fontSize: '13px',
   };
 
@@ -29,8 +30,8 @@ function SpaceOptionsDialog({
       <Menu
         sx={{
           '& .MuiMenu-paper': {
-            background: '#384047',
-            color: '#979797',
+            background: themeColors.background,
+            color: themeColors.textColor,
           },
           '& li': {
             fontSize: '13px',
@@ -41,7 +42,7 @@ function SpaceOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: '#dadada',
+          fontWeight: '600', padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
         }}
         >
           SPACE SETTINGS

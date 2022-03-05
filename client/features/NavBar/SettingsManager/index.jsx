@@ -9,6 +9,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import WorkspaceSelector from './WorkspaceSelector';
 import WorkspaceManager from './WorkspaceManager';
 import UserSettings from './UserSettings';
+import themeColors from '../../../utils/contexts/themeContext';
 
 function SettingsManager() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -34,7 +35,7 @@ function SettingsManager() {
         disableRipple
         onClick={handleButtonClick}
         sx={{
-          color: 'white',
+          color: themeColors.textColor,
           textTransform: 'capitalize',
         }}
       >
@@ -56,22 +57,22 @@ function SettingsManager() {
         }}
         sx={{
           ul: {
-            background: '#384047',
+            background: themeColors.background,
           },
         }}
         PaperProps={{
-          filter: 'drop-shadow(0px 2px 8px #384047)',
+          filter: `drop-shadow(0px 2px 8px black)`,
         }}
       >
         <Grid container spacing={1} sx={{ width: '410px', minHeight: '366px' }}>
           <Grid item xs={1.5} sm={1.5} md={1.5} lg={1.5} xl={1.5}>
             <WorkspaceSelector />
           </Grid>
-          <Divider orientation="vertical" flexItem light sx={{ right: { background: '#20262b' } }} variant="middle" />
+          <Divider orientation="vertical" flexItem light sx={{ right: { background: themeColors.backgroundDark } }} variant="middle" />
           <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
             <WorkspaceManager />
           </Grid>
-          <Divider orientation="vertical" flexItem light sx={{ right: { background: '#20262b' } }} variant="middle" />
+          <Divider orientation="vertical" flexItem light sx={{ right: { background: themeColors.backgroundDark } }} variant="middle" />
           <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
             <UserSettings />
           </Grid>

@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import DoubleArrowOutlinedIcon from '@mui/icons-material/DoubleArrowOutlined';
 import SettingsManager from './SettingsManager';
 import SpaceContainer from './SpaceContainer';
+import themeColors from '../../utils/contexts/themeContext';
 
 function DrawerToggler({ onClick, rotateBtn }) {
   const styles = {
     transform: rotateBtn === true ? 'rotate(180deg)' : 'rotate(0deg)',
-    fill: '#ffa12f',
+    fill: themeColors.accentColor,
     marginTop: '9px',
   };
   return (
@@ -39,7 +40,7 @@ function NavDrawer() {
         variant="persistent"
         sx={{
           '> .MuiPaper-root': {
-            background: '#20262b',
+            background: themeColors.background,
             width: '199px',
           },
         }}
@@ -49,8 +50,8 @@ function NavDrawer() {
           disableRipple
           endIcon={<DrawerToggler onClick={toggleDrawer} rotateBtn />}
           sx={{
-            color: 'white',
-            fontWeight: 900,
+            color: themeColors.textColor,
+            fontWeight: 600,
             fontSize: '16px',
             textTransform: 'capitalize',
           }}
