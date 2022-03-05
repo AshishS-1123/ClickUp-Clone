@@ -1,0 +1,23 @@
+.itemBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 30px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.title {
+  width: 55%;
+  padding-left: 20px;
+}
+
+
+.itemData {
+  width: 40%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-weight: 500;
+}
