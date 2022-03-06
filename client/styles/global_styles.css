@@ -5,6 +5,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  background: #fbfaff;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;

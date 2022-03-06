@@ -44,7 +44,7 @@ const data = [
 
 function Views() {
   const styles = {
-    width: 'calc(100vw - 228px)',
+    width: 'calc(100vw - 199px)',
     float: 'right',
     position: 'absolute',
     top: '0px',

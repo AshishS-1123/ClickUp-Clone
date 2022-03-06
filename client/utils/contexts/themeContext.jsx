@@ -2,7 +2,8 @@
 const themeColors = {
   background: "#ffffff",
   backgroundDark: "#e5e6e7",
-  backgroundMedium: "#fbfafe",
+  // backgroundMedium: "#f6f2ff",
+  backgroundMedium: '#fbfaff',
 
   textColor: "#292d34",
   textBoldColor: "#53575e",
