@@ -11,10 +11,12 @@ function UserSettings() {
         overflow: 'wrap',
         height: '100%',
         color: themeColors.textaccColor,
+        cursor: 'default',
         '&:hover': {
           background: themeColors.background,
         }
       }}
+      disableRipple
     >
       <div className={styles.container}>
         <div className={styles.titleContainer}>

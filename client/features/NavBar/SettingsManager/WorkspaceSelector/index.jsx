@@ -128,6 +128,7 @@ function WorkspaceSelector() {
         {
           workspaces.map((item, idx) => (
             <Avatar
+              style={{ cursor: 'pointer' }}
               {...stringAvatar(item.name, idx)}
               key={item.id}
               onClick={() => { handleWorkspaceIconClick(idx); }}
@@ -139,7 +140,7 @@ function WorkspaceSelector() {
           width: 32, height: 32, bgcolor: themeColors.backgroundDark, color: themeColors.textBoldColor,
         }}
         >
-          <AddIcon onClick={() => { handleAddIconClick(); }} />
+          <AddIcon onClick={() => { handleAddIconClick(); }} style={{ cursor: 'pointer' }} />
         </Avatar>
       </Stack>
 

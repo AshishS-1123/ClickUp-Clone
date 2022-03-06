@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
+import CreateViewDialog from '../../../../components/Dialogs/CreateViewDialog';
 import styles from './WorkspaceManager.module.css';
 import themeColors from '../../../../utils/contexts/themeContext';
 
@@ -25,43 +26,62 @@ const shortenName = (name) => {
 };
 
 function WorkspaceManager() {
+  const [openViewDialog, setOpenViewDialog] = useState(false);
+
   const workspaceData = useSelector((state) => state.workspaceReducer);
   const activeWorkspace = workspaceData.workspaces[workspaceData.activeWorkspace];
   const workspaceName = shortenName(activeWorkspace.name);
 
   return (
-    <MenuItem sx={{
-      overflow: 'wrap',
-      height: '100%',
-      color: themeColors.textColor,
-      padding: '6px 6px',
-      '&:hover': {
-        background: themeColors.background,
-      }
-    }}
-    >
-      <div className={styles.container}>
-        <div className={styles.titleContainer}>
-          <Avatar
-            sx={{
-              bgcolor: themeColors.accentColor,
-              width: 32,
-              height: 32,
-              fontSize: '10px',
-              color: themeColors.textColor,
-            }}
-            children={getAbbrev(activeWorkspace.name)}
-          />
-          <p>{workspaceName}</p>
-        </div>
+    <>
+      <MenuItem sx={{
+        overflow: 'wrap',
+        height: '100%',
+        color: themeColors.textColor,
+        padding: '6px 6px',
+        cursor: 'default',
+        '&:hover': {
+          background: themeColors.background,
+        }
+      }}
+        disableRipple
+      >
+        <div className={styles.container}>
+          <div className={styles.titleContainer}>
+            <Avatar
+              sx={{
+                bgcolor: themeColors.accentColor,
+                width: 32,
+                height: 32,
+                fontSize: '10px',
+                color: themeColors.textColor,
+              }}
+              children={getAbbrev(activeWorkspace.name)}
+            />
+            <p>{workspaceName}</p>
+          </div>
 
-        <ul>
-          <li>Settings</li>
-          <li>Import/Export</li>
-          <li>Spaces</li>
-        </ul>
-      </div>
-    </MenuItem>
+          <ul>
+            <li
+              onClick={() => { setOpenViewDialog(true); return false; }}
+              style={{ cursor: 'pointer' }}
+            >
+              Enable Views
+            </li>
+            <li>Add Priorities</li>
+            <li>Add Statuses</li>
+            <li>Settings</li>
+            <li>Import/Export</li>
+            <li>Spaces</li>
+          </ul>
+        </div>
+      </MenuItem>
+
+      <CreateViewDialog
+        open={openViewDialog}
+        closeDialog={() => { setOpenViewDialog(false) }}
+      />
+    </>
   );
 }
 

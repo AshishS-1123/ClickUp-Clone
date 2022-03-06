@@ -15,7 +15,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import ViewButton from "./ViewButton";
 import AddViewButton from './AddViewButton';
 
-const mapViewToIcon = (view) => {
+export const mapViewToIcon = (view) => {
   switch (view) {
     case 'LIST':
       return FormatListBulletedIcon;
