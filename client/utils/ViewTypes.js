@@ -1,15 +1,3 @@
-// const ViewTypes = [
-//   'list',
-//   'board',
-//   'calendar',
-//   'gantt',
-//   'timeline',
-//   // 'box',
-//   // 'table',
-//   // 'mindmap',
-//   // 'workload',
-//   // 'activity',
-// ]
 
 const Views = {
   LIST_VIEW: 'LIST_VIEW',

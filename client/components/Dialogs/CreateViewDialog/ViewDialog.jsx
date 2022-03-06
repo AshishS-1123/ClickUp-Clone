@@ -18,7 +18,7 @@ const mapViewToDescription = (viewName) => {
   }
 }
 
-function ViewDialog({ open, closeDialog, handleViewSettings, existingViews }) {
+function ViewDialog({ open, closeDialog, handleCreateView, existingViews }) {
   const [selectedView, setSelectedView] = useState(ViewTypes[0]);
 
   return (
@@ -111,6 +111,7 @@ function ViewDialog({ open, closeDialog, handleViewSettings, existingViews }) {
         </span>
 
         <Button
+          onClick={() => { handleCreateView(selectedView) }}
           disabled={existingViews.includes(selectedView)}
           sx={{
             color: themeColors.textColor,

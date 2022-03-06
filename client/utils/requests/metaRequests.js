@@ -53,7 +53,6 @@ export async function getViews(userId, workspaceId, token) {
   headers.append('Authorization', `Bearer ${token}`);
 
   const { data, status } = await makeRequest(url, 'GET', body, headers);
-  console.log("Views are", data);
   return { data, status };
 }
 
@@ -63,6 +62,7 @@ export async function createNewView(view, userId, workspaceId, token) {
 
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${token}`);
+  headers.append('Content-Type', 'application/json');
 
   const { data, status } = await makeRequest(url, 'PUT', body, headers);
   return { data, status };
