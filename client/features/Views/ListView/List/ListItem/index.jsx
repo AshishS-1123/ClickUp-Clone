@@ -9,7 +9,7 @@ function ListItem({ tasks, color }) {
         tasks.map((item, idx) => {
           return (
             <>
-              <li key={idx} className={styles.listItem}>
+              <li key={`${idx}__${Math.random() * 100}`} className={styles.listItem}>
                 <span
                   className={styles.icon}
                   style={{

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -6,7 +6,20 @@ import ViewTypes from '../../../utils/ViewTypes';
 import { mapViewToIcon } from '../../Layout/HeaderBar/ViewList';
 import themeColors from '../../../utils/contexts/themeContext';
 
+const mapViewToDescription = (viewName) => {
+  switch (viewName.toUpperCase()) {
+    case 'LIST': return 'Use List view to organize your tasks in any way imaginable';
+    case 'BOARD': return 'Use List view to organize your tasks in anyway imaginable';
+    case 'CALENDAR': return 'Use List view to organize your tasks in anyway imaginable';
+    case 'GANTT': return 'Use List view to organize your tasks in anyway imaginable';
+    case 'TIMELINE': return 'Use List view to organize your tasks in anyway imaginable';
+    default: return '';
+  }
+}
+
 function ViewDialog({ open, closeDialog, handleViewSettings }) {
+  const [selectedView, setSelectedView] = useState(ViewTypes[0]);
+
   return (
     <Dialog
       open={open}
@@ -17,6 +30,8 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
           position: 'absolute',
           top: '10px',
           background: themeColors.background,
+          display: 'flex',
+          flexDirection: "row",
         },
       }}
     >
@@ -28,7 +43,7 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
         display: 'flex',
         flexDirection: 'column',
       }}>
-        <h5
+        <span
           style={{
             textAlign: 'center',
             fontSize: '14px',
@@ -37,13 +52,15 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
             textTransform: 'uppercase',
             marginBottom: '20px',
           }}
-        >Task Views</h5>
+        >Task Views</span>
 
         {
           ViewTypes.map((viewName, idx) => {
             const Icon = mapViewToIcon(viewName.toUpperCase());
+
             return (
               <Button
+                onClick={() => { setSelectedView(viewName) }}
                 key={idx}
                 startIcon={<Icon />}
                 fullWidth={true}
@@ -55,9 +72,9 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
                   textTransform: 'capitalize',
                   marginBottom: '10px',
                   paddingLeft: '20px',
-                  background: themeColors.accentColor,
+                  background: viewName == selectedView ? themeColors.accentColor : themeColors.backgroundDark,
                   '&:hover': {
-                    background: themeColors.accentColor,
+                    background: viewName == selectedView ? themeColors.accentColor : themeColors.backgroundDark,
                   }
                 }}
               >
@@ -70,13 +87,39 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
 
       <Box sx={{
         height: '100%',
-        width: '35%',
-        background: 'red',
+        width: '65%',
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
       }}>
+        <span
+          style={{
+            color: themeColors.textColor,
+            textTransform: 'capitalize',
+            fontWeight: 600,
+            marginBottom: '30px',
+            marginTop: '40px',
+          }}
+        >
+          {selectedView}
+        </span>
+        <span
+          style={{ textAlign: 'justify', padding: '10px' }}
+        >
+          {mapViewToDescription(selectedView)}
+        </span>
 
+        <Button
+          sx={{
+            color: themeColors.textColor,
+            textTransform: 'capitalize',
+            marginTop: '20px',
+            background: themeColors.accentColor,
+            '&:hover': {
+              background: themeColors.accentColor,
+            }
+          }}
+        >Add View</Button>
       </Box>
     </Dialog>
   )
