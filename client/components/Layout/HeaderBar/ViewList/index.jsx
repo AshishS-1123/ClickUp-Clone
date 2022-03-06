@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Divider from '@mui/material/Divider';
 
 // List View Icon
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
@@ -14,21 +13,21 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 import ViewButton from "./ViewButton";
 import AddViewButton from './AddViewButton';
+import { Views } from "../../../../utils/ViewTypes";
 
 export const mapViewToIcon = (view) => {
   switch (view) {
-    case 'LIST':
+    case Views.LIST_VIEW:
       return FormatListBulletedIcon;
-    case 'BOARD':
+    case Views.BOARD_VIEW:
       return DashboardIcon
-    case 'CALENDAR':
+    case Views.CALENDAR_VIEW:
       return CalendarTodayIcon;
-    case 'GANTT':
+    case Views.GANTT_VIEW:
       return FormatAlignLeftIcon;
-    case 'TIMELINE':
+    case Views.TIMELINE_VIEW:
       return ClearAllIcon;
-    default:
-      return undefined;
+    default: return undefined;
   }
 }
 
@@ -41,7 +40,7 @@ const containerStyles = {
 }
 
 function ViewList() {
-  const enabledViews = ['LIST', 'BOARD'];
+  const enabledViews = [Views.LIST_VIEW, Views.BOARD_VIEW];
   const [activeView, setActiveView] = useState(0);
 
   const handleViewButtonClick = (newActiveView) => {

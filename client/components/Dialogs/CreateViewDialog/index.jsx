@@ -5,6 +5,7 @@ import ViewDialog from './ViewDialog';
 function CreateViewDialog({
   open, closeDialog,
 }) {
+  const existingViews = useSelector(state => state.metaReducer.views);
   const dispatch = useDispatch();
 
   const handleCreateView = () => {
@@ -20,6 +21,7 @@ function CreateViewDialog({
       open={open}
       closeDialog={closeDialog}
       handleViewSettings={handleViewSettings}
+      existingViews={existingViews}
     />
   );
 }

@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import ViewTypes from '../../../utils/ViewTypes';
+import ViewTypes, { Views } from '../../../utils/ViewTypes';
 import { mapViewToIcon } from '../../Layout/HeaderBar/ViewList';
 import themeColors from '../../../utils/contexts/themeContext';
 
 const mapViewToDescription = (viewName) => {
   switch (viewName.toUpperCase()) {
-    case 'LIST': return 'Use List view to organize your tasks in any way imaginable';
-    case 'BOARD': return 'Use List view to organize your tasks in anyway imaginable';
-    case 'CALENDAR': return 'Use List view to organize your tasks in anyway imaginable';
-    case 'GANTT': return 'Use List view to organize your tasks in anyway imaginable';
-    case 'TIMELINE': return 'Use List view to organize your tasks in anyway imaginable';
-    default: return '';
+    case Views.LIST_VIEW: return 'Use List view to organize your tasks in any way imaginable';
+    case Views.BOARD_VIEW: return 'Use List view to organize your tasks in anyway imaginable';
+    case Views.CALENDAR_VIEW: return 'Use List view to organize your tasks in anyway imaginable';
+    case Views.GANTT_VIEW: return 'Use List view to organize your tasks in anyway imaginable';
+    case Views.TIMELINE_VIEW: return 'Use List view to organize your tasks in anyway imaginable';
+    default:
+      return '';
   }
 }
 
-function ViewDialog({ open, closeDialog, handleViewSettings }) {
+function ViewDialog({ open, closeDialog, handleViewSettings, existingViews }) {
   const [selectedView, setSelectedView] = useState(ViewTypes[0]);
 
   return (
@@ -78,7 +79,7 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
                   }
                 }}
               >
-                {viewName}
+                {viewName.substring(0, viewName.indexOf('_')).toLowerCase()}
               </Button>
             )
           })
@@ -101,7 +102,7 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
             marginTop: '40px',
           }}
         >
-          {selectedView}
+          {selectedView.substring(0, selectedView.indexOf('_')).toLowerCase()}
         </span>
         <span
           style={{ textAlign: 'justify', padding: '10px' }}
@@ -110,6 +111,7 @@ function ViewDialog({ open, closeDialog, handleViewSettings }) {
         </span>
 
         <Button
+          disabled={existingViews.includes(selectedView)}
           sx={{
             color: themeColors.textColor,
             textTransform: 'capitalize',
