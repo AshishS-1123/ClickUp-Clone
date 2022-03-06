@@ -1,13 +1,11 @@
 .title_bar {
   width: 100%;
   height: 40%;
-  /* background: #384047; */
 }
 
 .title {
-  /* color: lightgray; */
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 400;
 
   position: relative;
   top: 50%;
@@ -15,7 +13,6 @@
 }
 
 .content {
-  /* background: #2b343b; */
   height: auto;
   display: flex;
   flex-direction: column;
@@ -23,7 +20,6 @@
 }
 
 .content {
-  /* background: #2b343b; */
   height: auto;
   display: flex;
   flex-direction: column;
@@ -39,13 +35,11 @@
   margin: 0 auto;
   height: 50px;
   padding: 16px 20px 12px 10px;
-  /* background: #2b343b; */
   outline: none;
   border: none;
   border-bottom: 2px solid #f89d2f;
-  /* color: white; */
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .content input:hover {
@@ -55,14 +49,12 @@
 
 .content label {
   font-size: 16px;
-  /* color: #f89d2f; */
   width: 80%;
   margin: 0 auto;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .dialog_button {
-  /* background: #f89d2f; */
   color: white;
   font-size: 18px;
   height: 48px;
@@ -72,7 +64,6 @@
 }
 
 .text {
-  /* color: white; */
   font-size: 14px;
   padding: 20px;
   text-align: center;
@@ -89,7 +80,6 @@
 }
 
 .errorText {
-  /* color: rgb(236, 108, 108); */
   font-size: 12px;
   position: relative;
   top: -9%;

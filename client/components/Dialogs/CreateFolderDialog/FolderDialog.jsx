@@ -42,7 +42,7 @@ function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
         onClick={handleCreateFolder}
         style={{
           background: themeColors.accentColor,
-          fontWeight: 800,
+          fontWeight: 700,
         }}
       >
         Create folder

@@ -42,7 +42,7 @@ function CreateSpaceDialog({ open, closeDialog, handleCreateSpace }, ref) {
         onClick={handleCreateSpace}
         style={{
           background: themeColors.accentColor,
-          fontWeight: 800,
+          fontWeight: 700,
         }}
       >
         Create space

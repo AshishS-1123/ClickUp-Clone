@@ -42,7 +42,7 @@ function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
         onClick={handleCreateList}
         style={{
           background: themeColors.accentColor,
-          fontWeight: 800,
+          fontWeight: 700,
         }}
       >
         Create list

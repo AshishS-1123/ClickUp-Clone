@@ -58,7 +58,8 @@ function SpaceContainer() {
           sx={{
             textTransform: 'uppercase',
             color: themeColors.textBoldColor,
-            fontWeight: 800,
+            fontWeight: 700,
+            fontSize: '13px',
           }}
         >
           Spaces

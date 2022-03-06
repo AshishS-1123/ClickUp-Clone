@@ -16,7 +16,7 @@ const containerStyles = {
 const textStyles = {
   fontSize: '16px',
   color: themeColors.textBoldColor,
-  fontWeight: 800,
+  fontWeight: 500,
 }
 
 function ViewForItem() {

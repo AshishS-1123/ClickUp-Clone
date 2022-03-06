@@ -12,8 +12,8 @@ function ViewButton({ viewName, icon: Icon, onClick, isActive }) {
       sx={{
         color: isActive ? themeColors.accentColor : themeColors.textColor,
         textTransform: 'capitalize',
-        fontSize: '12px',
-        fontWeight: 400,
+        fontSize: '13px',
+        fontWeight: 500,
       }}
     >
       {viewName}
