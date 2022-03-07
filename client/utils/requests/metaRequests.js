@@ -18,6 +18,7 @@ export async function createNewPriority(priority, userId, workspaceId, token) {
 
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${token}`);
+  headers.append('Content-Type', 'application/json');
 
   const { data, status } = await makeRequest(url, 'PUT', body, headers);
   return { data, status };
@@ -40,6 +41,7 @@ export async function createNewStatus(statusName, userId, workspaceId, token) {
 
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${token}`);
+  headers.append('Content-Type', 'application/json');
 
   const { data, status } = await makeRequest(url, 'PUT', body, headers);
   return { data, status };
