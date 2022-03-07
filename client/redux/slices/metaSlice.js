@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getPriorities, getStatuses, getViews, createNewView } from '../../utils/requests/metaRequests';
+import { getPriorities, getStatuses, getViews, createNewView, createNewPriority } from '../../utils/requests/metaRequests';
 
 export const getAllMetaData = createAsyncThunk(
   'meta/getAll',
@@ -33,6 +33,23 @@ export const createNewViewAsync = createAsyncThunk(
   }
 )
 
+export const createNewPriorityAsync = createAsyncThunk(
+  'meta/createPriority',
+  async ({ priority, userId, workspaceId, token }, thunkApi) => {
+    try {
+      const { data } = await createNewPriority(priority, userId, workspaceId, token);
+
+      if (!data.success) {
+        return thunkApi.rejectWithValue({ error: data });
+      }
+
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue({ error: error.message });
+    }
+  }
+)
+
 function setMetaData(state, { payload }) {
   state.priorities = payload.priorities;
   state.statuses = payload.statuses;
@@ -41,6 +58,10 @@ function setMetaData(state, { payload }) {
 
 function setViews(state, { payload }) {
   state.views = payload.views;
+}
+
+function setPriority(state, { payload }) {
+  state.priorities = payload.priorities;
 }
 
 const initialState = {
@@ -57,6 +78,7 @@ export const metaSlice = createSlice({
   extraReducers: {
     [getAllMetaData.fulfilled]: setMetaData,
     [createNewViewAsync.fulfilled]: setViews,
+    [createNewPriorityAsync.fulfilled]: setPriority,
   },
 });
 
