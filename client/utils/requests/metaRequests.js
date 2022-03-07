@@ -1,7 +1,6 @@
-import makeRequest from "./request";
+import makeRequest from './request';
 
 export async function getPriorities(userId, workspaceId, token) {
-  console.log("In getting prio, ", userId, workspaceId, token);
   const url = `/meta/priorities?user=${userId}&workspace=${workspaceId}`;
   const body = {};
 

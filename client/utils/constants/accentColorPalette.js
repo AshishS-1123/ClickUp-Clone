@@ -12,7 +12,7 @@ const accentColorPalette = [
   '#07a092',
   '#1db954',
   '#2ea52c',
-  '#757380'
-]
+  '#757380',
+];
 
 export default accentColorPalette;

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getPriorities, getStatuses, getViews, createNewView, createNewPriority } from '../../utils/requests/metaRequests';
+import {
+  getPriorities, getStatuses, getViews, createNewView, createNewPriority,
+} from '../../utils/requests/metaRequests';
 
 export const getAllMetaData = createAsyncThunk(
   'meta/getAll',
@@ -13,12 +15,14 @@ export const getAllMetaData = createAsyncThunk(
     } catch (error) {
       return thunkApi.rejectWithValue({ error: error.message });
     }
-  }
-)
+  },
+);
 
 export const createNewViewAsync = createAsyncThunk(
   'meta/createView',
-  async ({ view, userId, workspaceId, token }, thunkApi) => {
+  async ({
+    view, userId, workspaceId, token,
+  }, thunkApi) => {
     try {
       const { data } = await createNewView(view, userId, workspaceId, token);
 
@@ -30,12 +34,14 @@ export const createNewViewAsync = createAsyncThunk(
     } catch (error) {
       return thunkApi.rejectWithValue({ error: error.message });
     }
-  }
-)
+  },
+);
 
 export const createNewPriorityAsync = createAsyncThunk(
   'meta/createPriority',
-  async ({ priority, userId, workspaceId, token }, thunkApi) => {
+  async ({
+    priority, userId, workspaceId, token,
+  }, thunkApi) => {
     try {
       const { data } = await createNewPriority(priority, userId, workspaceId, token);
 
@@ -47,9 +53,10 @@ export const createNewPriorityAsync = createAsyncThunk(
     } catch (error) {
       return thunkApi.rejectWithValue({ error: error.message });
     }
-  }
-)
+  },
+);
 
+/* eslint-disable no-param-reassign */
 function setMetaData(state, { payload }) {
   state.priorities = payload.priorities;
   state.statuses = payload.statuses;
@@ -63,6 +70,7 @@ function setViews(state, { payload }) {
 function setPriority(state, { payload }) {
   state.priorities = payload.priorities;
 }
+/* eslint-enable no-param-reassign */
 
 const initialState = {
   priorities: [],
