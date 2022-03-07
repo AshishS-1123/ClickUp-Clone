@@ -13,7 +13,7 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 import ViewButton from "./ViewButton";
 import AddViewButton from './AddViewButton';
-import { Views } from "../../../../utils/ViewTypes";
+import { Views } from "../../../../utils/constants/ViewTypes";
 
 export const mapViewToIcon = (view) => {
   switch (view) {

@@ -4,10 +4,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import PriorityButton from './PropertiesButtons/PriorityButton';
 import TagsButton from './PropertiesButtons/TagsButton';
 import DueDatesButton from './PropertiesButtons/DueDatesButton';
-// Due Dates Icon
-// import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-// Tags Icon
-// import StyleIcon from '@mui/icons-material/Style';
 import styles from './TaskDialog.module.css';
 import themeColors from '../../../utils/contexts/themeContext';
 
@@ -47,7 +43,10 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 
     >
       <div className={styles.topBar}>
         <input placeholder='Task name' style={elementStyles} />
-        <CloseIcon sx={{ fill: themeColors.textBoldColor, width: '32px', height: '32px' }} />
+        <CloseIcon
+          sx={{ fill: themeColors.textBoldColor, width: '32px', height: '32px' }}
+          onClick={closeDialog}
+        />
       </div>
 
       <div className={styles.parentInfoBar}>

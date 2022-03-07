@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import CreateViewDialog from '../../../../components/Dialogs/CreateViewDialog';
+import CreatePrioritiesDialog from '../../../../components/Dialogs/CreatePrioritiesDialog';
 import styles from './WorkspaceManager.module.css';
 import themeColors from '../../../../utils/contexts/themeContext';
 
@@ -27,6 +28,7 @@ const shortenName = (name) => {
 
 function WorkspaceManager() {
   const [openViewDialog, setOpenViewDialog] = useState(false);
+  const [openPrioritiesDialog, setOpenPrioritiesDialog] = useState(false);
 
   const workspaceData = useSelector((state) => state.workspaceReducer);
   const activeWorkspace = workspaceData.workspaces[workspaceData.activeWorkspace];
@@ -68,7 +70,12 @@ function WorkspaceManager() {
             >
               Enable Views
             </li>
-            <li>Add Priorities</li>
+            <li
+              onClick={() => { setOpenPrioritiesDialog(true); return false; }}
+              style={{ cursor: 'pointer' }}
+            >
+              Add Priorities
+            </li>
             <li>Add Statuses</li>
             <li>Settings</li>
             <li>Import/Export</li>
@@ -80,6 +87,11 @@ function WorkspaceManager() {
       <CreateViewDialog
         open={openViewDialog}
         closeDialog={() => { setOpenViewDialog(false) }}
+      />
+
+      <CreatePrioritiesDialog
+        open={openPrioritiesDialog}
+        closeDialog={() => { setOpenPrioritiesDialog(false) }}
       />
     </>
   );

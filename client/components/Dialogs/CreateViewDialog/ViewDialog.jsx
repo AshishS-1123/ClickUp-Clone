@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import ViewTypes, { Views } from '../../../utils/ViewTypes';
+import ViewTypes, { Views } from '../../../utils/constants/ViewTypes';
 import { mapViewToIcon } from '../../Layout/HeaderBar/ViewList';
 import themeColors from '../../../utils/contexts/themeContext';
 
