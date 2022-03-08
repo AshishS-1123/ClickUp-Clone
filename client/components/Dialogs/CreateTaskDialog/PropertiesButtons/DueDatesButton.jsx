@@ -2,7 +2,7 @@ import React from 'react';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import themeColors from '../../../../utils/contexts/themeContext';
 
-function PriorityButton() {
+function DueDatesButton() {
 
   const iconStyles = {
     color: themeColors.textBoldColor,
@@ -21,4 +21,4 @@ function PriorityButton() {
   )
 }
 
-export default PriorityButton;
+export default DueDatesButton;

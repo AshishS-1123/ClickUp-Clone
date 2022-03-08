@@ -38,6 +38,8 @@ exports.createNewTask = async (req, res, next) => {
     dueDate
   } = req.body;
 
+  console.log("Body", req.body);
+
   const parent = req.parent;
   const parentType = req.parentType;
 

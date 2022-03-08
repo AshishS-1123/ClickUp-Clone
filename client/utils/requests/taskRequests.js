@@ -11,9 +11,14 @@ export const fetchTask = async (taskId, parentType, parentId, userId, token) => 
   return { data, status };
 };
 
-export const createTask = async (taskName, parentType, parentId, userId, token) => {
+export const createTask = async (taskName, taskMeta, parentType, parentId, userId, token) => {
   const url = `/tasks?user=${userId}&${parentType}=${parentId}`;
-  const body = { taskName };
+  const body = {
+    taskName,
+    priority: taskMeta.priority,
+    dueDate: '8 March, 2022',
+    tag: 'dummy-tag',
+  };
 
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${token}`);

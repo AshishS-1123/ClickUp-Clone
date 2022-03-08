@@ -2,7 +2,7 @@ import React from 'react';
 import StyleIcon from '@mui/icons-material/Style';
 import themeColors from '../../../../utils/contexts/themeContext';
 
-function PriorityButton() {
+function TagsButton() {
 
   const iconStyles = {
     color: themeColors.textBoldColor,
@@ -21,4 +21,4 @@ function PriorityButton() {
   )
 }
 
-export default PriorityButton;
+export default TagsButton;

@@ -101,10 +101,10 @@ export const createListAsync = createAsyncThunk(
 export const createTaskAsync = createAsyncThunk(
   'space/createTask',
   async ({
-    taskName, parentType, parentId, userId, token,
+    taskName, taskMeta, parentType, parentId, userId, token,
   }, thunkApi) => {
     try {
-      const { data } = await createTask(taskName, parentType, parentId, userId, token);
+      const { data } = await createTask(taskName, taskMeta, parentType, parentId, userId, token);
 
       if (data.success === false) {
         return thunkApi.rejectWithValue({ error: data.error });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import PriorityButton from './PropertiesButtons/PriorityButton';
@@ -23,6 +23,13 @@ const elementStyles = {
 }
 
 function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWorkspace }) {
+  const taskNameRef = useRef(null);
+  const [priority, setPriority] = useState('');
+
+  const handleSubmitButtonClick = () => {
+    handleCreateTask(taskNameRef.current.value, priority);
+  }
+
   return (
     <Dialog
       open={open}
@@ -42,7 +49,7 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWork
       }}
     >
       <div className={styles.topBar}>
-        <input placeholder='Task name' style={elementStyles} />
+        <input placeholder='Task name' style={elementStyles} ref={taskNameRef} />
         <CloseIcon
           sx={{ fill: themeColors.textBoldColor, width: '32px', height: '32px' }}
           onClick={closeDialog}
@@ -61,11 +68,17 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWork
 
       <div className={styles.bottomBar}>
         <div className={styles.propertiesBar}>
-          <PriorityButton />
+          <PriorityButton onPrioritySelect={setPriority} />
           <DueDatesButton />
           <TagsButton />
         </div>
-        <button className={styles.button} style={{ background: themeColors.accentColor, color: themeColors.textColor }} onClick={handleCreateTask}>Create Task</button>
+        <button
+          className={styles.button}
+          style={{ background: themeColors.accentColor, color: themeColors.textColor }}
+          onClick={handleSubmitButtonClick}
+        >
+          Create Task
+        </button>
       </div>
 
     </Dialog>

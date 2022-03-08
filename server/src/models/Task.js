@@ -20,7 +20,7 @@ const TaskSchema = mongoose.Schema({
   // Possible values: issues found, ready, review
   status: {
     type: String,
-    required: [true, "Provide status for task"],
+    required: false,//[true, "Provide status for task"],
   },
 
   // Represents level of urgency of task.
@@ -31,7 +31,7 @@ const TaskSchema = mongoose.Schema({
   },
 
   // Date by which task must be completed.
-  dueData: {
+  dueDate: {
     type: Date,
     required: [true, "Provide due data for task"],
   }
