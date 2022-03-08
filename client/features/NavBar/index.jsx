@@ -41,7 +41,7 @@ function NavDrawer() {
         sx={{
           '> .MuiPaper-root': {
             background: themeColors.background,
-            width: '199px',
+            width: '250px',
           },
         }}
       >

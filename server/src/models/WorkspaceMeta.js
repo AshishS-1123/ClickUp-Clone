@@ -17,11 +17,11 @@ const WorkspaceMetaSchema = mongoose.Schema({
   statuses: {
     type: [{ status: String, color: String }],
     default: [
-      { status: 'done', color: 'green' },
-      { status: 'review', color: 'pink' },
-      { status: 'pending', color: 'yellow' },
-      { status: 'todo', color: 'blue' },
-      { status: 'archive', color: 'grey' },
+      { status: 'complete', color: '#2ea52c' },
+      { status: 'review', color: '#ffa12f' },
+      { status: 'ready', color: '#7b69ee' },
+      { status: 'unassigned', color: '#f42c2c' },
+      { status: 'archive', color: '#757380' },
     ]
   },
 
@@ -30,10 +30,10 @@ const WorkspaceMetaSchema = mongoose.Schema({
   priorities: {
     type: [{ level: String, color: String }],
     default: [
-      { level: 'urgent', color: 'darkred' },
-      { level: 'high', color: 'orange' },
-      { level: 'medium', color: 'green' },
-      { level: 'low', color: 'blue' },
+      { level: 'urgent', color: '#f42c2c' },
+      { level: 'high', color: '#ff5722' },
+      { level: 'medium', color: '#1db954' },
+      { level: 'low', color: '#5f81ff' },
     ],
   },
 

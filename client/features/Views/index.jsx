@@ -44,11 +44,10 @@ const data = [
 
 function Views() {
   const styles = {
-    width: 'calc(100vw - 199px)',
-    float: 'right',
+    width: 'calc(100vw - 250px)',
     position: 'absolute',
     top: '0px',
-    left: '199px',
+    right: '0px',
     background: themeColors.backgroundMedium,
   }
 
