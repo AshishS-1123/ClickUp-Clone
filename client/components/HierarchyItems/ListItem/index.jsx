@@ -68,6 +68,7 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
         closeMenu={closeOptions}
         itemId={id}
         itemType="list"
+        listName={listName}
       />
     </div>
   );

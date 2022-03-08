@@ -22,7 +22,7 @@ const elementStyles = {
   background: themeColors.background
 }
 
-function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 1', forWorkspace = 'Workspace 1' }) {
+function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWorkspace }) {
   return (
     <Dialog
       open={open}
@@ -72,4 +72,4 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList = 'List 
   );
 }
 
-export default React.forwardRef(CreateTaskDialog);
+export default CreateTaskDialog;

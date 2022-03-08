@@ -1,20 +1,19 @@
 import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import { createTaskAsync } from '../../../redux/slices/spaceSlice';
 import TaskDialog from './TaskDialog';
 
 function CreateTaskDialog({
-  open, closeDialog, itemType, itemId,
+  open, closeDialog, itemType, itemId, listName, workspaceName
 }) {
-  const taskNameElement = useRef(null);
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.authReducer);
+  // const userData = useSelector((state) => state.authReducer);
 
   const handleCreateTask = () => {
     const taskName = taskNameElement.current.value;
 
-    const { userId } = userData;
-    const { token } = userData;
+    // const { userId } = userData;
+    // const { token } = userData;
 
     dispatch(createTaskAsync({
       taskName, parentType: itemType, parentId: itemId, userId, token,
@@ -31,9 +30,21 @@ function CreateTaskDialog({
       open={open}
       closeDialog={closeDialog}
       handleCreateTask={handleCreateTask}
-      ref={taskNameElement}
+      inList={listName}
+      forWorkspace={workspaceName}
     />
   );
 }
 
-export default CreateTaskDialog;
+const mapStateToProps = (state) => {
+  const activeWorkspace = state.workspaceReducer.activeWorkspace;
+  const workspace = state.workspaceReducer.workspaces[activeWorkspace];
+  console.log("workspace in map", workspace.name);
+  return {
+    userId: state.authReducer.userId,
+    token: state.authReducer.token,
+    workspaceName: workspace.name,
+  }
+}
+
+export default connect(mapStateToProps)(CreateTaskDialog);

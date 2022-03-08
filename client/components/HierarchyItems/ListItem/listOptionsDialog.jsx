@@ -8,7 +8,7 @@ import CreateTaskDialog from '../../Dialogs/CreateTaskDialog';
 import themeColors from '../../../utils/contexts/themeContext';
 
 function ListOptionsDialog({
-  anchorEl, openMenu, closeMenu, itemId, itemType,
+  anchorEl, openMenu, closeMenu, itemId, itemType, listName
 }) {
   const [showTaskDialog, setShowTaskDialog] = useState(false);
 
@@ -64,6 +64,7 @@ function ListOptionsDialog({
         closeDialog={() => { setShowTaskDialog(false); closeMenu(); }}
         itemType={itemType}
         itemId={itemId}
+        listName={listName}
       />
     </>
   );
