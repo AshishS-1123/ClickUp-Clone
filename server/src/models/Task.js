@@ -20,7 +20,7 @@ const TaskSchema = mongoose.Schema({
   // Possible values: issues found, ready, review
   status: {
     type: String,
-    required: false,//[true, "Provide status for task"],
+    required: [true, "Provide status for task"],
   },
 
   // Represents level of urgency of task.

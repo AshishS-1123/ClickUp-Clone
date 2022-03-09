@@ -35,10 +35,9 @@ exports.createNewTask = async (req, res, next) => {
     taskName,
     tag,
     priority,
-    dueDate
+    dueDate,
+    status
   } = req.body;
-
-  console.log("Body", req.body);
 
   const parent = req.parent;
   const parentType = req.parentType;
@@ -57,16 +56,14 @@ exports.createNewTask = async (req, res, next) => {
       tag,
       priority,
       dueDate,
+      status,
     });
   } catch (error) {
     return next(new ErrorResponse(error.message, 500));
   }
 
-  console.log("Parent", parent);
-  console.log("Task", task);
   try {
     parent.children.push({ childType: "TASK", id: String(task._id) });
-    console.log("New parent", parent);
     await parent.save();
 
     res.status(201).json({

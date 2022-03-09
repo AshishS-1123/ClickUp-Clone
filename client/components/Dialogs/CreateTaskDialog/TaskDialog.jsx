@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PriorityButton from './PropertiesButtons/PriorityButton';
 import TagsButton from './PropertiesButtons/TagsButton';
 import DueDatesButton from './PropertiesButtons/DueDatesButton';
+import StatusButton from './PropertiesButtons/StatusButton';
 import styles from './TaskDialog.module.css';
 import themeColors from '../../../utils/contexts/themeContext';
 
@@ -26,10 +27,11 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWork
   const taskNameRef = useRef(null);
   const [priority, setPriority] = useState('');
   const [dueDate, setDueDate] = useState(null);
+  const [status, setStatus] = useState('');
 
   const handleSubmitButtonClick = () => {
     const dateAsString = dueDate.toISOString().slice(0, 10).replace(/-/g, "");
-    handleCreateTask(taskNameRef.current.value, priority, dateAsString);
+    handleCreateTask(taskNameRef.current.value, priority, dateAsString, status);
   }
 
   return (
@@ -73,6 +75,7 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWork
           <DueDatesButton onDateSelect={setDueDate} />
           <PriorityButton onPrioritySelect={setPriority} />
           <TagsButton />
+          <StatusButton onStatusSelect={setStatus} />
         </div>
         <button
           className={styles.button}

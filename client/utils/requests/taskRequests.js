@@ -17,6 +17,7 @@ export const createTask = async (taskName, taskMeta, parentType, parentId, userI
     taskName,
     priority: taskMeta.priority,
     dueDate: taskMeta.dueDate || (new Date.now()).toISOString().slice(0, 10).replace(/-/g, ""),
+    status: taskMeta.status,
     tag: 'dummy-tag',
   };
 
