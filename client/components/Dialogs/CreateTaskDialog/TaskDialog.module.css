@@ -35,7 +35,7 @@
   border-radius: 20px;
   margin-right: 20px;
   text-align: center;
-  font-weight: 100;
+  font-weight: 200;
 }
 
 
@@ -64,7 +64,13 @@
   justify-content: center;
   width: 121px;
   height: 40px;
-  /* color: white; */
+  font-size: 14px;
   border-radius: 3px;
   font-weight: 600;
+}
+
+.propertiesBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

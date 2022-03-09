@@ -8,9 +8,10 @@ function CreateTaskDialog({
 }) {
   const dispatch = useDispatch();
 
-  const handleCreateTask = (taskName, priority) => {
+  const handleCreateTask = (taskName, priority, dueDate) => {
     const taskMeta = {
       priority,
+      dueDate,
     };
 
     dispatch(createTaskAsync({

@@ -18,6 +18,7 @@ function PriorityButton({ onPrioritySelect }) {
     borderRadius: '50%',
     padding: '5px',
     margin: '0 5px',
+    marginRight: '2px',
     cursor: 'pointer',
   }
 

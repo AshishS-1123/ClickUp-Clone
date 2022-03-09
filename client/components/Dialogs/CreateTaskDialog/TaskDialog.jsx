@@ -25,9 +25,11 @@ const elementStyles = {
 function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWorkspace }) {
   const taskNameRef = useRef(null);
   const [priority, setPriority] = useState('');
+  const [dueDate, setDueDate] = useState(null);
 
   const handleSubmitButtonClick = () => {
-    handleCreateTask(taskNameRef.current.value, priority);
+    const dateAsString = dueDate.toISOString().slice(0, 10).replace(/-/g, "");
+    handleCreateTask(taskNameRef.current.value, priority, dateAsString);
   }
 
   return (
@@ -64,17 +66,17 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWork
         <div className={styles.forWorkspace} style={elementStyles}>{forWorkspace}</div>
       </div>
 
-      <textarea className={styles.descriptionInput} style={elementStyles} />
+      <textarea className={styles.descriptionInput} style={{ ...elementStyles, resize: 'none' }} />
 
       <div className={styles.bottomBar}>
         <div className={styles.propertiesBar}>
+          <DueDatesButton onDateSelect={setDueDate} />
           <PriorityButton onPrioritySelect={setPriority} />
-          <DueDatesButton />
           <TagsButton />
         </div>
         <button
           className={styles.button}
-          style={{ background: themeColors.accentColor, color: themeColors.textColor }}
+          style={{ background: themeColors.accentColor, color: themeColors.background }}
           onClick={handleSubmitButtonClick}
         >
           Create Task
