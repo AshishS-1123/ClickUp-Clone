@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import themeColors from '../../../../utils/contexts/themeContext';
 import DateAdapter from '@mui/lab/AdapterMoment';
@@ -8,6 +8,11 @@ import Box from '@mui/material/Box';
 
 function DueDatesButton({ onDateSelect }) {
   const [date, setDate] = useState(null);
+
+  useEffect(() => {
+    setDate(new Date());
+    onDateSelect((new Date()).toDateString());
+  }, []);
 
   const iconStyles = {
     color: date ? themeColors.accentColor : themeColors.textBoldColor,
@@ -30,7 +35,7 @@ function DueDatesButton({ onDateSelect }) {
           value={date}
           onChange={(newValue) => {
             setDate(newValue);
-            onDateSelect(newValue);
+            onDateSelect(newValue.toDateString());
           }}
           renderInput={({ inputRef, InputProps }) => (
             <Box ref={inputRef}>

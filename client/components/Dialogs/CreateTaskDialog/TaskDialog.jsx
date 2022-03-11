@@ -30,8 +30,7 @@ function CreateTaskDialog({ open, closeDialog, handleCreateTask, inList, forWork
   const [status, setStatus] = useState('');
 
   const handleSubmitButtonClick = () => {
-    const dateAsString = dueDate.toISOString().slice(0, 10).replace(/-/g, "");
-    handleCreateTask(taskNameRef.current.value, priority, dateAsString, status);
+    handleCreateTask(taskNameRef.current.value, priority, dueDate, status);
   }
 
   return (

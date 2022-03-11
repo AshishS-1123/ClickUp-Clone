@@ -71,7 +71,12 @@ function SpaceOptionsDialog({
         itemType="space"
         itemId={id}
       />
-      <CreateListDialog open={showListDialog} closeDialog={() => { setShowListDialog(false); closeMenu(); }} />
+      <CreateListDialog
+        open={showListDialog}
+        closeDialog={() => { setShowListDialog(false); closeMenu(); }}
+        itemType="space"
+        itemId={id}
+      />
     </>
   );
 }

@@ -20,7 +20,7 @@ function CreateListDialog({
       listName, parentType: itemType, parentId: itemId, userId, token,
     }))
       .then((res) => {
-        if (res.payload.data.success) {
+        if (res.payload?.data?.success) {
           closeDialog();
         }
       });
