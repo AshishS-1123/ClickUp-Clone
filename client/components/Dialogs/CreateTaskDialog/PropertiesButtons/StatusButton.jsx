@@ -36,7 +36,7 @@ function StatusButton({ onStatusSelect }) {
   const onStatusButtonClick = (status) => {
     setSelectedStatus(status);
     setAnchorElement(null);
-    onStatusSelect(selectedStatus);
+    onStatusSelect(status);
   }
 
   useEffect(() => {
