@@ -11,28 +11,24 @@ function Dashboard() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.authReducer.userId);
   const token = useSelector((state) => state.authReducer.token);
-  const workspaces = useSelector((state) => state.workspaceReducer.activeWorkspaceChildren);
 
   useEffect(() => {
     // Dispatch request to fetch workspaces.
     dispatch(getAllWorkspacesAsync({ userId, token }))
       .then((action) => {
         dispatch(resetSlice);
-        // console.log(action);
         const workspaceId = action.payload.workspaces[0].id;
-
-        // Fetch data for each of the spaces.
-        action.payload.workspaces[0].spaces.forEach((spaceId) => {
-          dispatch(getSpaceDataAsync({
-            spaceId, workspaceId, userId, token,
-          }));
-        });
+        const spaces = action.payload.workspaces[0].spaces;
 
         // Fetch the meta data related to this workspace.
         dispatch(getAllMetaData({ userId, workspaceId, token }))
           .then((res) => {
-            // console.log("Meta", res);
+            // Fetch data for each of the spaces.
+            dispatch(getSpaceDataAsync({
+              spaces, workspaceId, userId, token,
+            }));
           })
+
       });
 
   }, []);

@@ -35,7 +35,7 @@ function DueDatesButton({ onDateSelect }) {
           value={date}
           onChange={(newValue) => {
             setDate(newValue);
-            onDateSelect(newValue.toDateString());
+            onDateSelect(newValue);
           }}
           renderInput={({ inputRef, InputProps }) => (
             <Box ref={inputRef}>

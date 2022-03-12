@@ -83,6 +83,8 @@ const validateList = async (listId, userId) => {
 const validateTask = async (taskId, userId) => {
   const task = await Task.findById(taskId);
 
+  console.log("Fetched task", task);
+
   if (!task) {
     throw new ErrorResponse("Task Not Found", 404);
   }

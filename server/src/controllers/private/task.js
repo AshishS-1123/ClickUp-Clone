@@ -1,6 +1,7 @@
 const Task = require("../../models/Task");
 const ErrorResponse = require("../../utils/errorResponse.js");
 const { validateTask } = require("../../middleware/paramValidator");
+const List = require("../../models/List");
 
 exports.getAllTasks = async (req, res, next) => {
   try {
@@ -66,9 +67,18 @@ exports.createNewTask = async (req, res, next) => {
     parent.children.push({ childType: "TASK", id: String(task._id) });
     await parent.save();
 
+    const sanitizedTask = {
+      _id: task._id,
+      name: task.name,
+      status: task.status,
+      priority: task.priority,
+      dueDate: task.dueDate,
+      parent: { parentId: task.parent._id, parentName: req.parent.name },
+    }
+
     res.status(201).json({
       success: true,
-      task: task,
+      task: sanitizedTask,
     })
   } catch (error) {
     try {
@@ -93,9 +103,21 @@ exports.getTaskData = async (req, res, next) => {
       return next(new ErrorResponse("Task not found", 404));
     }
 
+    console.log("parent is", req.parent, req.list);
+    // const taskParent = await List.findById(task.parent._id);
+
+    const sanitizedTask = {
+      _id: task._id,
+      name: task.name,
+      status: task.status,
+      priority: task.priority,
+      dueDate: task.dueDate,
+      parent: { parentId: task.parent._id, parentName: req.parent.name },
+    }
+
     res.status(200).json({
       success: true,
-      task: task,
+      task: sanitizedTask,
     });
   } catch (error) {
     return next(new ErrorResponse(error.message, 404));
