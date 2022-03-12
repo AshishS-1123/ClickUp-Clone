@@ -4,6 +4,7 @@ import { createFolder } from '../../utils/requests/folderRequests';
 import { createList } from '../../utils/requests/listRequests';
 import { createSpace } from '../../utils/requests/spaceRequests';
 import { createTask } from '../../utils/requests/taskRequests';
+import sanitizeTask from '../../utils/taskAlgorithms/sanitizeTasks';
 
 /*
  * In the space slice we only store the spaces of the currently active workspace.
@@ -30,11 +31,17 @@ const initialState = {
 export const getSpaceDataAsync = createAsyncThunk(
   'space/getData',
   async ({
-    spaceId, workspaceId, userId, token,
+    spaces, workspaceId, userId, token,
   }, thunkApi) => {
     try {
-      const spaceData = await fetchSpaceEverything(spaceId, workspaceId, userId, token);
-      return thunkApi.fulfillWithValue({ spaceData });
+      const combinedData = await Promise.all(spaces.map(space => fetchSpaceEverything(space, workspaceId, userId, token)));
+      const meta = thunkApi.getState().metaReducer;
+
+      combinedData.map((spaceData, idx) => {
+        combinedData[idx].task = sanitizeTask(spaceData.task, meta.priorities, meta.statuses);
+      });
+
+      return thunkApi.fulfillWithValue({ spaceData: combinedData });
     } catch (error) {
       return thunkApi.rejectWithValue({ error: error.message });
     }
@@ -110,7 +117,10 @@ export const createTaskAsync = createAsyncThunk(
         return thunkApi.rejectWithValue({ error: data.error });
       }
 
-      return { data };
+      const { priorities, statuses } = thunkApi.getState().metaReducer;
+      const task = sanitizeTask([data.task], priorities, statuses)[0];
+
+      return { data: { success: true, task } };
     } catch (error) {
       return thunkApi.rejectWithValue({ error: error.message });
     }
@@ -120,21 +130,25 @@ export const createTaskAsync = createAsyncThunk(
 /* eslint-disable no-param-reassign */
 function assignSpaceData(state, action) {
   const spaceData = action?.payload?.spaceData;
-  spaceData.space.forEach((item) => {
-    if (!state.spaceData.includes(item)) state.spaceData.push(item);
-  });
 
-  spaceData.folder.forEach((item) => {
-    if (!state.folderData.includes(item)) state.folderData.push(item);
-  });
+  spaceData.forEach(spaceItem => {
 
-  spaceData.list.forEach((item) => {
-    if (!state.listData.includes(item)) state.listData.push(item);
-  });
+    spaceItem.space.forEach((item) => {
+      if (!state.spaceData.includes(item)) state.spaceData.push(item);
+    });
 
-  spaceData.task.forEach((item) => {
-    if (!state.taskData.includes(item)) state.taskData.push(item);
-  });
+    spaceItem.folder.forEach((item) => {
+      if (!state.folderData.includes(item)) state.folderData.push(item);
+    });
+
+    spaceItem.list.forEach((item) => {
+      if (!state.listData.includes(item)) state.listData.push(item);
+    });
+
+    spaceItem.task.forEach((item) => {
+      if (!state.taskData.includes(item)) state.taskData.push(item);
+    });
+  })
 }
 
 function setActiveItem(state, action) {
@@ -215,14 +229,9 @@ function attachNewTask(state, action) {
 
   // Update this folder data in the parent.
   const { parentId } = task.parent;
-  const parentType = task.parent.parentType.toLowerCase();
 
   let parentData;
-  if (parentType === 'folder') {
-    parentData = state.folderData;
-  } else if (parentType === 'list') {
-    parentData = state.listData;
-  }
+  parentData = state.listData;
 
   // Add the new task to the parent's children list.
   for (let i = 0; i < parentData.length; i += 1) {
