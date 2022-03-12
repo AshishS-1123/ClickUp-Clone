@@ -41,7 +41,7 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
       case 'FOLDER':
         fetchedItem = await fetchFolder(
           itemToFetch.itemId,
-          itemToFetch.parentType,
+          itemToFetch.parentType.toLowerCase(),
           itemToFetch.parentId,
           userId,
           token,
@@ -52,7 +52,7 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
       case 'LIST':
         fetchedItem = await fetchList(
           itemToFetch.itemId,
-          itemToFetch.parentType,
+          itemToFetch.parentType.toLowerCase(),
           itemToFetch.parentId,
           userId,
           token,
@@ -63,7 +63,7 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
       case 'TASK':
         fetchedItem = await fetchTask(
           itemToFetch.itemId,
-          itemToFetch.parentType,
+          itemToFetch.parentType.toLowerCase(),
           itemToFetch.parentId,
           userId,
           token,
