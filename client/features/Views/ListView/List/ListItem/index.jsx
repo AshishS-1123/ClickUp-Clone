@@ -1,15 +1,18 @@
+import moment from 'moment';
 import React from 'react';
 import themeColors from '../../../../../utils/contexts/themeContext';
 import styles from './ListItem.module.css';
 
 function ListItem({ tasks, color }) {
+  console.log("Tasks rre", tasks);
+
   return (
     <ul className={styles.listContainer}>
       {
         tasks.map((item, idx) => {
           return (
             <>
-              <li key={`${idx}__${Math.random() * 100}`} className={styles.listItem}>
+              <li key={`${item._id}`} className={styles.listItem}>
                 <span
                   className={styles.icon}
                   style={{
@@ -20,11 +23,11 @@ function ListItem({ tasks, color }) {
                 </span>
                 <div className={styles.itemBar}>
                   <div className={styles.title}>
-                    {item.taskName}
+                    {item.name}
                   </div>
                   <div className={styles.itemData} style={{ color: themeColors.textBoldColor }}>
-                    <div>{item.dueDate}</div>
-                    <div>{item.listName}</div>
+                    <div>{moment(item.dueDate).format('LL')}</div>
+                    <div>{item.parent.parentName}</div>
                     <div>{item.priority.level}</div>
                   </div>
                 </div>
