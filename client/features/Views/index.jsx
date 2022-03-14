@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderBar from '../../components/Layout/HeaderBar';
-import ListView from "./ListView";
+import GridView from "./GridView";
 import themeColors from "../../utils/contexts/themeContext";
 import { useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ function Views() {
   return (
     <div style={styles}>
       <HeaderBar />
-      <ListView data={data} availableStatuses={availableStatuses} />
+      <GridView data={data} availableStatuses={availableStatuses} />
     </div>
   )
 }
