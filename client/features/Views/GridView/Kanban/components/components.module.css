@@ -1,0 +1,91 @@
+.boardWrapper {
+  height: 100vh;
+  padding-left: 20px;
+}
+
+.boardWrapper > div > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/*********************************/
+
+.section {
+  margin: 5px 5px;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-flex;
+  height: auto;
+  flex-direction: column;
+}
+
+.section > div > div {
+  padding-bottom: 10px;
+}
+
+.section > div > div > div{
+  box-shadow: 0px 2px 9px 1px #dcdcdc;
+  width: 95%;
+
+  padding: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  background: white;
+}
+
+/*********************************/
+
+.laneHeader {
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 15px;
+  margin-bottom: -10px;
+  background: white;
+  box-shadow: 0px 2px 9px 1px #dcdcdc;
+  font-weight: 600;
+}
+
+.laneHeader_bubble {
+  border: 1px solid lightgray;
+  border-radius: 50px;
+
+  display: inline-block;
+  padding: 5px 10px;
+
+  margin-left: 8px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 300;
+}
+
+/*********************************/
+
+.card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.card_parentName {
+  font-size: 10px;
+}
+
+.card_title {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 8px;
+  margin-left: 4px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
