@@ -11,19 +11,20 @@ function convertToKanbanFormat(taskData, availableStatuses) {
   // console.log("taskData", taskData);
   // console.log("Statuses", availableStatuses);
 
-  availableStatuses.forEach((status, idx) => {
+  availableStatuses.forEach(status => {
     const currentColumn = {
       id: status._id,
       title: status.status,
       lanes: [],
+      style: { borderTop: `3px solid ${status.color}` },
     };
 
     const currentCards = [];
-    taskData[status._id].tasks.forEach(task => {
+    taskData[status._id].tasks.forEach((task, idx) => {
       currentCards.push({
         id: task._id,
         title: task.name,
-        description: task.name,
+        parent: task.parent.parentName,
       });
 
     })
