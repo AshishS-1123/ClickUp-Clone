@@ -9,7 +9,7 @@ function Views() {
   const availableStatuses = useSelector(state => state.metaReducer.statuses);
 
   const styles = {
-    width: 'calc(100vw - 250px)',
+    width: 'calc(100vw - 260px)',
     position: 'absolute',
     top: '0px',
     right: '0px',

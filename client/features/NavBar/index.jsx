@@ -48,7 +48,7 @@ function NavDrawer() {
         <Button
           variant="text"
           disableRipple
-          endIcon={<DrawerToggler onClick={toggleDrawer} rotateBtn />}
+          // endIcon={<DrawerToggler onClick={toggleDrawer} rotateBtn />}
           sx={{
             color: themeColors.textColor,
             fontWeight: 600,

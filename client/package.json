@@ -11,6 +11,7 @@
   "dependencies": {
     "@date-io/date-fns": "^2.13.1",
     "@date-io/moment": "^2.13.1",
+    "@emotion/is-prop-valid": "^1.1.2",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",

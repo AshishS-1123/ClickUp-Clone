@@ -8,9 +8,6 @@ const KanbanBoard = dynamic(() => import('./Kanban'), { ssr: false, loading: () 
 function convertToKanbanFormat(taskData, availableStatuses) {
   const lanes = [];
 
-  // console.log("taskData", taskData);
-  // console.log("Statuses", availableStatuses);
-
   availableStatuses.forEach(status => {
     const currentColumn = {
       id: status._id,
@@ -31,8 +28,6 @@ function convertToKanbanFormat(taskData, availableStatuses) {
 
     currentColumn.cards = currentCards;
     lanes.push(currentColumn);
-
-    // console.log("Current col", currentColumn);
   })
 
   return { lanes };
@@ -45,9 +40,9 @@ function GridView({ data, availableStatuses }) {
   const kanbanFormat = convertToKanbanFormat(sorted, availableStatuses);
 
   return (
-    <>
+    <div style={{ padding: '15px 0px' }}>
       <KanbanBoard initialBoard={kanbanFormat} />
-    </>
+    </div>
   )
 }
 
