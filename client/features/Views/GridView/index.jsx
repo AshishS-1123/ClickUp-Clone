@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import groupTasks, { groupableValues } from '../../../utils/taskAlgorithms/groupAlgorithm';
@@ -30,7 +30,7 @@ function convertToKanbanFormat(taskData, availableStatuses) {
     lanes.push(currentColumn);
   })
 
-  return { lanes };
+  return { lanes: lanes.sort((a, b) => a.cards.length < b.cards.length) };
 }
 
 function GridView({ data, availableStatuses }) {

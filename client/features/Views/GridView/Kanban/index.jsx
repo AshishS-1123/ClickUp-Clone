@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from 'react-trello';
 import boardComponents from './components';
+import './kanban.module.css';
 
 function KanbanBoard({ initialBoard }) {
 
@@ -8,26 +9,12 @@ function KanbanBoard({ initialBoard }) {
     <Board
       data={initialBoard}
       components={boardComponents}
+      cardDragClass=''
+      laneDraggable={false}
+      collapsibleLanes={true}
+      handleDragEnd={() => { console.log("Done"); }}
     />
   );
 }
 
 export default KanbanBoard;
-
-/**
- * Components to customize
-
-  GlobalStyle,
-  BoardWrapper,
-  Loader,
-  ScrollableLane,
-  LaneHeader,
-  LaneFooter,
-  Section,
-  NewLaneForm,
-  NewLaneSection,
-  NewCardForm,
-  Card,
-  AddCardLink,
-
- */

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './components.module.css';
 
-function BoardWrapper({ children }) {
+function BoardWrapper({ children, ...props }) {
 
   return (
     <div className={styles.boardWrapper} >
