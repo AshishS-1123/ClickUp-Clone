@@ -1,7 +1,6 @@
 const Task = require("../../models/Task");
 const ErrorResponse = require("../../utils/errorResponse.js");
 const { validateTask } = require("../../middleware/paramValidator");
-const List = require("../../models/List");
 
 exports.getAllTasks = async (req, res, next) => {
   try {
@@ -103,9 +102,6 @@ exports.getTaskData = async (req, res, next) => {
       return next(new ErrorResponse("Task not found", 404));
     }
 
-    console.log("parent is", req.parent, req.list);
-    // const taskParent = await List.findById(task.parent._id);
-
     const sanitizedTask = {
       _id: task._id,
       name: task.name,
@@ -129,5 +125,29 @@ exports.deleteTask = async (req, res, next) => {
 }
 
 exports.modifyTask = async (req, res, next) => {
-  res.end("Modify Task");
+  const NON_MODIFIABLE_KEYS = ['userId', 'parent', '_id'];
+
+  const newData = req.body;
+  let isAllowed = true;
+
+  Object.keys(newData).forEach(item => {
+    if (NON_MODIFIABLE_KEYS.includes(item)) {
+      isAllowed = false;
+      return next(new ErrorResponse(`Modifying ${item} of task is not allowed`, 403));
+    }
+  })
+
+  try {
+    if (isAllowed) {
+      Task.findByIdAndUpdate(req.params.taskId, newData, { new: true }, (error, doc) => {
+        if (error) {
+          return next(new ErrorResponse(error, 500));
+        }
+
+        res.status(400).json({ success: true, task: doc });
+      })
+    }
+  } catch (error) {
+    return next(new ErrorResponse(error.message, 500));
+  }
 }
