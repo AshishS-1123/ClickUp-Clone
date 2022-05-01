@@ -108,7 +108,7 @@ exports.getTaskData = async (req, res, next) => {
       status: task.status,
       priority: task.priority,
       dueDate: task.dueDate,
-      parent: { parentId: task.parent._id, parentName: req.parent.name },
+      parent: { parentId: req.parent._id, parentName: req.parent.name },
     }
 
     res.status(200).json({
@@ -144,7 +144,7 @@ exports.modifyTask = async (req, res, next) => {
           return next(new ErrorResponse(error, 500));
         }
 
-        res.status(400).json({ success: true, task: doc });
+        res.status(200).json({ success: true, task: doc });
       })
     }
   } catch (error) {

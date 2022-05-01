@@ -3,7 +3,7 @@ import fetchSpaceEverything from '../../utils/requests/everythingRequests';
 import { createFolder } from '../../utils/requests/folderRequests';
 import { createList } from '../../utils/requests/listRequests';
 import { createSpace } from '../../utils/requests/spaceRequests';
-import { createTask } from '../../utils/requests/taskRequests';
+import { createTask, modifyTask } from '../../utils/requests/taskRequests';
 import sanitizeTask from '../../utils/taskAlgorithms/sanitizeTasks';
 
 /*
@@ -127,6 +127,29 @@ export const createTaskAsync = createAsyncThunk(
   },
 );
 
+export const modifyTaskAsync = createAsyncThunk(
+  'space/modifyTask',
+  async ({
+    taskId, newData, parentId, userId, token,
+  }, thunkApi) => {
+    console.log("Params are", { taskId, newData, parentId, userId, token });
+    try {
+      const { data } = await modifyTask(taskId, newData, parentId, userId, token);
+
+      if (data.success === false) {
+        return thunkApi.rejectWithValue({ error: data.error });
+      }
+
+      const meta = thunkApi.getState().metaReducer;
+      const sanitizedTask = sanitizeTask(data.task, meta.priorities, meta.statuses);
+
+      return { data: { task: sanitizedTask } };
+    } catch (error) {
+      return thunkApi.rejectWithValue({ error: error.message });
+    }
+  }
+)
+
 /* eslint-disable no-param-reassign */
 function assignSpaceData(state, action) {
   const spaceData = action?.payload?.spaceData;
@@ -246,6 +269,16 @@ function attachNewTask(state, action) {
   }
 }
 
+function updateTask(state, action) {
+  const newTask = action.payload.data.task;
+  state.taskData.forEach((task, idx) => {
+    if (task._id == newTask._id) {
+      state.taskData[idx] = newTask;
+      return;
+    }
+  })
+}
+
 function setError(state, action) {
   state.error = action.payload.error;
 }
@@ -273,7 +306,8 @@ export const spaceSlice = createSlice({
     [createListAsync.rejected]: setError,
     [createTaskAsync.fulfilled]: attachNewTask,
     [createTaskAsync.rejected]: setError,
-
+    [modifyTaskAsync.fulfilled]: updateTask,
+    [modifyTaskAsync.rejected]: setError,
   },
 });
 

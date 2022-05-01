@@ -4,6 +4,8 @@ function sanitizeTask(tasks, priorities, statuses) {
     const priority = priorities.find(item => item._id == task.priority);
     const status = statuses.find(item => item._id == task.status);
 
+    // console.log("Before sanit", task);
+
     return { ...task, status: status, priority: priority };
   })
 }

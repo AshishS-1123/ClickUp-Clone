@@ -67,6 +67,7 @@ const validateFolder = async (folderId, userId) => {
 }
 
 const validateList = async (listId, userId) => {
+  console.log("Find list ", listId);
   const list = await List.findById(listId);
 
   if (!list) {
