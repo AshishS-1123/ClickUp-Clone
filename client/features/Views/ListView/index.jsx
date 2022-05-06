@@ -1,27 +1,44 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import accentColorPalette from '../../../utils/constants/accentColorPalette';
+import LaneGroupItem from './List/ListGroupItem';
+import ListGroupTitle from './List/ListGroupTitle';
 import ListItem from './List/ListItem';
-import ListTitleBar from './List/ListTitleBar';
-import groupTasks, { groupableValues } from '../../../utils/taskAlgorithms/groupAlgorithm';
+
+const convertToListFormat = (taskData, availableStatuses) => {
+  const returnValue = [];
+
+  availableStatuses.forEach(status => {
+    let taskWithThisStatus = [];
+
+    taskData.forEach(task => {
+      if (task.status._id == status._id) {
+        taskWithThisStatus.push (task);
+      }
+
+    });
+
+    returnValue.push (taskWithThisStatus);
+  });
+
+  return returnValue;
+}
+
 
 function ListView({ data, availableStatuses }) {
-  console.log("Group", data);
-  const statuses = useSelector(state => state.metaReducer.statuses);
-  const sorted = groupTasks(data, groupableValues.STATUS, statuses);
+  const group = convertToListFormat(data, availableStatuses);
 
   return (
-    <>
+    <div style={{width: "90%", margin: "30px auto"}}>
+
       {
-        availableStatuses.map(status => {
+        group.map ((group, idx) => {
+          const status = availableStatuses[idx];
           return (
-            <React.Fragment key={`${status._id}`}>
-              <ListTitleBar title={status.status} color={status.color} />
-              <ListItem tasks={sorted[status._id].tasks} color={status.color} />
-            </React.Fragment>
+            <LaneGroupItem group={group} groupTitle={status.status} groupColor={status.color} key={status._id} />
           )
         })
       }
-    </>
+    </div>
   )
 }
 
