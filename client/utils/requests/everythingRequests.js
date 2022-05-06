@@ -61,7 +61,6 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
         fetchedItem = fetchedItem.data;
         break;
       case 'TASK':
-        console.log("Fetch", itemToFetch);
         fetchedItem = await fetchTask(
           itemToFetch.itemId,
           itemToFetch.parentType.toLowerCase(),
@@ -69,7 +68,6 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
           userId,
           token,
         );
-        console.log("Fetched", fetchedItem);
 
         fetchedItem = fetchedItem.data;
         break;

@@ -8,8 +8,7 @@ const groupStyles = {
     padding: "10px 5px",
 }
 
-function LaneGroupItem ({group, groupTitle, groupColor}) {
-    console.log("Group", group);
+function ListGroupItem ({group, groupTitle, groupColor}) {
 
     if (group.length === 0) {
         return <></>;
@@ -39,4 +38,4 @@ function LaneGroupItem ({group, groupTitle, groupColor}) {
     );
 }
 
-export default LaneGroupItem;
+export default ListGroupItem;

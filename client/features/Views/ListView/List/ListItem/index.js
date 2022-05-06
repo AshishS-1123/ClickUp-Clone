@@ -38,7 +38,7 @@ const spanStyles = {
 }
 
 function ListItem ({taskName, dueDate, priority, list}) {
-    console.log("Priority is", priority );
+
     return (
         <div style={containerStyles}>
             <div style={titleStyles}>

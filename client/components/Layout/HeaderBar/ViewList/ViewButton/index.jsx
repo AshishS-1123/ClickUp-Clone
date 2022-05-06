@@ -16,7 +16,7 @@ function ViewButton({ viewName, icon: Icon, onClick, isActive }) {
         fontWeight: 500,
       }}
     >
-      {viewName}
+      {viewName.split("_").join(" ").toLowerCase()}
     </Button>
   )
 }

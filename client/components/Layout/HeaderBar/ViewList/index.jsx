@@ -19,7 +19,7 @@ export const mapViewToIcon = (view) => {
   switch (view) {
     case Views.LIST_VIEW:
       return FormatListBulletedIcon;
-    case Views.BOARD_VIEW:
+    case Views.GRID_VIEW:
       return DashboardIcon
     case Views.CALENDAR_VIEW:
       return CalendarTodayIcon;
@@ -40,7 +40,7 @@ const containerStyles = {
 }
 
 function ViewList({activeView, setActiveView}) {
-  const enabledViews = [Views.LIST_VIEW, Views.BOARD_VIEW];
+  const enabledViews = [Views.LIST_VIEW, Views.GRID_VIEW];
 
   const handleViewButtonClick = (newActiveView) => {
     setActiveView(newActiveView);
@@ -50,6 +50,7 @@ function ViewList({activeView, setActiveView}) {
     <div style={containerStyles}>
       {
         enabledViews.map((viewName) => {
+          console.log("View Name", viewName, activeView);
           return <ViewButton
             viewName={viewName.toLowerCase()}
             icon={mapViewToIcon(viewName)}
