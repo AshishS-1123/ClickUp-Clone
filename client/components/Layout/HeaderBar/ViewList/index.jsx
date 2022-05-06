@@ -39,9 +39,8 @@ const containerStyles = {
   gap: '8px'
 }
 
-function ViewList() {
+function ViewList({activeView, setActiveView}) {
   const enabledViews = [Views.LIST_VIEW, Views.BOARD_VIEW];
-  const [activeView, setActiveView] = useState(0);
 
   const handleViewButtonClick = (newActiveView) => {
     setActiveView(newActiveView);
@@ -50,13 +49,13 @@ function ViewList() {
   return (
     <div style={containerStyles}>
       {
-        enabledViews.map((viewName, idx) => {
+        enabledViews.map((viewName) => {
           return <ViewButton
             viewName={viewName.toLowerCase()}
             icon={mapViewToIcon(viewName)}
-            onClick={() => handleViewButtonClick(idx)}
-            isActive={activeView == idx}
-            key={idx}
+            onClick={() => handleViewButtonClick(viewName)}
+            isActive={activeView == viewName}
+            key={viewName}
           />
         })
       }

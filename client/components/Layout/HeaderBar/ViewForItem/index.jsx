@@ -10,7 +10,6 @@ const containerStyles = {
   justifyContent: 'space-around',
   marginLeft: '10px',
   paddingRight: '10px',
-  borderRight: `1px solid lightgrey`
 };
 
 const textStyles = {
