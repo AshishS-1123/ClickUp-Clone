@@ -18,7 +18,6 @@ function convertToKanbanFormat(taskData, availableStatuses) {
 
     const currentCards = [];
     taskData[status._id].tasks.forEach((task, idx) => {
-      console.log(idx, "task", task);
       currentCards.push({
         id: task._id,
         title: task.name,
