@@ -6,11 +6,14 @@ import protectedRoute from '../utils/ProtectedRoutes';
 import { getAllWorkspacesAsync } from '../redux/slices/workspaceSlice';
 import { getSpaceDataAsync, resetSlice } from '../redux/slices/spaceSlice';
 import { getAllMetaData } from '../redux/slices/metaSlice';
+import useMobile from '../utils/useMobile';
+import InvalidDevice from '../components/Misc/InvalidDevice';
 
 function Dashboard() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.authReducer.userId);
   const token = useSelector((state) => state.authReducer.token);
+  const isMobile = useMobile();
 
   useEffect(() => {
     // Dispatch request to fetch workspaces.
@@ -32,6 +35,10 @@ function Dashboard() {
       });
 
   }, []);
+
+  if (isMobile) {
+    return <InvalidDevice />
+  }
 
   return (
     <>
