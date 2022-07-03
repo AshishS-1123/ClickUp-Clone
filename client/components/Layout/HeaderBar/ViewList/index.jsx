@@ -40,7 +40,7 @@ const containerStyles = {
 }
 
 function ViewList({activeView, setActiveView}) {
-  const enabledViews = [Views.LIST_VIEW, Views.BOARD_VIEW];
+  const enabledViews = [Views.BOARD_VIEW];
 
   const handleViewButtonClick = (newActiveView) => {
     setActiveView(newActiveView);
@@ -51,7 +51,7 @@ function ViewList({activeView, setActiveView}) {
       {
         enabledViews.map((viewName) => {
           return <ViewButton
-            viewName={viewName.toLowerCase()}
+            viewName={viewName.split("_").join(" ").toLocaleLowerCase()}
             icon={mapViewToIcon(viewName)}
             onClick={() => handleViewButtonClick(viewName)}
             isActive={activeView == viewName}

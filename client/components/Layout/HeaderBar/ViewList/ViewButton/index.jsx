@@ -13,7 +13,7 @@ function ViewButton({ viewName, icon: Icon, onClick, isActive }) {
         color: isActive ? themeColors.accentColor : themeColors.textColor,
         textTransform: 'capitalize',
         fontSize: '13px',
-        fontWeight: 500,
+        fontWeight: 600,
       }}
     >
       {viewName}

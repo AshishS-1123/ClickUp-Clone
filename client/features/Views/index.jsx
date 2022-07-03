@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HeaderBar from '../../components/Layout/HeaderBar';
 import GridView from "./GridView";
-import ListView from "./ListView";
 import themeColors from "../../utils/contexts/themeContext";
 import { Views } from "../../utils/constants/ViewTypes";
 import { useSelector } from "react-redux";
@@ -9,7 +8,7 @@ import { useSelector } from "react-redux";
 function ViewsContainer() {
   const data = useSelector(state => state.spaceReducer.taskData);
   const availableStatuses = useSelector(state => state.metaReducer.statuses);
-  const [activeView, setActiveView] = useState(Views.LIST_VIEW);
+  const [activeView, setActiveView] = useState(Views.BOARD_VIEW);
 
   const styles = {
     width: 'calc(100vw - 260px)',
@@ -22,7 +21,7 @@ function ViewsContainer() {
   return (
     <div style={styles}>
       <HeaderBar activeView={activeView} setActiveView={setActiveView}/>
-      <ListView data={data} availableStatuses={availableStatuses}/>
+      <GridView data={data} availableStatuses={availableStatuses}/>
     </div>
   )
 }

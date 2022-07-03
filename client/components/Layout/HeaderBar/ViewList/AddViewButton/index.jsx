@@ -26,7 +26,7 @@ function AddViewButton() {
           textTransform: 'capitalize',
           fontSize: '12px',
           marginLeft: '10px',
-          fontWeight: '100',
+          fontWeight: '600',
         }}
       >
         view
