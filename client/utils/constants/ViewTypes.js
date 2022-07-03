@@ -1,6 +1,6 @@
 const Views = {
   LIST_VIEW: 'LIST_VIEW',
-  GRID_VIEW: 'GRID_VIEW',
+  BOARD_VIEW: 'BOARD_VIEW',
   CALENDAR_VIEW: 'CALENDAR_VIEW',
   GANTT_VIEW: 'GANTT_VIEW',
   TIMELINE_VIEW: 'TIMELINE_VIEW',
@@ -8,7 +8,7 @@ const Views = {
 
 const ViewTypes = [
   Views.LIST_VIEW,
-  Views.GRID_VIEW,
+  Views.BOARD_VIEW,
   Views.CALENDAR_VIEW,
   Views.GANTT_VIEW,
   Views.TIMELINE_VIEW,

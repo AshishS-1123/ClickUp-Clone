@@ -1,5 +1,8 @@
 import React from 'react';
-import ListGroupItem from './List/ListGroupItem';
+import accentColorPalette from '../../../utils/constants/accentColorPalette';
+import LaneGroupItem from './List/ListGroupItem';
+import ListGroupTitle from './List/ListGroupTitle';
+import ListItem from './List/ListItem';
 
 const convertToListFormat = (taskData, availableStatuses) => {
   const returnValue = [];
@@ -31,7 +34,7 @@ function ListView({ data, availableStatuses }) {
         group.map ((group, idx) => {
           const status = availableStatuses[idx];
           return (
-            <ListGroupItem group={group} groupTitle={status.status} groupColor={status.color} key={status._id} />
+            <LaneGroupItem group={group} groupTitle={status.status} groupColor={status.color} key={status._id} />
           )
         })
       }
