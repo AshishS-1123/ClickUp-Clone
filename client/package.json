@@ -5,6 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
+    "deploy": "next build && touch out/.nojekyll && git add out/ && git commit -m \"Deploy\" && git subtree push --prefix out origin gh-pages",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch"
