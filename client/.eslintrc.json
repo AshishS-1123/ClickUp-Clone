@@ -18,5 +18,8 @@
         "react"
     ],
     "rules": {
-    }
+    },
+    "ignorePatterns": [
+        "**/*.test.jsx"
+    ]
 }

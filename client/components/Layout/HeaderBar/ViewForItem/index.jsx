@@ -24,7 +24,7 @@ function ViewForItem() {
   return (
     <div style={containerStyles}>
       <ShieldIcon sx={{ width: '32px', height: '32px', color: themeColors.accentColor }} />
-      <p style={textStyles}>{activeItemName || "Space 1"}</p>
+      <p style={textStyles}>{activeItemName || "Everything View"}</p>
     </div>
   )
 }

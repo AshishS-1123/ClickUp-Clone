@@ -49,3 +49,13 @@ Same goes for lists and folders.
 4. Creating other stuff
 
 You can also create priorities and statuses for the settings menu. These will define the priorities and statuses that you can assign to a task. In the future, I will also be using them to sort and group tasks in different views.
+
+### Instructions for Deploying
+
+1. Deploy server.
+
+Run following command from root directory.
+
+```
+git subtree push --prefix server heroku master
+```

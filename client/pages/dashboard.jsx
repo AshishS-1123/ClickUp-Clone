@@ -20,24 +20,23 @@ function Dashboard() {
     dispatch(getAllWorkspacesAsync({ userId, token }))
       .then((action) => {
         dispatch(resetSlice);
-        const workspaceId = action.payload.workspaces[0].id;
-        const spaces = action.payload.workspaces[0].spaces;
+        // const workspaceId = action.payload.workspaces[0].id;
+        // const spaces = action.payload.workspaces[0].spaces;
+        const {id: workspaceId, spaces} = action.payload.workspaces[0];
 
         // Fetch the meta data related to this workspace.
         dispatch(getAllMetaData({ userId, workspaceId, token }))
-          .then((res) => {
+          .then(() => {
             // Fetch data for each of the spaces.
             dispatch(getSpaceDataAsync({
               spaces, workspaceId, userId, token,
             }));
-          })
-
+          });
       });
-
   }, []);
 
   if (isMobile) {
-    return <InvalidDevice />
+    return <InvalidDevice />;
   }
 
   return (
@@ -49,4 +48,3 @@ function Dashboard() {
 }
 
 export default protectedRoute(Dashboard);
-// export default Dashboard;

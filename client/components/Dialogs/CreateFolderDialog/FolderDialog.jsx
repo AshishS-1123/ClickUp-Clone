@@ -1,4 +1,6 @@
+// eslint-disable-file jsx-a11y/label-has-associated-control
 import React from 'react';
+import PropTypes from "prop-types";
 import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from '../dialog.module.css';
@@ -28,7 +30,7 @@ function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
             right: '25px',
             color: themeColors.textBoldColor,
             width: '32px',
-            height: '32px'
+            height: '32px',
           }}
           onClick={closeDialog}
         />
@@ -38,6 +40,7 @@ function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
         <input type="text" id="folderDialog_name" placeholder="Enter folder name" ref={ref} />
       </div>
       <button
+        type="button"
         className={styles.dialog_button}
         onClick={handleCreateFolder}
         style={{
@@ -49,6 +52,18 @@ function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
       </button>
     </Dialog>
   );
+}
+
+CreateFolderDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  closeDialog: PropTypes.func.isRequired,
+  handleCreateFolder: PropTypes.func.isRequired,
+};
+
+CreateFolderDialog.defaultProps = {
+  open: false,
+  closeDialog: () => {console.log("Failed to provide close method.");},
+  handleCreateFolder: () => {console.log("Failed to provide create method.");},
 }
 
 export default React.forwardRef(CreateFolderDialog);
