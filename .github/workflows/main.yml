@@ -13,7 +13,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: ./app
+        working-directory: ./client
 
     steps:
       - uses: actions/checkout@v3
