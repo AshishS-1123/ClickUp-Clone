@@ -30,6 +30,7 @@ exports.fetchWorkspaceRecur = async (spaceIds, userId) => {
                 spaces.push({
                     id: space._id,
                     name: space.name,
+                    children: space.children
                 });
 
                 // add children to the queue.
@@ -42,7 +43,8 @@ exports.fetchWorkspaceRecur = async (spaceIds, userId) => {
                 // add this folder to the global folder store.
                 folders.push ({
                     id: folder._id,
-                    name: folder.name
+                    name: folder.name,
+                    children: folder.children
                 });
 
                 // add children to queue.
@@ -55,7 +57,8 @@ exports.fetchWorkspaceRecur = async (spaceIds, userId) => {
                 // add this list to the global list store.
                 lists.push ({
                     id: list._id,
-                    name: list.name
+                    name: list.name,
+                    children: list.children
                 });
 
                 // add children to queue.

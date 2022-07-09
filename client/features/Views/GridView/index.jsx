@@ -21,8 +21,8 @@ function convertToKanbanFormat(taskData, availableStatuses) {
       currentCards.push({
         id: task._id,
         title: task.name,
-        parent: task.parent.parentName,
-        parentId: task.parent.parentId,
+        parent: task.parent.name,
+        parentId: task.parent.id,
       });
 
     })

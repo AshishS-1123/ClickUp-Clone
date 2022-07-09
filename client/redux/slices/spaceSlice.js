@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import fetchSpaceEverything from '../../utils/requests/everythingRequests';
 import { createFolder } from '../../utils/requests/folderRequests';
 import { createList } from '../../utils/requests/listRequests';
 import { createSpace } from '../../utils/requests/spaceRequests';
 import { createTask, modifyTask } from '../../utils/requests/taskRequests';
+import { getWorkspaceData } from '../../utils/requests/workspaceRequests';
 import sanitizeTask from '../../utils/taskAlgorithms/sanitizeTasks';
 
 /*
@@ -34,12 +34,11 @@ export const getSpaceDataAsync = createAsyncThunk(
     spaces, workspaceId, userId, token,
   }, thunkApi) => {
     try {
-      const combinedData = await Promise.all(spaces.map(space => fetchSpaceEverything(space, workspaceId, userId, token)));
-      const meta = thunkApi.getState().metaReducer;
+      // const combinedData = await Promise.all(spaces.map(space => fetchSpaceEverything(space, workspaceId, userId, token)));
+      const combinedData = await getWorkspaceData(userId, token, workspaceId);
+      const { metaReducer } = thunkApi.getState();
 
-      combinedData.map((spaceData, idx) => {
-        combinedData[idx].task = sanitizeTask(spaceData.task, meta.priorities, meta.statuses);
-      });
+      combinedData.tasks = combinedData.tasks.map(task => sanitizeTask(task, metaReducer.priorities, metaReducer.statuses, combinedData.lists));
 
       return thunkApi.fulfillWithValue({ spaceData: combinedData });
     } catch (error) {
@@ -117,8 +116,9 @@ export const createTaskAsync = createAsyncThunk(
         return thunkApi.rejectWithValue({ error: data.error });
       }
 
+      const lists = thunkApi.getState().spaceReducer.listData;
       const { priorities, statuses } = thunkApi.getState().metaReducer;
-      const task = sanitizeTask([data.task], priorities, statuses)[0];
+      const task = sanitizeTask(data.task, priorities, statuses, lists);
 
       return { data: { success: true, task } };
     } catch (error) {
@@ -132,7 +132,6 @@ export const modifyTaskAsync = createAsyncThunk(
   async ({
     taskId, newData, parentId, userId, token,
   }, thunkApi) => {
-    console.log("Params are", { taskId, newData, parentId, userId, token });
     try {
       const { data } = await modifyTask(taskId, newData, parentId, userId, token);
 
@@ -154,24 +153,21 @@ export const modifyTaskAsync = createAsyncThunk(
 function assignSpaceData(state, action) {
   const spaceData = action?.payload?.spaceData;
 
-  spaceData.forEach(spaceItem => {
+  spaceData.spaces.forEach((item) => {
+    if (!state.spaceData.includes(item)) state.spaceData.push(item);
+  });
 
-    spaceItem.space.forEach((item) => {
-      if (!state.spaceData.includes(item)) state.spaceData.push(item);
-    });
+  spaceData.folders.forEach((item) => {
+    if (!state.folderData.includes(item)) state.folderData.push(item);
+  });
 
-    spaceItem.folder.forEach((item) => {
-      if (!state.folderData.includes(item)) state.folderData.push(item);
-    });
+  spaceData.lists.forEach((item) => {
+    if (!state.listData.includes(item)) state.listData.push(item);
+  });
 
-    spaceItem.list.forEach((item) => {
-      if (!state.listData.includes(item)) state.listData.push(item);
-    });
-
-    spaceItem.task.forEach((item) => {
-      if (!state.taskData.includes(item)) state.taskData.push(item);
-    });
-  })
+  spaceData.tasks.forEach((item) => {
+    if (!state.taskData.includes(item)) state.taskData.push(item);
+  });
 }
 
 function setActiveItem(state, action) {
@@ -179,14 +175,19 @@ function setActiveItem(state, action) {
 }
 
 function attachNewSpace(state, action) {
-  state.spaceData.push(action.payload.data.space);
+  const newSpace = action.payload.data.space;
+  state.spaceData.push({...newSpace, id: newSpace._id});
 }
 
 function attachNewFolder(state, action) {
   const folder = action.payload?.data?.folder;
 
   // Add this folder to the list of all folders.
-  state.folderData.push(folder);
+  state.folderData.push({
+    id: folder._id,
+    name: folder.name,
+    children: folder.children,
+  });
 
   // Update this folder data in the parent.
   const { parentId } = folder.parent;
@@ -203,7 +204,7 @@ function attachNewFolder(state, action) {
 
   // Add the new folder to the parent's children list.
   for (let i = 0; i < parentData.length; i += 1) {
-    if (parentData[i]._id === parentId) {
+    if (parentData[i].id === parentId) {
       parentData[i].children.push({
         childType: 'FOLDER',
         id: folder._id,
@@ -217,7 +218,11 @@ function attachNewFolder(state, action) {
 function attachNewList(state, action) {
   const { list } = action.payload.data;
 
-  state.listData.push(list);
+  state.listData.push({
+    id: list._id,
+    name: list.name,
+    children: list.children,
+  });
 
   // Update this folder data in the parent.
   const { parentId } = list.parent;
@@ -234,7 +239,7 @@ function attachNewList(state, action) {
 
   // Add the new folder to the parent's children list.
   for (let i = 0; i < parentData.length; i += 1) {
-    if (parentData[i]._id === parentId) {
+    if (parentData[i].id === parentId) {
       parentData[i].children.push({
         childType: 'LIST',
         id: list._id,
@@ -248,7 +253,14 @@ function attachNewList(state, action) {
 function attachNewTask(state, action) {
   const task = action?.payload?.data?.task;
 
-  state.taskData.push(task);
+  state.taskData.push({
+    id: task._id,
+    _id: task.id,
+    name: task.name,
+    parent: task.parent,
+    status: task.status,
+    priority: task.priority,
+  });
 
   // Update this folder data in the parent.
   const { parentId } = task.parent;
@@ -258,7 +270,7 @@ function attachNewTask(state, action) {
 
   // Add the new task to the parent's children list.
   for (let i = 0; i < parentData.length; i += 1) {
-    if (parentData[i]._id === parentId) {
+    if (parentData[i].id === parentId) {
       parentData[i].children.push({
         childType: 'TASK',
         id: task._id,

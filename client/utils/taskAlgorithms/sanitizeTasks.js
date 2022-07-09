@@ -1,13 +1,10 @@
-function sanitizeTask(tasks, priorities, statuses) {
+function sanitizeTask(task, priorities, statuses, lists) {
 
-  return tasks.map(task => {
-    const priority = priorities.find(item => item._id == task.priority);
-    const status = statuses.find(item => item._id == task.status);
+  const priority = priorities.find(item => item._id == task.priority);
+  const status = statuses.find(item => item._id == task.status);
+  const parent = lists.find(item => item._id == task.parent.id);
 
-    // console.log("Before sanit", task);
-
-    return { ...task, status: status, priority: priority };
-  })
+  return { ...task, status, priority, parent };
 }
 
 export default sanitizeTask;

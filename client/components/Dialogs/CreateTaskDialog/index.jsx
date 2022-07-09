@@ -19,8 +19,7 @@ function CreateTaskDialog({
       taskName, taskMeta, parentType: itemType, parentId: itemId, userId, token,
     }))
       .then((res) => {
-        console.log("Res", res);
-        if (res.payload.data.success) {
+        if (res?.payload?.data?.success) {
           closeDialog();
         }
       });

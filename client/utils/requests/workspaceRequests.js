@@ -23,8 +23,15 @@ export const createNewWorkspace = async (userId, token, workspaceName) => {
   return { data, status };
 };
 
-export const getWorkspaceData = () => {
+export const getWorkspaceData = async (userId, token, workspaceId) => {
+  const url = `/workspaces/${workspaceId}?user=${userId}`;
+  const body = {};
 
+  const headers = new Headers();
+  headers.append('Authorization', `Bearer ${token}`);
+
+  const { data } = await makeRequest(url, 'GET', body, headers);
+  return data;
 };
 
 export const deleteWorkspace = () => {
