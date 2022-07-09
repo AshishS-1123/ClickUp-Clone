@@ -1,5 +1,11 @@
 # ClickUp Clone
 
+
+
+
+https://user-images.githubusercontent.com/64722310/178110755-409033a1-6685-4d52-af6a-64cefa07f2c9.mp4
+
+
 This is a clone of the project management service ClickUp, developed using NextJS, Express and MongoDB.
 
 ### Features Completed
@@ -25,7 +31,7 @@ yarn install
 - Run ```yarn dev``` in **client** and **server** directory to start the servers.
 
 I have also created some dummy data and exported to CSV that you can use to populate your database (Check the **dummy-db-data** folder).
-Check (this)[https://stackoverflow.com/questions/35119959/how-to-share-database-created-by-mongodb] link on how to use it.
+Check [this](https://stackoverflow.com/questions/35119959/how-to-share-database-created-by-mongodb) link on how to use it.
 
 ### Basic Usage
 
@@ -59,3 +65,7 @@ Run following command from root directory.
 ```
 git subtree push --prefix server heroku master
 ```
+
+2. Deploy Client
+
+Works automatically as I am using Vercel.
