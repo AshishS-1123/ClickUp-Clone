@@ -21,8 +21,9 @@ function convertToKanbanFormat(taskData, availableStatuses) {
       currentCards.push({
         id: task._id,
         title: task.name,
-        parent: task.parent.parentName,
-        parentId: task.parent.parentId,
+        parent: task.parent.name,
+        parentId: task.parent.id,
+        priority: task.priority,
       });
 
     })
@@ -31,6 +32,7 @@ function convertToKanbanFormat(taskData, availableStatuses) {
     lanes.push(currentColumn);
   })
 
+  console.log("Lanes", lanes);
   return { lanes: lanes.sort((a, b) => a.cards.length < b.cards.length) };
 }
 

@@ -3,18 +3,19 @@ function computeSpaceTree(data) {
 
   function getListData(listId) {
     // eslint-disable-next-line no-underscore-dangle
-    const list = data.listData.filter((item) => item._id === listId)[0];
+    const list = data.listData.filter((item) => item.id === listId)[0];
 
     return {
       itemType: 'LIST',
       id: listId,
       name: list.name,
+      contents: list.children,
     };
   }
 
   function getFolderData(folderId) {
     // eslint-disable-next-line no-underscore-dangle
-    const folder = data.folderData.filter((item) => item._id === folderId)[0];
+    const folder = data.folderData.filter((item) => item.id === folderId)[0];
 
     const contents = folder.children.map((child) => {
       if (child.childType === 'FOLDER') {
@@ -52,7 +53,7 @@ function computeSpaceTree(data) {
 
       returnValue.push({
         // eslint-disable-next-line no-underscore-dangle
-        id: space._id,
+        id: space.id,
         name: space.name,
         contents,
       });

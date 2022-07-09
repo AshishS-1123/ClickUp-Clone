@@ -36,7 +36,7 @@ function PriorityButton({ onPrioritySelect }) {
   const onPriorityButtonClick = (priority) => {
     setSelectedPriority(priority);
     setAnchorElement(null);
-    onPrioritySelect(selectedPriority);
+    onPrioritySelect(priority);
   }
 
   useEffect(() => {

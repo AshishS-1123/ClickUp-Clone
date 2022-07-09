@@ -74,17 +74,23 @@
 }
 
 .card_title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  margin-top: 8px;
+  margin-top: 16px;
   margin-left: 4px;
+}
+
+.card svg {
+  position: relative;
+  top: -40px;
+  right: -200px;
 }
 
 /*********************************/
 
 .addButtonContainer {
   margin-top: 10px;
-
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;

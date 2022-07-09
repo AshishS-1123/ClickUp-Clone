@@ -67,6 +67,7 @@
   font-size: 14px;
   border-radius: 3px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .propertiesBar {

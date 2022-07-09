@@ -3,18 +3,7 @@ const User = require("../../models/User");
 const Workspace = require("../../models/Workspace");
 const WorkspaceMeta = require("../../models/WorkspaceMeta");
 const ErrorResponse = require("../../utils/errorResponse");
-
-// const fetchWorkspaceData = async (workspaceId) => {
-//   const workspaceItem = {
-//     name: "",
-//     id: workspaceId,
-//   };
-
-//   const workspace = await Workspace.findById(workspaceId);
-//   workspaceItem.name = workspace.name;
-
-//   return workspaceItem
-// }
+const { fetchWorkspaceRecur } = require("../../utils/recursiveWorkspaceFetcher");
 
 exports.getAllWorkspaces = async (req, res, next) => {
   // Get which user made this request.
@@ -112,6 +101,7 @@ exports.getWorkspaceData = async (req, res, next) => {
 
   try {
     const workspace = await validateWorkspace(workspaceId, userId);
+    const {spaces, folders, lists, tasks} = await fetchWorkspaceRecur(workspace.spaces, userId);
 
     if (!workspace) {
       return next(new ErrorResponse("Workspace not found", 404));
@@ -119,11 +109,14 @@ exports.getWorkspaceData = async (req, res, next) => {
 
     res.status(200).json({
       workspace: workspace,
+      spaces,
+      folders,
+      lists,
+      tasks
     });
   } catch (error) {
     return next(new ErrorResponse(error.message, 404));
   }
-
 }
 
 exports.deleteWorkspace = async (req, res, next) => {

@@ -61,6 +61,7 @@
   width: 80%;
   margin: -20px auto 24px auto;
   border: none;
+  cursor: pointer;
 }
 
 .text {
