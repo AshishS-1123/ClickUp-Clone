@@ -3,9 +3,10 @@
         "eslint:recommended",
         "plugin:import/errors",
         "plugin:react/recommended",
-        "plugin:jsx-a11y/recommended"
+        "plugin:jsx-a11y/recommended",
+        "plugin:sonarjs/recommended"
     ],
-    "plugins": ["react", "import", "jsx-a11y"],
+    "plugins": ["react", "import", "jsx-a11y", "sonarjs"],
     "rules": {
         "react/prop-types": 0,
         "indent": ["error", 2],
