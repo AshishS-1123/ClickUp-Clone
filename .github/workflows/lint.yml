@@ -35,5 +35,5 @@ jobs:
         run: npm install
 
       # Run eslint as per config
-      - name: Run ESLine
+      - name: Run ESLint
         run: npm run lint
