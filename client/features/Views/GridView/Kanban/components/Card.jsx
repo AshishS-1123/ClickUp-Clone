@@ -1,7 +1,7 @@
-import React from 'react';
-import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
-import { makeStringConsize } from '../../../../../utils/misc';
-import styles from './components.module.css';
+import React from "react";
+import AssistantPhotoIcon from "@mui/icons-material/AssistantPhoto";
+import { makeStringConsize } from "../../../../../utils/misc";
+import styles from "./components.module.css";
 
 const MAX_TITLE_LEN = 25;
 const MAX_PARENT_LEN = 35;

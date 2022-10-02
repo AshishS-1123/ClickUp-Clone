@@ -1,9 +1,9 @@
-import React from 'react';
-import Board from 'react-trello';
-import { useDispatch, useSelector } from 'react-redux';
-import boardComponents from './components';
-import './kanban.module.css';
-import { modifyTaskAsync } from '../../../../redux/slices/spaceSlice';
+import React from "react";
+import Board from "react-trello";
+import { useDispatch, useSelector } from "react-redux";
+import boardComponents from "./components";
+import "./kanban.module.css";
+import { modifyTaskAsync } from "../../../../redux/slices/spaceSlice";
 
 function KanbanBoard({ initialBoard }) {
   const { userId, token } = useSelector(state => state.authReducer);

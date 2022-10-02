@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeaderBar from '../../components/Layout/HeaderBar';
+import HeaderBar from "../../components/Layout/HeaderBar";
 import GridView from "./GridView";
 import themeColors from "../../utils/contexts/themeContext";
 import { Views } from "../../utils/constants/ViewTypes";
@@ -11,10 +11,10 @@ function ViewsContainer() {
   const [activeView, setActiveView] = useState(Views.BOARD_VIEW);
 
   const styles = {
-    width: 'calc(100vw - 260px)',
-    position: 'absolute',
-    top: '0px',
-    right: '0px',
+    width: "calc(100vw - 260px)",
+    position: "absolute",
+    top: "0px",
+    right: "0px",
     background: themeColors.backgroundMedium,
   }
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import accentColorPalette from '../../../utils/constants/accentColorPalette';
-import LaneGroupItem from './List/ListGroupItem';
-import ListGroupTitle from './List/ListGroupTitle';
-import ListItem from './List/ListItem';
+import React from "react";
+import accentColorPalette from "../../../utils/constants/accentColorPalette";
+import LaneGroupItem from "./List/ListGroupItem";
+import ListGroupTitle from "./List/ListGroupTitle";
+import ListItem from "./List/ListItem";
 
 const convertToListFormat = (taskData, availableStatuses) => {
   const returnValue = [];

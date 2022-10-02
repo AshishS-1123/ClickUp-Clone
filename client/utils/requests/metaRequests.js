@@ -1,13 +1,13 @@
-import makeRequest from './request';
+import makeRequest from "./request";
 
 export async function getPriorities(userId, workspaceId, token) {
   const url = `/meta/priorities?user=${userId}&workspace=${workspaceId}`;
   const body = {};
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
+  headers.append("Authorization", `Bearer ${token}`);
 
-  const { data, status } = await makeRequest(url, 'GET', body, headers);
+  const { data, status } = await makeRequest(url, "GET", body, headers);
   return { data, status };
 }
 
@@ -16,10 +16,10 @@ export async function createNewPriority(priority, userId, workspaceId, token) {
   const body = { ...priority };
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
-  headers.append('Content-Type', 'application/json');
+  headers.append("Authorization", `Bearer ${token}`);
+  headers.append("Content-Type", "application/json");
 
-  const { data, status } = await makeRequest(url, 'PUT', body, headers);
+  const { data, status } = await makeRequest(url, "PUT", body, headers);
   return { data, status };
 }
 
@@ -28,9 +28,9 @@ export async function getStatuses(userId, workspaceId, token) {
   const body = {};
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
+  headers.append("Authorization", `Bearer ${token}`);
 
-  const { data, status } = await makeRequest(url, 'GET', body, headers);
+  const { data, status } = await makeRequest(url, "GET", body, headers);
   return { data, status };
 }
 
@@ -39,10 +39,10 @@ export async function createNewStatus(statusName, userId, workspaceId, token) {
   const body = { status: statusName };
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
-  headers.append('Content-Type', 'application/json');
+  headers.append("Authorization", `Bearer ${token}`);
+  headers.append("Content-Type", "application/json");
 
-  const { data, status } = await makeRequest(url, 'PUT', body, headers);
+  const { data, status } = await makeRequest(url, "PUT", body, headers);
   return { data, status };
 }
 
@@ -51,9 +51,9 @@ export async function getViews(userId, workspaceId, token) {
   const body = {};
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
+  headers.append("Authorization", `Bearer ${token}`);
 
-  const { data, status } = await makeRequest(url, 'GET', body, headers);
+  const { data, status } = await makeRequest(url, "GET", body, headers);
   return { data, status };
 }
 
@@ -62,9 +62,9 @@ export async function createNewView(view, userId, workspaceId, token) {
   const body = { view };
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
-  headers.append('Content-Type', 'application/json');
+  headers.append("Authorization", `Bearer ${token}`);
+  headers.append("Content-Type", "application/json");
 
-  const { data, status } = await makeRequest(url, 'PUT', body, headers);
+  const { data, status } = await makeRequest(url, "PUT", body, headers);
   return { data, status };
 }

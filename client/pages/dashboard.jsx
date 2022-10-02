@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import NavDrawer from '../features/NavBar';
-import Views from '../features/Views';
-import protectedRoute from '../utils/ProtectedRoutes';
-import { getAllWorkspacesAsync } from '../redux/slices/workspaceSlice';
-import { getSpaceDataAsync, resetSlice } from '../redux/slices/spaceSlice';
-import { getAllMetaData } from '../redux/slices/metaSlice';
-import useMobile from '../utils/useMobile';
-import InvalidDevice from '../components/Misc/InvalidDevice';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import NavDrawer from "../features/NavBar";
+import Views from "../features/Views";
+import protectedRoute from "../utils/ProtectedRoutes";
+import { getAllWorkspacesAsync } from "../redux/slices/workspaceSlice";
+import { getSpaceDataAsync, resetSlice } from "../redux/slices/spaceSlice";
+import { getAllMetaData } from "../redux/slices/metaSlice";
+import useMobile from "../utils/useMobile";
+import InvalidDevice from "../components/Misc/InvalidDevice";
 
 function Dashboard() {
   const dispatch = useDispatch();

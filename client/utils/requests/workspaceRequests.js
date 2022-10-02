@@ -1,13 +1,13 @@
-import makeRequest from './request';
+import makeRequest from "./request";
 
 export const getAllWorkspaces = async (userId, token) => {
   const url = `/workspaces?user=${userId}`;
   const body = {};
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
+  headers.append("Authorization", `Bearer ${token}`);
 
-  const { data, status } = await makeRequest(url, 'GET', body, headers);
+  const { data, status } = await makeRequest(url, "GET", body, headers);
   return { data, status };
 };
 
@@ -16,10 +16,10 @@ export const createNewWorkspace = async (userId, token, workspaceName) => {
   const body = { workspaceName };
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
-  headers.append('Content-Type', 'application/json');
+  headers.append("Authorization", `Bearer ${token}`);
+  headers.append("Content-Type", "application/json");
 
-  const { data, status } = await makeRequest(url, 'POST', body, headers);
+  const { data, status } = await makeRequest(url, "POST", body, headers);
   return { data, status };
 };
 
@@ -28,9 +28,9 @@ export const getWorkspaceData = async (userId, token, workspaceId) => {
   const body = {};
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
+  headers.append("Authorization", `Bearer ${token}`);
 
-  const { data } = await makeRequest(url, 'GET', body, headers);
+  const { data } = await makeRequest(url, "GET", body, headers);
   return data;
 };
 

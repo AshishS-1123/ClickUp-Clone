@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createFolder } from '../../utils/requests/folderRequests';
-import { createList } from '../../utils/requests/listRequests';
-import { createSpace } from '../../utils/requests/spaceRequests';
-import { createTask, modifyTask } from '../../utils/requests/taskRequests';
-import { getWorkspaceData } from '../../utils/requests/workspaceRequests';
-import sanitizeTask from '../../utils/taskAlgorithms/sanitizeTasks';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createFolder } from "../../utils/requests/folderRequests";
+import { createList } from "../../utils/requests/listRequests";
+import { createSpace } from "../../utils/requests/spaceRequests";
+import { createTask, modifyTask } from "../../utils/requests/taskRequests";
+import { getWorkspaceData } from "../../utils/requests/workspaceRequests";
+import sanitizeTask from "../../utils/taskAlgorithms/sanitizeTasks";
 
 /*
  * In the space slice we only store the spaces of the currently active workspace.
@@ -22,14 +22,14 @@ const initialState = {
   folderData: [],
   listData: [],
   taskData: [],
-  activeItem: '',
-  activeItemName: '',
-  error: '',
+  activeItem: "",
+  activeItemName: "",
+  error: "",
 };
 
 /* eslint-disable no-underscore-dangle */
 export const getSpaceDataAsync = createAsyncThunk(
-  'space/getData',
+  "space/getData",
   async ({
     spaces, workspaceId, userId, token,
   }, thunkApi) => {
@@ -48,7 +48,7 @@ export const getSpaceDataAsync = createAsyncThunk(
 );
 
 export const createSpaceAsync = createAsyncThunk(
-  'space/createSpace',
+  "space/createSpace",
   async ({
     spaceName, workspaceId, userId, token,
   }, thunkApi) => {
@@ -67,7 +67,7 @@ export const createSpaceAsync = createAsyncThunk(
 );
 
 export const createFolderAsync = createAsyncThunk(
-  'space/createFolder',
+  "space/createFolder",
   async ({
     folderName, parentType, parentId, userId, token,
   }, thunkApi) => {
@@ -86,7 +86,7 @@ export const createFolderAsync = createAsyncThunk(
 );
 
 export const createListAsync = createAsyncThunk(
-  'space/createList',
+  "space/createList",
   async ({
     listName, parentType, parentId, userId, token,
   }, thunkApi) => {
@@ -105,7 +105,7 @@ export const createListAsync = createAsyncThunk(
 );
 
 export const createTaskAsync = createAsyncThunk(
-  'space/createTask',
+  "space/createTask",
   async ({
     taskName, taskMeta, parentType, parentId, userId, token,
   }, thunkApi) => {
@@ -128,7 +128,7 @@ export const createTaskAsync = createAsyncThunk(
 );
 
 export const modifyTaskAsync = createAsyncThunk(
-  'space/modifyTask',
+  "space/modifyTask",
   async ({
     taskId, newData, parentId, userId, token,
   }, thunkApi) => {
@@ -194,11 +194,11 @@ function attachNewFolder(state, action) {
   const parentType = folder.parent.parentType.toLowerCase();
 
   let parentData;
-  if (parentType === 'space') {
+  if (parentType === "space") {
     parentData = state.spaceData;
-  } else if (parentType === 'folder') {
+  } else if (parentType === "folder") {
     parentData = state.folderData;
-  } else if (parentType === 'list') {
+  } else if (parentType === "list") {
     parentData = state.listData;
   }
 
@@ -206,7 +206,7 @@ function attachNewFolder(state, action) {
   for (let i = 0; i < parentData.length; i += 1) {
     if (parentData[i].id === parentId) {
       parentData[i].children.push({
-        childType: 'FOLDER',
+        childType: "FOLDER",
         id: folder._id,
         _id: folder._id,
       });
@@ -229,11 +229,11 @@ function attachNewList(state, action) {
   const parentType = list.parent.parentType.toLowerCase();
 
   let parentData;
-  if (parentType === 'space') {
+  if (parentType === "space") {
     parentData = state.spaceData;
-  } else if (parentType === 'folder') {
+  } else if (parentType === "folder") {
     parentData = state.folderData;
-  } else if (parentType === 'list') {
+  } else if (parentType === "list") {
     parentData = state.listData;
   }
 
@@ -241,7 +241,7 @@ function attachNewList(state, action) {
   for (let i = 0; i < parentData.length; i += 1) {
     if (parentData[i].id === parentId) {
       parentData[i].children.push({
-        childType: 'LIST',
+        childType: "LIST",
         id: list._id,
         _id: list._id,
       });
@@ -272,7 +272,7 @@ function attachNewTask(state, action) {
   for (let i = 0; i < parentData.length; i += 1) {
     if (parentData[i].id === parentId) {
       parentData[i].children.push({
-        childType: 'TASK',
+        childType: "TASK",
         id: task._id,
         _id: task._id,
       });
@@ -301,7 +301,7 @@ function resetSliceToDefault() {
 /* eslint-enable no-param-reassign */
 
 export const spaceSlice = createSlice({
-  name: 'space',
+  name: "space",
   initialState,
   reducers: {
     setActive: setActiveItem,

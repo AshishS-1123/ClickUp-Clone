@@ -1,9 +1,9 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
-import groupTasks, { groupableValues } from '../../../utils/taskAlgorithms/groupAlgorithm';
+import React from "react";
+import dynamic from "next/dynamic";
+import { useSelector } from "react-redux";
+import groupTasks, { groupableValues } from "../../../utils/taskAlgorithms/groupAlgorithm";
 
-const KanbanBoard = dynamic(() => import('./Kanban'), { ssr: false, loading: () => <p>Loading</p> })
+const KanbanBoard = dynamic(() => import("./Kanban"), { ssr: false, loading: () => <p>Loading</p> })
 
 function convertToKanbanFormat(taskData, availableStatuses) {
   const lanes = [];
@@ -43,7 +43,7 @@ function GridView({ data, availableStatuses }) {
   const kanbanFormat = convertToKanbanFormat(sorted, availableStatuses);
 
   return (
-    <div style={{ padding: '15px 0px' }}>
+    <div style={{ padding: "15px 0px" }}>
       <KanbanBoard initialBoard={kanbanFormat} />
     </div>
   )

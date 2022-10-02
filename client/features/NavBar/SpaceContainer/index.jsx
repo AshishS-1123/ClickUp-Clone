@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useDispatch, useSelector } from 'react-redux';
-import Stack from '@mui/material/Stack';
-import SpaceItem from '../../../components/HierarchyItems/SpaceItem';
-import CreateSpaceButton from '../../../components/Misc/CreateSpaceButton';
-import './SpaceContainer.module.css';
-import computeSpaceTree from '../../../utils/computeSpaceTree';
-import { resetSlice, getSpaceDataAsync } from '../../../redux/slices/spaceSlice';
-import themeColors from '../../../utils/contexts/themeContext';
+import React, { useEffect, useState } from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useDispatch, useSelector } from "react-redux";
+import Stack from "@mui/material/Stack";
+import SpaceItem from "../../../components/HierarchyItems/SpaceItem";
+import CreateSpaceButton from "../../../components/Misc/CreateSpaceButton";
+import "./SpaceContainer.module.css";
+import computeSpaceTree from "../../../utils/computeSpaceTree";
+import { resetSlice, getSpaceDataAsync } from "../../../redux/slices/spaceSlice";
+import themeColors from "../../../utils/contexts/themeContext";
 
 const spaceContainerStyles = {
   bgcolor: themeColors.background,
-  boxShadow: 'none',
-  height: '48px',
-  '> div': {
+  boxShadow: "none",
+  height: "48px",
+  "> div": {
     color: themeColors.textColor,
   },
 };
@@ -56,17 +56,17 @@ function SpaceContainer() {
         <Typography
           variant="caption"
           sx={{
-            textTransform: 'uppercase',
+            textTransform: "uppercase",
             color: themeColors.textBoldColor,
             fontWeight: 700,
-            fontSize: '13px',
+            fontSize: "13px",
           }}
         >
           Spaces
         </Typography>
       </AccordionSummary>
 
-      <AccordionDetails sx={{ padding: '0px' }}>
+      <AccordionDetails sx={{ padding: "0px" }}>
         <Stack spacing={2}>
           <CreateSpaceButton />
           {

@@ -1,13 +1,13 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { logInUser, registerUser } from '../../utils/requests/authRequests';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { logInUser, registerUser } from "../../utils/requests/authRequests";
 
 export const registerAsync = createAsyncThunk(
-  'auth/register',
+  "auth/register",
   async ({ userEmail, password }, thunkApi) => {
     // Check that the email and password are provided
     if (!userEmail || !password) {
       return thunkApi.rejectWithValue({
-        error: 'Please provide email and password',
+        error: "Please provide email and password",
       });
     }
 
@@ -32,12 +32,12 @@ export const registerAsync = createAsyncThunk(
 );
 
 export const loginAsync = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async ({ userEmail, password }, thunkApi) => {
     // Check that the email and password are provided
     if (!userEmail || !password) {
       return thunkApi.rejectWithValue({
-        error: 'Please provide email and password',
+        error: "Please provide email and password",
       });
     }
 
@@ -62,7 +62,7 @@ export const loginAsync = createAsyncThunk(
 );
 
 export const signOutAsync = createAsyncThunk(
-  'auth/signout',
+  "auth/signout",
   () => { },
 );
 
@@ -76,7 +76,7 @@ function setUserCreds(state, action) {
   state.loading = false;
   state.userEmail = userEmail;
   state.token = token;
-  state.error = '';
+  state.error = "";
   state.loggedIn = true;
   state.userId = userId;
 }
@@ -87,25 +87,25 @@ function setError(state, { payload }) {
 }
 
 function signOutUser(state) {
-  state.userEmail = '';
-  state.token = '';
+  state.userEmail = "";
+  state.token = "";
   state.loggedIn = false;
   state.loading = false;
-  state.userId = '';
+  state.userId = "";
 }
 /* eslint-disable no-param-reassign */
 
 const initialState = {
-  userEmail: '',
+  userEmail: "",
   loggedIn: false,
-  token: '',
-  error: '',
+  token: "",
+  error: "",
   loading: true,
-  userId: '',
+  userId: "",
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
   },

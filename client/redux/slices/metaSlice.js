@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getPriorities, getStatuses, getViews, createNewView, createNewPriority,
-} from '../../utils/requests/metaRequests';
+} from "../../utils/requests/metaRequests";
 
 export const getAllMetaData = createAsyncThunk(
-  'meta/getAll',
+  "meta/getAll",
   async ({ userId, workspaceId, token }, thunkApi) => {
     try {
       const { data: { priorities } } = await getPriorities(userId, workspaceId, token);
@@ -19,7 +19,7 @@ export const getAllMetaData = createAsyncThunk(
 );
 
 export const createNewViewAsync = createAsyncThunk(
-  'meta/createView',
+  "meta/createView",
   async ({
     view, userId, workspaceId, token,
   }, thunkApi) => {
@@ -38,7 +38,7 @@ export const createNewViewAsync = createAsyncThunk(
 );
 
 export const createNewPriorityAsync = createAsyncThunk(
-  'meta/createPriority',
+  "meta/createPriority",
   async ({
     priority, userId, workspaceId, token,
   }, thunkApi) => {
@@ -79,7 +79,7 @@ const initialState = {
 };
 
 export const metaSlice = createSlice({
-  name: 'meta',
+  name: "meta",
   initialState,
   reducers: {
   },

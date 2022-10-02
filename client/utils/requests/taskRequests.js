@@ -1,13 +1,13 @@
-import makeRequest from './request';
+import makeRequest from "./request";
 
 export const fetchTask = async (taskId, parentType, parentId, userId, token) => {
   const url = `/tasks/${taskId}?user=${userId}&${parentType}=${parentId}`;
   const body = {};
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
+  headers.append("Authorization", `Bearer ${token}`);
 
-  const { data, status } = await makeRequest(url, 'GET', body, headers);
+  const { data, status } = await makeRequest(url, "GET", body, headers);
   return { data, status };
 };
 
@@ -18,14 +18,14 @@ export const createTask = async (taskName, taskMeta, parentType, parentId, userI
     priority: taskMeta.priority,
     dueDate: taskMeta.dueDate || (new Date()).toDateString(),
     status: taskMeta.status,
-    tag: 'dummy-tag',
+    tag: "dummy-tag",
   };
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
-  headers.append('Content-Type', 'application/json');
+  headers.append("Authorization", `Bearer ${token}`);
+  headers.append("Content-Type", "application/json");
 
-  const { data, status } = await makeRequest(url, 'POST', body, headers);
+  const { data, status } = await makeRequest(url, "POST", body, headers);
   return { data, status };
 };
 
@@ -34,9 +34,9 @@ export const modifyTask = async (taskId, newData, parentId, userId, token) => {
   const body = newData;
 
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${token}`);
-  headers.append('Content-Type', 'application/json');
+  headers.append("Authorization", `Bearer ${token}`);
+  headers.append("Content-Type", "application/json");
 
-  const { data, status } = await makeRequest(url, 'PATCH', body, headers);
+  const { data, status } = await makeRequest(url, "PATCH", body, headers);
   return { data, status };
 }

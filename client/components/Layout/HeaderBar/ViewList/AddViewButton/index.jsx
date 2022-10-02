@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AddIcon from '@mui/icons-material/Add';
-import Button from '@mui/material/Button';
+import AddIcon from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
 import CreateViewDialog from "../../../../Dialogs/CreateViewDialog";
 import themeColors from "../../../../../utils/contexts/themeContext";
 
@@ -19,14 +19,14 @@ function AddViewButton() {
     <div>
       <Button
         onClick={onClick}
-        startIcon={<AddIcon sx={{ width: '20px', height: '20px', color: themeColors.textBoldColor }} />}
+        startIcon={<AddIcon sx={{ width: "20px", height: "20px", color: themeColors.textBoldColor }} />}
         disableRipple
         sx={{
           color: themeColors.textColor,
-          textTransform: 'capitalize',
-          fontSize: '12px',
-          marginLeft: '10px',
-          fontWeight: '600',
+          textTransform: "capitalize",
+          fontSize: "12px",
+          marginLeft: "10px",
+          fontWeight: "600",
         }}
       >
         view

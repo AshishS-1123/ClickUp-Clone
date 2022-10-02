@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 function ScrollableLane({ children }, ref) {
   return (
-    <div style={{ width: '257px' }}>
+    <div style={{ width: "257px" }}>
       {children}
     </div>
   )

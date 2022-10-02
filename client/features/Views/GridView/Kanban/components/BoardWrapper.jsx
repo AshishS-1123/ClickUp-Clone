@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './components.module.css';
+import React from "react";
+import styles from "./components.module.css";
 
 function BoardWrapper({ children, ...props }) {
 

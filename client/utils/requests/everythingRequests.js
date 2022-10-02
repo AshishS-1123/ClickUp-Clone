@@ -1,7 +1,7 @@
-import { fetchSpace } from './spaceRequests';
-import { fetchFolder } from './folderRequests';
-import { fetchList } from './listRequests';
-import { fetchTask } from './taskRequests';
+import { fetchSpace } from "./spaceRequests";
+import { fetchFolder } from "./folderRequests";
+import { fetchList } from "./listRequests";
+import { fetchTask } from "./taskRequests";
 
 const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
   // This is the value we will be returning.
@@ -16,7 +16,7 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
   // Each element is an object containing type of data to fetch (space, folder, list)
   // and id of data.
   const fetchQueue = [{
-    itemType: 'SPACE', itemId: spaceId, parentType: 'WORKSPACE', parentId: workspaceId,
+    itemType: "SPACE", itemId: spaceId, parentType: "WORKSPACE", parentId: workspaceId,
   }];
 
   while (fetchQueue.length !== 0) {
@@ -27,54 +27,54 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
 
     // Fetch this item.
     switch (itemToFetch.itemType) {
-      /* eslint-disable no-await-in-loop */
-      case 'SPACE':
-        fetchedItem = await fetchSpace(
-          itemToFetch.itemId,
-          itemToFetch.parentId,
-          userId,
-          token,
-        );
+    /* eslint-disable no-await-in-loop */
+    case "SPACE":
+      fetchedItem = await fetchSpace(
+        itemToFetch.itemId,
+        itemToFetch.parentId,
+        userId,
+        token,
+      );
 
-        fetchedItem = fetchedItem.data;
-        break;
-      case 'FOLDER':
-        fetchedItem = await fetchFolder(
-          itemToFetch.itemId,
-          itemToFetch.parentType.toLowerCase(),
-          itemToFetch.parentId,
-          userId,
-          token,
-        );
+      fetchedItem = fetchedItem.data;
+      break;
+    case "FOLDER":
+      fetchedItem = await fetchFolder(
+        itemToFetch.itemId,
+        itemToFetch.parentType.toLowerCase(),
+        itemToFetch.parentId,
+        userId,
+        token,
+      );
 
-        fetchedItem = fetchedItem.data;
-        break;
-      case 'LIST':
-        fetchedItem = await fetchList(
-          itemToFetch.itemId,
-          itemToFetch.parentType.toLowerCase(),
-          itemToFetch.parentId,
-          userId,
-          token,
-        );
+      fetchedItem = fetchedItem.data;
+      break;
+    case "LIST":
+      fetchedItem = await fetchList(
+        itemToFetch.itemId,
+        itemToFetch.parentType.toLowerCase(),
+        itemToFetch.parentId,
+        userId,
+        token,
+      );
 
-        fetchedItem = fetchedItem.data;
-        break;
-      case 'TASK':
-        console.log("Fetch", itemToFetch);
-        fetchedItem = await fetchTask(
-          itemToFetch.itemId,
-          itemToFetch.parentType.toLowerCase(),
-          itemToFetch.parentId,
-          userId,
-          token,
-        );
-        console.log("Fetched", fetchedItem);
+      fetchedItem = fetchedItem.data;
+      break;
+    case "TASK":
+      console.log("Fetch", itemToFetch);
+      fetchedItem = await fetchTask(
+        itemToFetch.itemId,
+        itemToFetch.parentType.toLowerCase(),
+        itemToFetch.parentId,
+        userId,
+        token,
+      );
+      console.log("Fetched", fetchedItem);
 
-        fetchedItem = fetchedItem.data;
-        break;
-      default:
-        break;
+      fetchedItem = fetchedItem.data;
+      break;
+    default:
+      break;
       /* eslint-enable no-await-in-loop */
     }
 
@@ -85,29 +85,29 @@ const fetchSpaceEverything = async (spaceId, workspaceId, userId, token) => {
 
     // If the data was successfully fetched, place it in the return value.
     switch (itemToFetch.itemType) {
-      case 'SPACE':
-        returnValue.space.push(fetchedItem.space);
-        fetchedItem = fetchedItem.space;
-        break;
-      case 'FOLDER':
-        returnValue.folder.push(fetchedItem.folder);
-        fetchedItem = fetchedItem.folder;
-        break;
-      case 'LIST':
-        returnValue.list.push(fetchedItem.list);
-        fetchedItem = fetchedItem.list;
-        break;
-      case 'TASK':
-        returnValue.task.push(fetchedItem.task);
-        fetchedItem = fetchedItem.task;
-        break;
-      default:
-        break;
+    case "SPACE":
+      returnValue.space.push(fetchedItem.space);
+      fetchedItem = fetchedItem.space;
+      break;
+    case "FOLDER":
+      returnValue.folder.push(fetchedItem.folder);
+      fetchedItem = fetchedItem.folder;
+      break;
+    case "LIST":
+      returnValue.list.push(fetchedItem.list);
+      fetchedItem = fetchedItem.list;
+      break;
+    case "TASK":
+      returnValue.task.push(fetchedItem.task);
+      fetchedItem = fetchedItem.task;
+      break;
+    default:
+      break;
     }
 
     // Now add all the children of the fetched item to the queue.
     // if (fetchedItem.hasOwnProperty('children')) {
-    if (Object.hasOwnProperty.call(fetchedItem, 'children')) {
+    if (Object.hasOwnProperty.call(fetchedItem, "children")) {
       fetchedItem.children.forEach((child) => {
         fetchQueue.push({
           itemType: child.childType,

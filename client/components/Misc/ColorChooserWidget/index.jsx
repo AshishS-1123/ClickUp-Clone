@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import accentColorPalette from '../../../utils/constants/accentColorPalette';
-import styles from './ColorChooserWidget.module.css';
+import React, { useEffect, useState } from "react";
+import accentColorPalette from "../../../utils/constants/accentColorPalette";
+import styles from "./ColorChooserWidget.module.css";
 
 function ColorChooserWidget({ onColorSelect }) {
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState("");
 
   useEffect(() => {
     setSelected(accentColorPalette[0]);

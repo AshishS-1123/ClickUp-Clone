@@ -1,11 +1,11 @@
 // eslint-disable-file react/prop-types
 // eslint-disable-file react/jsx-props-no-spreading
-import Head from 'next/head';
-import React from 'react';
-import { Provider } from 'react-redux';
+import Head from "next/head";
+import React from "react";
+import { Provider } from "react-redux";
 
-import store from '../redux/store';
-import '../styles/global_styles.css';
+import store from "../redux/store";
+import "../styles/global_styles.css";
 
 export default function App({ Component, pageProps }) {
   return (

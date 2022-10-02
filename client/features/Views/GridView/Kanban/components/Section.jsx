@@ -1,6 +1,6 @@
-import React from 'react';
-import AddTaskButton from './AddTaskButton';
-import styles from './components.module.css';
+import React from "react";
+import AddTaskButton from "./AddTaskButton";
+import styles from "./components.module.css";
 
 function Section({ children }) {
   return (

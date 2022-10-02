@@ -1,13 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import ListDialog from '../ListDialog';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import ListDialog from "../ListDialog";
 
 let component = null;
 
-describe('<ListDialog /> tests', () => {
+describe("<ListDialog /> tests", () => {
   // Snapshot Testing
-  it('should match snapshot', () => {
+  it("should match snapshot", () => {
     component = render(
       <ListDialog
         open
@@ -21,7 +21,7 @@ describe('<ListDialog /> tests', () => {
   });
 
   // Test for syntax errors.
-  it('should render without crashing', () => {
+  it("should render without crashing", () => {
     component = render(
       <ListDialog
         open
@@ -43,7 +43,7 @@ describe('<ListDialog /> tests', () => {
       />,
     );
 
-    expect(screen.getByRole('dialog')).toBeDefined();
+    expect(screen.getByRole("dialog")).toBeDefined();
   });
 
   //Test that visibility of component can be controlled by open prop.
@@ -57,11 +57,11 @@ describe('<ListDialog /> tests', () => {
       />,
     );
 
-    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 
   // Standard behaviour for backdrop. Implementation from mui.
-  it('should close when backdrop is clicked', () => {
+  it("should close when backdrop is clicked", () => {
     const closeDialog = jest.fn();
     const handleCreateList = jest.fn();
 
@@ -75,7 +75,7 @@ describe('<ListDialog /> tests', () => {
     );
 
     // Get the backdrop.
-    const backdrop = screen.getByRole('dialog').parentElement;
+    const backdrop = screen.getByRole("dialog").parentElement;
 
     // Click on the backdrop.
     userEvent.click(backdrop);
@@ -85,7 +85,7 @@ describe('<ListDialog /> tests', () => {
   });
 
   // Test that function for closing dialog is called when close icon is clicked.
-  it('should should close when close icon is clicked', () => {
+  it("should should close when close icon is clicked", () => {
     const closeDialog = jest.fn();
     const handleCreateList = jest.fn();
 
@@ -99,7 +99,7 @@ describe('<ListDialog /> tests', () => {
     );
 
     // Get the close icon button.
-    const button = screen.getByTestId('CloseIcon');
+    const button = screen.getByTestId("CloseIcon");
 
     // Click on the button.
     userEvent.click(button);
@@ -109,7 +109,7 @@ describe('<ListDialog /> tests', () => {
   });
 
   // Check UI layout.
-  it('should have a title, close icon, input element and submit button', () => {
+  it("should have a title, close icon, input element and submit button", () => {
     component = render(
       <ListDialog
         open
@@ -120,10 +120,10 @@ describe('<ListDialog /> tests', () => {
     );
 
     // Check label is present.
-    expect(screen.getByLabelText('List name')).toBeDefined();
+    expect(screen.getByLabelText("List name")).toBeDefined();
     // Check input is present.
-    expect(screen.getByPlaceholderText('Enter list name')).toBeDefined();
+    expect(screen.getByPlaceholderText("Enter list name")).toBeDefined();
     // Check submit button is present
-    expect(screen.getByText('Create list')).toBeDefined();
+    expect(screen.getByText("Create list")).toBeDefined();
   });
 });

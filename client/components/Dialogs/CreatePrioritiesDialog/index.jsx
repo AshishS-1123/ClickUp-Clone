@@ -1,7 +1,7 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import PrioritiesDialog from './PrioritiesDialog';
-import { createNewPriorityAsync } from '../../../redux/slices/metaSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PrioritiesDialog from "./PrioritiesDialog";
+import { createNewPriorityAsync } from "../../../redux/slices/metaSlice";
 
 function CreatePrioritiesDialog({ open, closeDialog }) {
   const existingPriorities = useSelector(state => state.metaReducer.priorities);

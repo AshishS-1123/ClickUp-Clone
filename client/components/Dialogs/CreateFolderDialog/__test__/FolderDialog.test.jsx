@@ -1,13 +1,13 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import FolderDialog from '../FolderDialog';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import FolderDialog from "../FolderDialog";
 
 let component = null;
 
-describe('<FolderDialog /> tests', () => {
+describe("<FolderDialog /> tests", () => {
   // Snapshot Testing
-  it('should match snapshot', () => {
+  it("should match snapshot", () => {
     component = render(
       <FolderDialog
         open
@@ -21,7 +21,7 @@ describe('<FolderDialog /> tests', () => {
   });
 
   // Test for syntax errors.
-  it('should render without crashing', () => {
+  it("should render without crashing", () => {
     component = render(
       <FolderDialog
         open
@@ -43,7 +43,7 @@ describe('<FolderDialog /> tests', () => {
       />,
     );
 
-    expect(screen.getByRole('dialog')).toBeDefined();
+    expect(screen.getByRole("dialog")).toBeDefined();
   });
 
   //Test that visibility of component can be controlled by open prop.
@@ -57,11 +57,11 @@ describe('<FolderDialog /> tests', () => {
       />,
     );
 
-    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 
   // Standard behaviour for backdrop. Implementation from mui.
-  it('should close when backdrop is clicked', () => {
+  it("should close when backdrop is clicked", () => {
     const closeDialog = jest.fn();
     const handleCreateFolder = jest.fn();
 
@@ -75,7 +75,7 @@ describe('<FolderDialog /> tests', () => {
     );
 
     // Get the backdrop.
-    const backdrop = screen.getByRole('dialog').parentElement;
+    const backdrop = screen.getByRole("dialog").parentElement;
 
     // Click on the backdrop.
     userEvent.click(backdrop);
@@ -85,7 +85,7 @@ describe('<FolderDialog /> tests', () => {
   });
 
   // Test that function for closing dialog is called when close icon is clicked.
-  it('should should close when close icon is clicked', () => {
+  it("should should close when close icon is clicked", () => {
     const closeDialog = jest.fn();
     const handleCreateFolder = jest.fn();
 
@@ -99,7 +99,7 @@ describe('<FolderDialog /> tests', () => {
     );
 
     // Get the close icon button.
-    const button = screen.getByTestId('CloseIcon');
+    const button = screen.getByTestId("CloseIcon");
 
     // Click on the button.
     userEvent.click(button);
@@ -109,7 +109,7 @@ describe('<FolderDialog /> tests', () => {
   });
 
   // Check UI layout.
-  it('should have a title, close icon, input element and submit button', () => {
+  it("should have a title, close icon, input element and submit button", () => {
     component = render(
       <FolderDialog
         open
@@ -120,10 +120,10 @@ describe('<FolderDialog /> tests', () => {
     );
 
     // Check label is present.
-    expect(screen.getByLabelText('Folder name')).toBeDefined();
+    expect(screen.getByLabelText("Folder name")).toBeDefined();
     // Check input is present.
-    expect(screen.getByPlaceholderText('Enter folder name')).toBeDefined();
+    expect(screen.getByPlaceholderText("Enter folder name")).toBeDefined();
     // Check submit button is present
-    expect(screen.getByText('Create folder')).toBeDefined();
+    expect(screen.getByText("Create folder")).toBeDefined();
   });
 });

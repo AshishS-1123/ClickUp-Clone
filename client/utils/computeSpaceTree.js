@@ -6,7 +6,7 @@ function computeSpaceTree(data) {
     const list = data.listData.filter((item) => item.id === listId)[0];
 
     return {
-      itemType: 'LIST',
+      itemType: "LIST",
       id: listId,
       name: list.name,
       contents: list.children,
@@ -18,19 +18,19 @@ function computeSpaceTree(data) {
     const folder = data.folderData.filter((item) => item.id === folderId)[0];
 
     const contents = folder.children.map((child) => {
-      if (child.childType === 'FOLDER') {
+      if (child.childType === "FOLDER") {
         return getFolderData(child.id);
-      } if (child.childType === 'LIST') {
+      } if (child.childType === "LIST") {
         return getListData(child.id);
-      } if (child.childType === 'TASK') {
-        return { itemType: 'TASK', id: child.id };
+      } if (child.childType === "TASK") {
+        return { itemType: "TASK", id: child.id };
       }
 
       return undefined;
     });
 
     return {
-      itemType: 'FOLDER',
+      itemType: "FOLDER",
       id: folderId,
       name: folder.name,
       contents,
@@ -39,7 +39,7 @@ function computeSpaceTree(data) {
 
   function getChildrenForSpace(children) {
     return children.map((child) => {
-      if (child.childType === 'FOLDER') {
+      if (child.childType === "FOLDER") {
         return getFolderData(child.id);
       }
       return getListData(child.id);

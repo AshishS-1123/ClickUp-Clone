@@ -1,6 +1,6 @@
 export const groupableValues = {
-  PRIORITY: 'priority',
-  STATUS: 'status',
+  PRIORITY: "priority",
+  STATUS: "status",
 }
 
 function getInitialValueFromKeys(possibleKeys) {

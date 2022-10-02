@@ -1,25 +1,25 @@
-import React, { useRef } from 'react';
-import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
-import styles from './AuthForm.module.css';
-import protectedRoute from '../ProtectedRoutes';
+import React, { useRef } from "react";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./AuthForm.module.css";
+import protectedRoute from "../ProtectedRoutes";
 import PropTypes from "prop-types";
 
 const dataFromAuthType = (authType) => {
   const metaData = {};
 
-  if (authType === 'login') {
-    metaData.formHeading = 'Welcome back!';
-    metaData.alternateAuthLink = '/register';
+  if (authType === "login") {
+    metaData.formHeading = "Welcome back!";
+    metaData.alternateAuthLink = "/register";
     metaData.alternateAuthText = "Don't have an account? Register";
-  } else if (authType === 'register') {
+  } else if (authType === "register") {
     metaData.formHeading = "Let's go!";
-    metaData.alternateAuthLink = '/login';
-    metaData.alternateAuthText = 'Already have an account? Log In';
+    metaData.alternateAuthLink = "/login";
+    metaData.alternateAuthText = "Already have an account? Log In";
   } else {
-    metaData.formHeading = '';
-    metaData.alternateAuthLink = '';
-    metaData.alternateAuthText = '';
+    metaData.formHeading = "";
+    metaData.alternateAuthLink = "";
+    metaData.alternateAuthText = "";
   }
 
   return metaData;

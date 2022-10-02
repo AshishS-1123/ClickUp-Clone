@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { setActive } from '../../../redux/slices/spaceSlice';
-import styles from '../SpaceItem/SpaceItem.module.css';
-import ListOptionsDialog from './listOptionsDialog';
-import themeColors from '../../../utils/contexts/themeContext';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { setActive } from "../../../redux/slices/spaceSlice";
+import styles from "../SpaceItem/SpaceItem.module.css";
+import ListOptionsDialog from "./listOptionsDialog";
+import themeColors from "../../../utils/contexts/themeContext";
 
 function ListItem({ id, listName, nestingLevel = 10 }) {
   const isActive = useSelector((state) => state.spaceReducer.activeItem) == id;
@@ -47,17 +47,17 @@ function ListItem({ id, listName, nestingLevel = 10 }) {
       onMouseLeave={() => { setRevealerVisible(false); }}
     >
       <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
-        <RadioButtonUncheckedIcon sx={{ width: '10px', height: '10px', color: themeColors.textBoldColor }} />
+        <RadioButtonUncheckedIcon sx={{ width: "10px", height: "10px", color: themeColors.textBoldColor }} />
         <div className={styles.list__title}>{listName}</div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
         <MoreHorizIcon
           onClick={showOptions}
           sx={{
-            visibility: (revealerVisible || openMenu) ? 'visible' : 'hidden',
-            transform: 'scale(0.7)',
-            marginLeft: '15px',
+            visibility: (revealerVisible || openMenu) ? "visible" : "hidden",
+            transform: "scale(0.7)",
+            marginLeft: "15px",
           }}
         />
       </div>

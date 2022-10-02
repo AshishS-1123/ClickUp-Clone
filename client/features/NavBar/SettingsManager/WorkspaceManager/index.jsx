@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import { useSelector } from 'react-redux';
-import Avatar from '@mui/material/Avatar';
-import CreateViewDialog from '../../../../components/Dialogs/CreateViewDialog';
-import CreatePrioritiesDialog from '../../../../components/Dialogs/CreatePrioritiesDialog';
-import styles from './WorkspaceManager.module.css';
-import themeColors from '../../../../utils/contexts/themeContext';
+import React, { useState } from "react";
+import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
+import Avatar from "@mui/material/Avatar";
+import CreateViewDialog from "../../../../components/Dialogs/CreateViewDialog";
+import CreatePrioritiesDialog from "../../../../components/Dialogs/CreatePrioritiesDialog";
+import styles from "./WorkspaceManager.module.css";
+import themeColors from "../../../../utils/contexts/themeContext";
 
 const getAbbrev = (name) => {
-  const abbrev = name.split(' ').length >= 2
-    ? `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
+  const abbrev = name.split(" ").length >= 2
+    ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
     : name.substr(0, 2);
 
   return abbrev;
@@ -20,7 +20,7 @@ const shortenName = (name) => {
 
   let res = name.substr(0, length);
   if (res.length != name.length) {
-    res += '...';
+    res += "...";
   }
 
   return res;
@@ -37,16 +37,16 @@ function WorkspaceManager() {
   return (
     <>
       <MenuItem sx={{
-        overflow: 'wrap',
-        height: '100%',
+        overflow: "wrap",
+        height: "100%",
         color: themeColors.textColor,
-        padding: '6px 6px',
-        cursor: 'default',
-        '&:hover': {
+        padding: "6px 6px",
+        cursor: "default",
+        "&:hover": {
           background: themeColors.background,
         }
       }}
-        disableRipple
+      disableRipple
       >
         <div className={styles.container}>
           <div className={styles.titleContainer}>
@@ -55,7 +55,7 @@ function WorkspaceManager() {
                 bgcolor: themeColors.accentColor,
                 width: 32,
                 height: 32,
-                fontSize: '10px',
+                fontSize: "10px",
                 color: themeColors.textColor,
               }}
               children={getAbbrev(activeWorkspace.name)}
@@ -66,13 +66,13 @@ function WorkspaceManager() {
           <ul>
             <li
               onClick={() => { setOpenViewDialog(true); return false; }}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               Enable Views
             </li>
             <li
               onClick={() => { setOpenPrioritiesDialog(true); return false; }}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               Add Priorities
             </li>

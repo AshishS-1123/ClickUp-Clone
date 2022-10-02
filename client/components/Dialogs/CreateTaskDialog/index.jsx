@@ -1,7 +1,7 @@
-import React from 'react';
-import { useDispatch, connect } from 'react-redux';
-import { createTaskAsync } from '../../../redux/slices/spaceSlice';
-import TaskDialog from './TaskDialog';
+import React from "react";
+import { useDispatch, connect } from "react-redux";
+import { createTaskAsync } from "../../../redux/slices/spaceSlice";
+import TaskDialog from "./TaskDialog";
 
 function CreateTaskDialog({
   open, closeDialog, itemType, itemId, listName, workspaceName, userId, token

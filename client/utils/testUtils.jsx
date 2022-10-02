@@ -1,11 +1,11 @@
-import React from 'react';
-import { render as rtlRender } from '@testing-library/react';
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux';
+import React from "react";
+import { render as rtlRender } from "@testing-library/react";
+import { configureStore } from "@reduxjs/toolkit"
+import { Provider } from "react-redux";
 
-import authReducer from '../redux/slices/authSlice';
-import workspaceReducer from '../redux/slices/workspaceSlice';
-import spaceReducer from '../redux/slices/spaceSlice';
+import authReducer from "../redux/slices/authSlice";
+import workspaceReducer from "../redux/slices/workspaceSlice";
+import spaceReducer from "../redux/slices/spaceSlice";
 
 
 const reducers = {
@@ -29,6 +29,6 @@ function render(
 }
 
 // re-export everything
-export * from '@testing-library/react'
+export * from "@testing-library/react"
 // override render method
 export { render }

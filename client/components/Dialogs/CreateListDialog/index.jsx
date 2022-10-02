@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createListAsync } from '../../../redux/slices/spaceSlice';
-import ListDialog from './ListDialog';
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createListAsync } from "../../../redux/slices/spaceSlice";
+import ListDialog from "./ListDialog";
 
 function CreateListDialog({
   open, closeDialog, itemType, itemId,

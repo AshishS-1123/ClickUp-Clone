@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createNewWorkspace, getAllWorkspaces } from '../../utils/requests/workspaceRequests';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createNewWorkspace, getAllWorkspaces } from "../../utils/requests/workspaceRequests";
 
 export const getAllWorkspacesAsync = createAsyncThunk(
-  'workspace/getAll',
+  "workspace/getAll",
   async ({ userId, token }, thunkApi) => {
     try {
       const { data } = await getAllWorkspaces(userId, token);
@@ -19,7 +19,7 @@ export const getAllWorkspacesAsync = createAsyncThunk(
 );
 
 export const createNewWorkspaceAsync = createAsyncThunk(
-  'workspace/createNew',
+  "workspace/createNew",
   async ({ userId, token, workspaceName }, thunkApi) => {
     const { data } = await createNewWorkspace(userId, token, workspaceName);
 
@@ -36,7 +36,7 @@ export const createNewWorkspaceAsync = createAsyncThunk(
 );
 
 export const switchWorkspace = createAsyncThunk(
-  'workspace/switchWorkspace',
+  "workspace/switchWorkspace",
   async ({ workspaceId }) => ({ workspaceId }),
 );
 
@@ -76,11 +76,11 @@ const initialState = {
   // Stores ids of all spaces that belong the currently selected workspace.
   activeWorkspaceChildren: [],
   // Stores any errors that were generated,
-  error: '',
+  error: "",
 };
 
 export const workspaceSlice = createSlice({
-  name: 'workspace',
+  name: "workspace",
   initialState,
   reducers: {
 

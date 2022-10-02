@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import FolderIcon from '@mui/icons-material/Folder';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import styles from '../SpaceItem/SpaceItem.module.css';
-import ListItem from '../ListItem';
-import { setActive } from '../../../redux/slices/spaceSlice';
-import FolderOptionsDialog from './folderOptionsDialog';
-import themeColors from '../../../utils/contexts/themeContext';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import FolderIcon from "@mui/icons-material/Folder";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import styles from "../SpaceItem/SpaceItem.module.css";
+import ListItem from "../ListItem";
+import { setActive } from "../../../redux/slices/spaceSlice";
+import FolderOptionsDialog from "./folderOptionsDialog";
+import themeColors from "../../../utils/contexts/themeContext";
 
 function FolderItem({
   id, folderName, contents, nestingLevel = 10,
@@ -59,34 +59,34 @@ function FolderItem({
       >
 
         <div className={styles.item__titleContainer} onClick={setCurrentAsActive}>
-          <FolderIcon sx={{ width: '16px', height: '16px', color: themeColors.textBoldColor }} />
+          <FolderIcon sx={{ width: "16px", height: "16px", color: themeColors.textBoldColor }} />
           <h5 className={styles.folder__title}>{folderName}</h5>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <MoreHorizIcon
             onClick={showOptions}
             sx={{
-              visibility: (showIcons || openMenu) ? 'visible' : 'hidden',
-              transform: 'scale(0.7)',
+              visibility: (showIcons || openMenu) ? "visible" : "hidden",
+              transform: "scale(0.7)",
             }}
           />
 
           <KeyboardArrowDownIcon
             onClick={showRevealer}
             sx={{
-              transform: revealerVisible ? 'rotate(180deg) scale(0.7)' : 'scale(0.7)',
-              display: showIcons ? 'block' : 'none',
+              transform: revealerVisible ? "rotate(180deg) scale(0.7)" : "scale(0.7)",
+              display: showIcons ? "block" : "none",
             }}
           />
         </div>
 
       </div>
 
-      <div style={{ display: revealerVisible ? 'block' : 'none' }}>
+      <div style={{ display: revealerVisible ? "block" : "none" }}>
         {
           contents && contents.map((item) => {
-            if (item.itemType === 'FOLDER') {
+            if (item.itemType === "FOLDER") {
               return (
                 <FolderItem
                   key={item.id}
@@ -96,7 +96,7 @@ function FolderItem({
                   contents={item.contents}
                 />
               );
-            } if (item.itemType === 'LIST') {
+            } if (item.itemType === "LIST") {
               return (
                 <ListItem
                   key={item.id}

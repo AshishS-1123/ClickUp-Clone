@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import CreateListDialog from '../../Dialogs/CreateListDialog';
-import CreateFolderDialog from '../../Dialogs/CreateFolderDialog';
-import themeColors from '../../../utils/contexts/themeContext';
+import React, { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import CreateListDialog from "../../Dialogs/CreateListDialog";
+import CreateFolderDialog from "../../Dialogs/CreateFolderDialog";
+import themeColors from "../../../utils/contexts/themeContext";
 
 function SpaceOptionsDialog({
   anchorEl, openMenu, closeMenu, id,
@@ -15,26 +15,26 @@ function SpaceOptionsDialog({
   const [showFolderDialog, setShowFolderDialog] = useState(false);
 
   const menuItemStyle = {
-    padding: '8px',
+    padding: "8px",
     color: themeColors.textColor,
-    fontSize: '13px',
+    fontSize: "13px",
   };
 
   const iconStyle = {
-    marginRight: '5px',
-    transform: 'scale(0.8)',
+    marginRight: "5px",
+    transform: "scale(0.8)",
   };
 
   return (
     <>
       <Menu
         sx={{
-          '& .MuiMenu-paper': {
+          "& .MuiMenu-paper": {
             background: themeColors.background,
             color: themeColors.textColor,
           },
-          '& li': {
-            fontSize: '13px',
+          "& li": {
+            fontSize: "13px",
           },
         }}
         anchorEl={anchorEl}
@@ -42,7 +42,7 @@ function SpaceOptionsDialog({
         onClose={closeMenu}
       >
         <h5 style={{
-          fontWeight: 400, padding: '5px 20px', fontSize: '11px', color: themeColors.textBoldColor,
+          fontWeight: 400, padding: "5px 20px", fontSize: "11px", color: themeColors.textBoldColor,
         }}
         >
           SPACE SETTINGS

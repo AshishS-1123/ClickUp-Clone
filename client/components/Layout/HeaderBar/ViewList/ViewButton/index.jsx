@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
-import themeColors from '../../../../../utils/contexts/themeContext';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "@mui/material/Button";
+import themeColors from "../../../../../utils/contexts/themeContext";
 
 function ViewButton({ viewName, icon: Icon, onClick, isActive }) {
   return (
@@ -11,8 +11,8 @@ function ViewButton({ viewName, icon: Icon, onClick, isActive }) {
       disableRipple
       sx={{
         color: isActive ? themeColors.accentColor : themeColors.textColor,
-        textTransform: 'capitalize',
-        fontSize: '13px',
+        textTransform: "capitalize",
+        fontSize: "13px",
         fontWeight: 600,
       }}
     >

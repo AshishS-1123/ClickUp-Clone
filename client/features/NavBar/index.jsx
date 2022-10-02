@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import PropTypes from 'prop-types';
-import DoubleArrowOutlinedIcon from '@mui/icons-material/DoubleArrowOutlined';
-import SettingsManager from './SettingsManager';
-import SpaceContainer from './SpaceContainer';
-import themeColors from '../../utils/contexts/themeContext';
+import React, { useState } from "react";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import PropTypes from "prop-types";
+import DoubleArrowOutlinedIcon from "@mui/icons-material/DoubleArrowOutlined";
+import SettingsManager from "./SettingsManager";
+import SpaceContainer from "./SpaceContainer";
+import themeColors from "../../utils/contexts/themeContext";
 
 function DrawerToggler({ onClick, rotateBtn }) {
   const styles = {
-    transform: rotateBtn === true ? 'rotate(180deg)' : 'rotate(0deg)',
+    transform: rotateBtn === true ? "rotate(180deg)" : "rotate(0deg)",
     fill: themeColors.accentColor,
-    marginTop: '9px',
+    marginTop: "9px",
   };
   return (
     <div
@@ -39,9 +39,9 @@ function NavDrawer() {
         open={drawerState}
         variant="persistent"
         sx={{
-          '> .MuiPaper-root': {
+          "> .MuiPaper-root": {
             background: themeColors.background,
-            width: '250px',
+            width: "250px",
           },
         }}
       >
@@ -52,8 +52,8 @@ function NavDrawer() {
           sx={{
             color: themeColors.textColor,
             fontWeight: 600,
-            fontSize: '16px',
-            textTransform: 'capitalize',
+            fontSize: "16px",
+            textTransform: "capitalize",
           }}
         >
           ClickUp Clone

@@ -5,5 +5,5 @@ export function makeStringConsize(str, len) {
     return consize;
   }
 
-  return str.slice(0, len - 3) + '...';
+  return str.slice(0, len - 3) + "...";
 }

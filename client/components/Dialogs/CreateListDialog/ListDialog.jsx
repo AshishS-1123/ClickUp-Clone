@@ -1,8 +1,8 @@
-import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import CloseIcon from '@mui/icons-material/Close';
-import styles from '../dialog.module.css';
-import themeColors from '../../../utils/contexts/themeContext';
+import React from "react";
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
+import styles from "../dialog.module.css";
+import themeColors from "../../../utils/contexts/themeContext";
 
 function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
   return (
@@ -10,11 +10,11 @@ function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
       open={open}
       onBackdropClick={closeDialog}
       sx={{
-        '& .MuiDialog-paper': {
-          width: '550px',
-          height: '419px',
-          position: 'absolute',
-          top: '10px',
+        "& .MuiDialog-paper": {
+          width: "550px",
+          height: "419px",
+          position: "absolute",
+          top: "10px",
           background: themeColors.background,
         },
       }}
@@ -23,12 +23,12 @@ function CreateListDialog({ open, closeDialog, handleCreateList }, ref) {
         <h1 className={styles.title}>Create new list</h1>
         <CloseIcon
           sx={{
-            position: 'absolute',
-            top: '25px',
-            right: '25px',
+            position: "absolute",
+            top: "25px",
+            right: "25px",
             color: themeColors.textBoldColor,
-            width: '32px',
-            height: '32px'
+            width: "32px",
+            height: "32px"
           }}
           onClick={closeDialog}
         />

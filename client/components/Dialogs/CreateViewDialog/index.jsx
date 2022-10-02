@@ -1,7 +1,7 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createNewViewAsync } from '../../../redux/slices/metaSlice';
-import ViewDialog from './ViewDialog';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewViewAsync } from "../../../redux/slices/metaSlice";
+import ViewDialog from "./ViewDialog";
 
 function CreateViewDialog({
   open, closeDialog,

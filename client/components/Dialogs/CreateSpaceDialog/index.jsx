@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createSpaceAsync } from '../../../redux/slices/spaceSlice';
-import SpaceDialog from './SpaceDialog';
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createSpaceAsync } from "../../../redux/slices/spaceSlice";
+import SpaceDialog from "./SpaceDialog";
 
 function CreateSpaceDialog({
   open, closeDialog,

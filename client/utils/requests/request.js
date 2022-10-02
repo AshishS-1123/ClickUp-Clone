@@ -1,5 +1,5 @@
 // const URL = 'http://localhost:5000/api/v1';
-const URL = 'https://fathomless-coast-92467.herokuapp.com/api/v1';
+const URL = "https://fathomless-coast-92467.herokuapp.com/api/v1";
 
 async function makeRequest(urlPath, method, body, reqHeaders) {
   // Create the whole url.
@@ -9,7 +9,7 @@ async function makeRequest(urlPath, method, body, reqHeaders) {
   let headers;
   if (!reqHeaders) {
     headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    headers.append("Content-Type", "application/json");
   } else {
     headers = reqHeaders;
   }
@@ -17,13 +17,13 @@ async function makeRequest(urlPath, method, body, reqHeaders) {
   // This data defines the request we make.
   const options = {
     method, // GET, POST, UPDATE, DELETE
-    mode: 'cors',
+    mode: "cors",
     headers,
   };
 
   // For GET method, we must not provide the body attribute.
   // that's why we are adding the property seperately.
-  if (method !== 'GET') {
+  if (method !== "GET") {
     options.body = JSON.stringify(body);
   }
 

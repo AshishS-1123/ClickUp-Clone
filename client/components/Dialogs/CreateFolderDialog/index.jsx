@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createFolderAsync } from '../../../redux/slices/spaceSlice';
-import FolderDialog from './FolderDialog';
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createFolderAsync } from "../../../redux/slices/spaceSlice";
+import FolderDialog from "./FolderDialog";
 
 function CreateFolderDialog({
   open, closeDialog, itemType, itemId,

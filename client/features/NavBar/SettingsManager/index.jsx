@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import Menu from '@mui/material/Menu';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import SettingsIcon from '@mui/icons-material/Settings';
+import React, { useState } from "react";
+import Menu from "@mui/material/Menu";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SettingsIcon from "@mui/icons-material/Settings";
 
-import WorkspaceSelector from './WorkspaceSelector';
-import WorkspaceManager from './WorkspaceManager';
-import UserSettings from './UserSettings';
-import themeColors from '../../../utils/contexts/themeContext';
+import WorkspaceSelector from "./WorkspaceSelector";
+import WorkspaceManager from "./WorkspaceManager";
+import UserSettings from "./UserSettings";
+import themeColors from "../../../utils/contexts/themeContext";
 
 function SettingsManager() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,7 +25,7 @@ function SettingsManager() {
 
   return (
     <div style={{
-      position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)',
+      position: "absolute", bottom: "5px", left: "50%", transform: "translateX(-50%)",
     }}
     >
       <Button
@@ -36,7 +36,7 @@ function SettingsManager() {
         onClick={handleButtonClick}
         sx={{
           color: themeColors.textColor,
-          textTransform: 'capitalize',
+          textTransform: "capitalize",
         }}
       >
         Settings
@@ -48,12 +48,12 @@ function SettingsManager() {
         open={open}
         onClose={handleMenuClose}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         sx={{
           ul: {
@@ -61,10 +61,10 @@ function SettingsManager() {
           },
         }}
         PaperProps={{
-          filter: `drop-shadow(0px 2px 8px black)`,
+          filter: "drop-shadow(0px 2px 8px black)",
         }}
       >
-        <Grid container spacing={1} sx={{ width: '410px', minHeight: '366px' }}>
+        <Grid container spacing={1} sx={{ width: "410px", minHeight: "366px" }}>
           <Grid item xs={1.5} sm={1.5} md={1.5} lg={1.5} xl={1.5}>
             <WorkspaceSelector />
           </Grid>

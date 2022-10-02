@@ -1,10 +1,10 @@
 // eslint-disable-file jsx-a11y/label-has-associated-control
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
-import Dialog from '@mui/material/Dialog';
-import CloseIcon from '@mui/icons-material/Close';
-import styles from '../dialog.module.css';
-import themeColors from '../../../utils/contexts/themeContext';
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
+import styles from "../dialog.module.css";
+import themeColors from "../../../utils/contexts/themeContext";
 
 function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
   return (
@@ -12,11 +12,11 @@ function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
       open={open}
       onBackdropClick={closeDialog}
       sx={{
-        '& .MuiDialog-paper': {
-          width: '550px',
-          height: '419px',
-          position: 'absolute',
-          top: '10px',
+        "& .MuiDialog-paper": {
+          width: "550px",
+          height: "419px",
+          position: "absolute",
+          top: "10px",
           background: themeColors.background,
         },
       }}
@@ -25,12 +25,12 @@ function CreateFolderDialog({ open, closeDialog, handleCreateFolder }, ref) {
         <h1 className={styles.title}>Create new folder</h1>
         <CloseIcon
           sx={{
-            position: 'absolute',
-            top: '25px',
-            right: '25px',
+            position: "absolute",
+            top: "25px",
+            right: "25px",
             color: themeColors.textBoldColor,
-            width: '32px',
-            height: '32px',
+            width: "32px",
+            height: "32px",
           }}
           onClick={closeDialog}
         />
