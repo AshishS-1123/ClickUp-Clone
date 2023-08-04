@@ -1,0 +1,9 @@
+{
+  "editor.tabSize": 2,
+  "editor.tabCompletion": "on",
+  "editor.renderWhitespace": "all",
+  "editor.detectIndentation": false,
+  "search.exclude": {
+    "**/bower_components": true
+  }
+}
