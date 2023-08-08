@@ -43,6 +43,7 @@
     "@types/react-dom": "18.2.5",
     "encoding": "^0.1.13",
     "eslint": "8.46.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-next": "13.4.12",
     "eslint-plugin-storybook": "^0.6.13",
     "storybook": "^7.2.1"

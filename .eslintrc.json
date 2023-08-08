@@ -1,6 +1,10 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:storybook/recommended"
-  ]
+    "plugin:storybook/recommended",
+    "airbnb-base"
+  ],
+  "rules": {
+    "import/extensions": 0
+  }
 }
