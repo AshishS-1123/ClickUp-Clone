@@ -1,4 +1,9 @@
-import './globals.css'
+import React from 'react';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import './globals.css';
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center">
           {children}
