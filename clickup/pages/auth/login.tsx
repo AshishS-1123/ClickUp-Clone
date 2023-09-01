@@ -36,15 +36,15 @@ export default function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      <Paper className="w-11/12 max-w-md absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 flex flex-col justify-items-center drop-shadow-xl">
-        <h5 className="text-center text-2xl font-black mb-4">Welcome back!</h5>
+      <Paper className="w-11/12 max-w-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 flex flex-col justify-items-center drop-shadow-xl">
+        <h5 className="text-center text-3xl font-black mb-4">Welcome back!</h5>
 
         <TextField
           label="Email"
           variant="outlined"
           autoFocus
           required
-          className="my-1.5"
+          className="my-3"
           size="small"
           name="email"
           value={credentials.email}
@@ -66,7 +66,7 @@ export default function Login() {
         <Button
           disableElevation
           color='secondary'
-          className="font-semibold text-center text-base normal-case bg-purpleBase hover:bg-purpleBase h-10 mt-4"
+          className="font-semibold text-center text-lg normal-case bg-purpleBase hover:bg-purpleBase h-12 mt-4"
         >
           Start playing
         </Button>

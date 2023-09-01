@@ -10,6 +10,9 @@ const theme = createTheme({
         @font-face {
           font-family: 'Montserrat';
         }
+        * {
+          font-size: 14px;
+        }
       `,
     },
   },
