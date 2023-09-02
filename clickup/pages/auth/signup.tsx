@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Paper from '@mui/material/Paper';
@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 import { Credentials } from './login';
+import makeRequest from '../../utils/makeRequest';
 
 const defaultCredentials: Credentials = {
   email: '',
@@ -16,7 +17,7 @@ export default function SignUp() {
   const [credentials, setCredentials] = useState<Credentials>(defaultCredentials);
   const [errors, setErrors] = useState<Credentials>(defaultCredentials);
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const inputFor = e.target.name;
     const inputValue = e.target.value;
 
@@ -25,6 +26,17 @@ export default function SignUp() {
 
     // Update errors if any.
     setErrors({ ...errors, [inputFor]: inputValue !== '' });
+  }
+
+  const onSignUp = async () => {
+    makeRequest('/api/auth/signup', 'POST', { email: credentials.email, password: credentials.password })
+      .then((data) => {
+        console.log('Data', data);
+      })
+      .catch((err) => {
+        console.log('Error', err.message);
+      });
+    
   }
 
   return (
@@ -63,6 +75,7 @@ export default function SignUp() {
           disableElevation
           color='secondary'
           className="font-semibold text-center text-lg normal-case bg-purpleBase hover:bg-purpleBase h-12 mt-4"
+          onClick={onSignUp}
         >
           Start playing
         </Button>
