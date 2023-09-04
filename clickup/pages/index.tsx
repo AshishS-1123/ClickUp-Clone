@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { cookies } from 'next/headers';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { Database } from '../database.types';
 
-export default function MainApplication() {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+export default async function MainApplication() {
   const router = useRouter();
+  const supabase = createServerComponentClient<Database>({
+    cookies,
+  });
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/auth/login');
-    }
-  }, [isLoggedIn, router]);
+  const { data: { session } } = await supabase.auth.getSession();
 
-  return (
-    <div className="font-bold underline">
-      Hello World
-    </div>
-  )
+  if (!session) {
+    router.push('/login');
+  } else {
+    router.push('/dashboard');
+  }
 }

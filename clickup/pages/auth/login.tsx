@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
+import { Database } from '../../database.types';
 
 export interface Credentials {
   email: string;
@@ -19,8 +22,11 @@ const defaultCredentials: Credentials = {
 export default function Login() {
   const [credentials, setCredentials] = useState<Credentials>(defaultCredentials);
   const [errors, setErrors] = useState<Credentials>(defaultCredentials);
+  const [generalError, setGeneralError] = useState<string>('');
+  const router = useRouter();
+  const supabase = createClientComponentClient<Database>();
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const inputFor = e.target.name;
     const inputValue = e.target.value;
 
@@ -29,6 +35,16 @@ export default function Login() {
 
     // Update errors if any.
     setErrors({ ...errors, [inputFor]: inputValue !== '' });
+  }
+
+  const onSignIn = async () => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: credentials.email,
+      password: credentials.password,
+    });
+    setGeneralError(error?.message || '');
+
+    router.push('/dashboard');
   }
 
   return (
@@ -63,10 +79,15 @@ export default function Login() {
           onChange={onChangeHandler}
         />
 
+        <FormHelperText className="text-sm text-center mt-1.5" style={{ color: 'red' }}>
+          {generalError}
+        </FormHelperText>
+
         <Button
           disableElevation
           color='secondary'
           className="font-semibold text-center text-lg normal-case bg-purpleBase hover:bg-purpleBase h-12 mt-4"
+          onClick={onSignIn}
         >
           Start playing
         </Button>

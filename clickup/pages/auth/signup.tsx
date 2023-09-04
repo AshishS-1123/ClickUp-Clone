@@ -1,12 +1,14 @@
 import React, { ChangeEvent, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 import { Credentials } from './login';
-import makeRequest from '../../utils/makeRequest';
+import { Database } from '../../database.types';
 
 const defaultCredentials: Credentials = {
   email: '',
@@ -16,6 +18,8 @@ const defaultCredentials: Credentials = {
 export default function SignUp() {
   const [credentials, setCredentials] = useState<Credentials>(defaultCredentials);
   const [errors, setErrors] = useState<Credentials>(defaultCredentials);
+  const router = useRouter();
+  const supabase = createClientComponentClient<Database>();
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const inputFor = e.target.name;
@@ -29,14 +33,14 @@ export default function SignUp() {
   }
 
   const onSignUp = async () => {
-    makeRequest('/api/auth/signup', 'POST', { email: credentials.email, password: credentials.password })
-      .then((data) => {
-        console.log('Data', data);
-      })
-      .catch((err) => {
-        console.log('Error', err.message);
-      });
-    
+    await supabase.auth.signUp({
+      email: credentials.email,
+      password: credentials.password,
+      options: {
+        emailRedirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+    router.refresh();
   }
 
   return (
