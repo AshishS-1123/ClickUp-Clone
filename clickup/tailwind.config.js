@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     colors: {
       // purple: '#7b68ee',
-      // white: '#fff',
+      white: '#fff',
 
       // Black
       inkDarkest: '#090A0A',

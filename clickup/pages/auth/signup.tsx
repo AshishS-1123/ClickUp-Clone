@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
+import Input from '../../components/Input';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 import { Credentials } from './login';
@@ -40,7 +40,7 @@ export default function SignUp() {
         emailRedirectTo: `${location.origin}/auth/callback`,
       },
     });
-    router.refresh();
+    router.push('/');
   }
 
   return (
@@ -51,28 +51,24 @@ export default function SignUp() {
       <Paper className="w-11/12 max-w-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 flex flex-col justify-items-center drop-shadow-xl">
         <h5 className="text-center text-3xl font-black mb-4">Let&apos;s Go!</h5>
 
-        <TextField
-          label="Email"
-          variant="outlined"
-          autoFocus
-          required
-          className="my-3"
-          size="small"
+        <Input
+          type="text"
           name="email"
-          value={credentials.email}
+          placeholder="example@site.com"
+          initialValue=""
           onChange={onChangeHandler}
+          label="Email"
+          containerStyle="mt-3.5 mb-2.5"
         />
 
-        <TextField
-          label="Password"
-          variant="outlined"
-          required
+        <Input
           type="password"
-          className="my-3"
-          size="small"
           name="password"
-          value={credentials.password}
+          placeholder="****"
+          initialValue=""
           onChange={onChangeHandler}
+          label="Password"
+          containerStyle="mt-3.5 mb-2.5"
         />
 
         <Button
