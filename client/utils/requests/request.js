@@ -1,5 +1,10 @@
-// const URL = 'http://localhost:5000/api/v1';
-const URL = "https://fathomless-coast-92467.herokuapp.com/api/v1";
+const LOCAL_URL = 'http://localhost:5000/api/v1';
+const SERVER_URL = "https://fathomless-coast-92467.herokuapp.com/api/v1";
+
+let URL = SERVER_URL;
+if (process.env.NODE_ENV === 'development') {
+  URL = LOCAL_URL;
+}
 
 async function makeRequest(urlPath, method, body, reqHeaders) {
   // Create the whole url.

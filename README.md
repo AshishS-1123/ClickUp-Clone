@@ -8,27 +8,16 @@ https://user-images.githubusercontent.com/64722310/178110755-409033a1-6685-4d52-
 
 This is a clone of the project management service ClickUp, developed using NextJS, Express and MongoDB.
 
+## Local Setup
+Check out the Wiki for detailed instructions
+https://github.com/AshishS-1123/ClickUp-Clone/wiki/Local-Development-Setup
+
 ### Features Completed
 
 1. User Authentication
 2. Creating Workspaces and switching between them.
 3. Creating Spaces, Folders and Lists to organize your tasks.
 4. Creating Tasks and adding Priorities and Statuses to them.
-
-### How to use
-
-You need NodeJs and MongoDB installed to run this project.
-
-- Clone this repo and ```cd`` into the directory.
-- Install client and server side dependencies
-```bash
-cd client
-yarn install
-cd ../server
-yarn install
-```
-- Create the **.env** files using the **.env.example** files provided in client and server folders.
-- Run ```yarn dev``` in **client** and **server** directory to start the servers.
 
 I have also created some dummy data and exported to CSV that you can use to populate your database (Check the **dummy-db-data** folder).
 Check [this](https://stackoverflow.com/questions/35119959/how-to-share-database-created-by-mongodb) link on how to use it.
