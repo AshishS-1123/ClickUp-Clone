@@ -1,5 +1,5 @@
 const LOCAL_URL = 'http://localhost:5000/api/v1';
-const SERVER_URL = "https://fathomless-coast-92467.herokuapp.com/api/v1";
+const SERVER_URL = "https://clickup-clone-api.onrender.com/api/v1";
 
 let URL = SERVER_URL;
 if (process.env.NODE_ENV === 'development') {
